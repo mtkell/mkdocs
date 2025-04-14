@@ -1,0 +1,15 @@
+services:
+  mkdocs-web:
+    image: caddy
+    container_name: mkdocs-web
+    # ports:
+    #   - "8000:80"
+    volumes:
+      - ./site:/usr/share/caddy
+    restart: unless-stopped
+    networks:
+      - npm
+networks:
+  npm:
+    external: true
+    name: npm

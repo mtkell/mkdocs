@@ -1,0 +1,6 @@
+flowchart TD
+    A["Connect via SSH"] --> B["Run Ansible hardening role"]
+    B --> C["Apply UFW, auditd, AIDE, fail2ban"]
+    C --> D["Test logging and security tools"]
+    D --> E["Install Podman + user roles"]
+    E --> F["Hardened system ready for services"]

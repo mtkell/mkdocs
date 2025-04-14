@@ -1,0 +1,4 @@
+flowchart TD
+    A["Install Wazuh agents on all hosts"] --> B["Forward logs (auditd, systemd)"]
+    B --> C["Parse alerts in Wazuh dashboard"]
+    C --> D["Trigger email or external SIEM forwarding"]

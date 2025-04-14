@@ -1,0 +1,69 @@
+flowchart TD
+    subgraph Internet
+        EXT1["External Mail Server"]
+        EXT2["Remote Users"]
+        EXT3["Public DNS"]
+    end
+
+    subgraph Perimeter["DMZ / Reverse Proxy Zone"]
+        NGINX["NGINX Proxy Manager / Caddy"]
+        TUNNEL["Tailscale Coordination"]
+    end
+
+    subgraph Internal["Trusted Internal Zone"]
+        KC["Keycloak SSO + MFA"]
+        NC["Nextcloud File Storage"]
+        MC["Mailcow + SOGo"]
+        STEPCA["Step-CA (Internal CA)"]
+        WAZUH["Wazuh SIEM + Monitoring"]
+        DNS["Unbound/CoreDNS"]
+        DHCP["Kea DHCP"]
+        PRINT["CUPS Print Server"]
+        DB["PostgreSQL"]
+        CACHE["Redis"]
+    end
+
+    subgraph Clients["Client Devices"]
+        WIN["Windows"]
+        MAC["macOS"]
+        LINUX["Linux"]
+        IOS["iOS"]
+        ANDR["Android"]
+    end
+
+    EXT2 --> NGINX
+    EXT2 --> TUNNEL
+
+    WIN --> TUNNEL
+    MAC --> TUNNEL
+    LINUX --> TUNNEL
+    IOS --> TUNNEL
+    ANDR --> TUNNEL
+
+    WIN -->|SSO + MFA| KC
+    MAC -->|S/MIME Mail| MC
+    LINUX -->|Cert Enrollment| STEPCA
+    IOS -->|File Access| NC
+    ANDR -->|Webmail Access| MC
+
+    NGINX --> KC
+    NGINX --> NC
+    NGINX --> MC
+    NGINX --> WAZUH
+
+    KC --> DB
+    NC --> DB
+    MC --> DB
+    NC --> CACHE
+    MC --> DNS
+    STEPCA --> DNS
+    WAZUH --> DB
+
+    DHCP --> Clients
+    DNS --> Internal
+    PRINT --> Clients
+
+    Clients -->|Logs| WAZUH
+    STEPCA -->|Audit Logs| WAZUH
+    KC -->|Login Logs| WAZUH
+    MC -->|SMTP Logs| WAZUH

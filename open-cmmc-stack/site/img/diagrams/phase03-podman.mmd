@@ -1,0 +1,5 @@
+flowchart TD
+    A["Create Podman service user"] --> B["Define podman-compose file"]
+    B --> C["Set up systemd unit for container"]
+    C --> D["Launch services: Keycloak, Nextcloud, Mailcow, Wazuh"]
+    D --> E["Proxy public endpoints via Caddy/NPM"]

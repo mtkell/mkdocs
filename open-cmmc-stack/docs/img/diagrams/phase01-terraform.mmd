@@ -1,0 +1,6 @@
+flowchart TD
+    A["Start: Define scope and hosting"] --> B["Create Terraform config"]
+    B --> C["Run terraform apply"]
+    C --> D["Provision Ubuntu 22.04 VM"]
+    D --> E["Assign SSH key access"]
+    E --> F["Output IP for provisioning"]

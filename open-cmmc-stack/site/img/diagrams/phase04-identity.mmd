@@ -1,0 +1,6 @@
+flowchart TD
+    A["Create Keycloak realm"] --> B["Add OIDC clients for services"]
+    B --> C["Enable MFA and group-based RBAC"]
+    A2["Deploy Smallstep CA"] --> C2["Issue user + device certs"]
+    C2 --> D["Configure cert-based SSH, TLS, email"]
+    D --> E["Join Tailscale overlay and apply ACLs"]

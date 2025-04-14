@@ -1,0 +1,5 @@
+flowchart TD
+    A["Issue S/MIME or device cert"] --> B["Import into client OS/email"]
+    B --> C["Install Tailscale client"]
+    C --> D["Log in via SSO and verify ACLs"]
+    D --> E["Access services securely"]
