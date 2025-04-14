@@ -1,0 +1,35 @@
+
+graph LR
+  subgraph Internet
+    User[User (Browser, Client)]
+  end
+
+  subgraph "DMZ (Zero Trust Proxy Layer)"
+    NGINX[NGINX Proxy Manager
+(TLS Termination)]
+  end
+
+  subgraph "Internal Secure Docker Network"
+    Keycloak[Keycloak
+(SSO, MFA, RBAC)]
+    NC[Nextcloud AIO
+(Files, AV, OnlyOffice, Talk)]
+    Mailcow[Mailcow
+(SMTP, IMAP, Webmail)]
+    DB[Internal Services
+(PostgreSQL, Redis)]
+  end
+
+  subgraph Optional["Optional External Identity Provider"]
+    Entra[Microsoft Entra ID
+(SAML Federation)]
+  end
+
+  User --> NGINX
+  NGINX --> Keycloak
+  NGINX --> NC
+  NGINX --> Mailcow
+
+  Keycloak --> Entra
+  NC --> DB
+  Mailcow --> DB

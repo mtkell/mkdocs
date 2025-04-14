@@ -2,77 +2,90 @@
 
 ## 🎯 Objective
 
-This section details how to securely deploy **Nextcloud**, an open-source file sharing and collaboration platform that satisfies CMMC Level 2 requirements for **Media Protection (MP)**, **Access Control (AC)**, and **System Communications Protection (SC)**.
+This section details how to securely deploy **Nextcloud All-in-One (AIO)** — an integrated file sharing and collaboration platform that satisfies CMMC Level 2 requirements for **Media Protection (MP)**, **Access Control (AC)**, and **System Communications Protection (SC)**.
 
-It enables your organization to securely store, access, and collaborate on Controlled Unclassified Information (CUI) without relying on commercial SaaS platforms.
-
----
-
-## 🧩 Why Nextcloud?
-
-**Nextcloud** offers:
-
-- Web-based file access and sharing with granular permissions
-- Full audit logs and file activity tracking
-- Integration with SSO (via Keycloak)
-- End-to-end encryption (E2EE) and client-side encryption
-- Collaboration apps (Office, calendar, contacts)
+Nextcloud AIO consolidates secure storage, team collaboration, antivirus scanning, and file retention — enabling your organization to manage CUI without reliance on commercial SaaS platforms.
 
 ---
 
-## 📦 Deployment with Podman
+## 🧩 Why Nextcloud AIO?
 
-Basic command (non-production setup):
+**Nextcloud AIO** offers:
+
+- One hardened container with all critical components:
+  - Files, Calendar, Contacts, Mail, Talk, and OnlyOffice
+  - PostgreSQL, Redis, and ClamAV preconfigured
+- Web-based file access with granular permissioning
+- Built-in audit logging and file activity tracking
+- SSO support via Keycloak (SAML)
+- Server-side and optional client-side encryption
+- Secure sharing and team folder access control
+
+---
+
+## 📦 Deployment via Docker
+
+Run this container behind a reverse proxy (e.g., NGINX Proxy Manager):
 
 ```bash
-podman run -d --name nextcloud \
-  -p 8081:80 \
-  -v nextcloud_data:/var/www/html \
-  docker.io/library/nextcloud:28-apache
+docker run -d \\
+  --name nextcloud-aio-mastercontainer \\
+  --restart always \\
+  -p 8080:8080 \\
+  -v nextcloud_aio_mastercontainer:/mnt/docker-aio-config \\
+  -e NEXTCLOUD_DATADIR="/mnt/ncdata" \\
+  nextcloud/all-in-one:latest
 ```
 
-In production, Nextcloud should use a reverse proxy (NGINX, Traefik), persistent PostgreSQL backend, Redis cache, and TLS.
+- Expose to internet **only through reverse proxy with TLS termination**
+- All services run inside AIO: no external database or cache required
 
 ---
 
-## 🧰 Recommended Stack
+## 🧰 Hardened Stack (Built-In)
 
-| Component   | Purpose                    |
-|------------|----------------------------|
-| Nextcloud  | File & data collaboration  |
-| PostgreSQL | Reliable backend DB        |
-| Redis      | Improves performance       |
-| NGINX      | TLS termination, reverse proxy |
-| Keycloak   | Federated SSO via OIDC     |
+| Component        | Purpose                                |
+|------------------|----------------------------------------|
+| Nextcloud Core   | File & data collaboration              |
+| OnlyOffice       | Integrated document editing            |
+| ClamAV           | Antivirus scanning for file uploads    |
+| PostgreSQL       | Backend database (within container)    |
+| Redis            | Performance cache                      |
+| Keycloak         | External SSO federation via SAML       |
 
-All components should be deployed as rootless Podman containers and protected behind a firewall or private network overlay.
+All services are isolated within the container and monitored via health checks.
 
 ---
 
-## 🔒 Access Controls
+## 🔒 Access Controls (SSO via Keycloak)
 
-Configure Nextcloud to use Keycloak for authentication:
+Configure SSO for Nextcloud AIO:
 
-1. Install [OIDC Login app](https://apps.nextcloud.com/apps/oidc_login)
+1. In Nextcloud AIO:
+   - Install **SSO & SAML authentication** app
+   - Set UID attribute: `user.userprincipalname`
+   - Set display name, email, group mapping (via SAML)
 2. In Keycloak:
-   - Add a client with `openid-connect` protocol
-   - Set redirect URI: `https://nextcloud.yourdomain.com/index.php/apps/oidc_login/oidc`
-3. In Nextcloud:
-   - Enter Keycloak endpoints and client credentials
-   - Enable auto-provisioning
-4. Test login and group-based file access
+   - Create a SAML client
+   - Import metadata from:
+     `https://nextcloud.yourdomain.com/apps/user_saml/saml/metadata`
+   - Map email, displayname, and groups
+
+This enables secure login via Microsoft Entra ID, Keycloak users, or FreeIPA LDAP federation.
 
 ---
 
-## 🔐 Folder Permissions & CUI Tagging
+## 🔐 Folder Permissions & CUI Access Groups
 
-Use **Nextcloud Groups** to control CUI access:
+Use **Team Folders** to control CUI access:
 
-- Create groups: `fcigroup`, `cuigroup`, `executiveonly`
-- Assign folder-level sharing permissions
-- Restrict file/folder downloads and sharing
+- Create groups: `Access_CUI`, `Access_FCI`, `Access_Proprietary`
+- Restrict download, upload, and sharing rights per group
+- Assign group-based access via Keycloak SAML attribute mapping
 
-Enable logging and configure **file retention** for change auditing.
+Use File Access Control rules to:
+- Block sharing of CUI outside organization
+- Require group membership for sensitive content
 
 ---
 
@@ -88,18 +101,22 @@ Enable logging and configure **file retention** for change auditing.
 
 ---
 
-## 📝 Backup Considerations
+## 🔁 Health Monitoring & Backup
 
-Use tools like **Restic** or **BorgBackup** to:
+- Use **Uptime Kuma** to check AIO at `/status.php`
+- Enable internal **Nextcloud backup app** or schedule:
+  - Volume-level backups via Restic or BorgBackup
+  - External backup of `/mnt/ncdata` and `aio-mastercontainer` config
 
-- Schedule encrypted backups of Nextcloud volumes
-- Store offsite or on offline storage
-- Validate backups monthly for integrity
+Backup plans should include:
+- Encryption-at-rest
+- Monthly restore validation
+- Offline storage copies (e.g., encrypted USB)
 
 ---
 
 ## ✅ Next Step
 
-With secure file collaboration enabled, we now turn to deploying **secure email services with Mailcow** in Section 7.
+With secure file collaboration via Nextcloud AIO in place, proceed to Section 7 to configure **Mailcow** for secure email services.
 
 ---

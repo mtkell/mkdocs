@@ -16,29 +16,27 @@ This aligns with CMMC Level 2 controls for **Access Control (AC)** and **Identif
 **Keycloak** is an enterprise-grade open-source IAM platform. It supports:
 
 - SSO via OIDC and SAML 2.0
-- Multi-factor authentication
+- Multi-factor authentication (TOTP, WebAuthn, Duo)
 - Role-based access control
-- LDAP and AD federation
+- LDAP, AD, and Entra ID federation
 - Fine-grained session policies
 
-It integrates with applications like Nextcloud, Mailcow, Gitea, and more.
+It integrates with applications like Nextcloud AIO, Mailcow, Gitea, and more.
 
 ---
 
-## 🧪 Keycloak Deployment
-
-Use a secure container runtime like Podman:
+## 🧪 Keycloak Deployment (Secure Container)
 
 ```bash
-podman run -d --name keycloak \
+docker run -d --name keycloak \
   -p 8080:8080 \
   -e KEYCLOAK_ADMIN=admin \
   -e KEYCLOAK_ADMIN_PASSWORD=supersecurepw \
   quay.io/keycloak/keycloak:24.0.2 \
-  start-dev
+  start --optimized
 ```
 
-> ✅ Change this to systemd-managed service in production.
+> ✅ In production, place behind a reverse proxy and run as a systemd-managed container with secure TLS.
 
 ---
 
@@ -46,11 +44,47 @@ podman run -d --name keycloak \
 
 1. Log in to `http://yourhost:8080`
 2. Create a realm (e.g., `OpenCMMC`)
-3. Create users and roles
-4. Enable MFA under Authentication > Flows
-5. Register clients (Nextcloud, Mailcow, etc.)
-6. Configure client protocols (OIDC preferred)
-7. Use `confidential` access type for server-to-server auth
+3. Create groups: `Access_CUI`, `Access_FCI`, `Access_Proprietary`
+4. Enable MFA under **Authentication > Flows**
+5. Register clients (Nextcloud AIO, Mailcow, Gitea, etc.)
+6. Use:
+   - **OIDC** for Mailcow and Gitea
+   - **SAML** for Nextcloud AIO
+7. Use `confidential` clients for server-to-server integration
+
+---
+
+### 📎 Example: SAML Integration with Nextcloud AIO
+
+1. In Keycloak:
+   - Create new **SAML client** (e.g., `nextcloud-aio`)
+   - Import metadata from:
+     `https://nextcloud.yourdomain.com/apps/user_saml/saml/metadata`
+   - Map attributes:
+     - `uid` → `user.userprincipalname`
+     - `email` → `user.mail`
+     - `displayname` → `user.displayname`
+     - `groups` → `user.groups`
+2. In Nextcloud AIO:
+   - Enable **SSO & SAML authentication app**
+   - Set UID attribute and display name/email fields
+   - Enable group mapping for Team Folder access control
+
+---
+
+### 🌐 Optional Federation with Microsoft Entra ID
+
+To support hybrid ICAM or externally managed users:
+
+- Create an **Identity Provider** in Keycloak using:
+  - Protocol: SAML
+  - IdP Entity ID: `https://sts.windows.net/<tenant-id>/`
+  - SSO URL: `https://login.microsoftonline.com/<tenant-id>/saml2`
+- Import Microsoft X.509 certificate from Entra metadata
+- Map incoming attributes to Keycloak realm users and groups
+
+This allows for a clean hybrid SSO flow:
+`Entra ID → Keycloak → Nextcloud AIO`
 
 ---
 
@@ -62,6 +96,7 @@ podman run -d --name keycloak \
 - Automatic NAT traversal
 - ACL policies enforced by user identity
 - Built-in auditing and access logs
+- Compatible with containerized infrastructure
 
 ---
 
@@ -80,7 +115,7 @@ Use ephemeral or tag-based auth keys to automate provisioning in Terraform or An
 
 ## 🔒 Best Practice: Protecting Admin Interfaces
 
-Use Tailscale ACLs to expose sensitive ports (e.g., Keycloak admin, Mailcow admin) **only to specific users or device tags**.
+Use Tailscale ACLs to expose sensitive ports (e.g., Keycloak admin, Mailcow admin, Nextcloud AIO console) **only to specific users or device tags**.
 
 Example ACL:
 
@@ -112,6 +147,6 @@ Example ACL:
 
 ## ✅ Next Step
 
-With centralized identity in place, the next phase is deploying user-facing collaboration services like **Nextcloud for file storage** and **Mailcow for secure email**.
+With centralized identity in place, the next phase is deploying user-facing collaboration services like **Nextcloud AIO for file storage** and **Mailcow for secure email**.
 
 ---

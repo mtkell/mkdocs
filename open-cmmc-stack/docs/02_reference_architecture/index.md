@@ -43,27 +43,30 @@ The architecture emphasizes:
 |---------------|------------------------------------------|--------------|
 | **Keycloak**  | SSO, MFA, RBAC (OIDC & SAML support)     | AC, IA       |
 | **Tailscale** | Identity-bound networking (Zero Trust)   | AC, SC       |
+| **Microsoft Entra ID** (optional) | External SAML IDP for hybrid ICAM | AC, IA  |
 
 ---
 
 ### 4. **Application Services Layer**
 
-| Component         | Purpose                              | CMMC Domains |
-|------------------|--------------------------------------|--------------|
-| **Nextcloud**     | File sharing, document collaboration | MP, AC, SC   |
-| **Mailcow**       | Secure email with TLS, DKIM, SPF     | SC, AC       |
-| **PostgreSQL**    | Database backend                     | SC, SI       |
-| **Redis**         | Caching layer for Nextcloud          | SC           |
+| Component             | Purpose                                                  | CMMC Domains |
+|----------------------|----------------------------------------------------------|--------------|
+| **Nextcloud AIO**     | Secure file sharing, document collaboration, AV scanning, OnlyOffice, Talk | MP, AC, SC |
+| **Mailcow**           | Secure email with TLS, DKIM, SPF                         | SC, AC       |
+| **PostgreSQL** (in AIO) | Database backend for Nextcloud services               | SC, SI       |
+| **Redis** (in AIO)    | Caching for Nextcloud performance                       | SC           |
+
+> 🔒 **Nextcloud AIO** is deployed as an all-in-one container behind NGINX Proxy Manager, offering full server-side encryption, integrated ClamAV, and team folder access control. It is functionally equivalent to the SharePoint + OneDrive components in Microsoft GCC High.
 
 ---
 
 ### 5. **Monitoring & Response Layer**
 
-| Component   | Purpose                                   | CMMC Domains |
-|-------------|-------------------------------------------|--------------|
-| **Wazuh**   | Centralized logging, alerting, SIEM       | AU, IR, SI   |
-| **Auditd**  | Local event and command auditing          | AU           |
-| **Email Alerts** | Critical notification channel        | IR, SI       |
+| Component     | Purpose                                   | CMMC Domains |
+|---------------|-------------------------------------------|--------------|
+| **Wazuh**     | Centralized logging, alerting, SIEM       | AU, IR, SI   |
+| **Auditd**    | Local event and command auditing          | AU           |
+| **Email Alerts** | Critical notification channel          | IR, SI       |
 
 ---
 
@@ -71,7 +74,7 @@ The architecture emphasizes:
 
 1. **User authenticates via Keycloak** using MFA.
 2. **Tailscale tunnel is established** for trusted remote access.
-3. **User accesses services** (Nextcloud, Mailcow) over TLS.
+3. **User accesses services** (Nextcloud AIO, Mailcow) over TLS.
 4. **System logs events** with `auditd`, `journalctl`, and `Wazuh`.
 5. **AIDE checks** file system integrity every 24 hours.
 6. **Security policies** are applied via Ansible on schedule or via trigger.
@@ -90,17 +93,14 @@ This architecture supports the following CMMC Level 2 priorities:
 
 ---
 
-## 🖼️ Architecture Diagram (Recommended)
+## 🖼️ Architecture Diagram
 
-*(Insert network/system-level diagram here)*
+![OpenCMMC Stack with Nextcloud AIO](../../img/svg/open-cmmc-stack-nextcloud-aio-arch.svg)
 
-Suggested elements to include:
-
-- Hardened Ubuntu base with Podman containers
-- Enforced SSO via Keycloak
-- VPN overlay via Tailscale
-- Logging pipeline from `auditd` to Wazuh
-- Web services reverse-proxied with NGINX or Caddy
+**Key updates:**
+- Nextcloud AIO consolidates file services into one secure container
+- All access routed through NGINX Proxy Manager (TLS-terminated)
+- Trust boundaries clearly separate identity, infrastructure, and application services
 
 ---
 
