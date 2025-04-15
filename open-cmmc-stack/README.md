@@ -59,4 +59,4 @@ Developed by cybersecurity professionals and community contributors focused on s
 
 ---
 
-For questions or contributions, please open an [issue](https://github.com/your-org/open-cmmc-stack/issues) or submit a [pull request](https://github.com/your-org/open-cmmc-stack/pulls).
+For questions or contributions, please open an [issue](https://github.com/mtkell/mkdocs/issues) or submit a [pull request](https://github.com/mtkell/mkdocs/pulls).
