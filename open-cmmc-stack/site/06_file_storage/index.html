@@ -447,45 +447,45 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#why-nextcloud" class="md-nav__link">
+  <a href="#why-nextcloud-aio" class="md-nav__link">
     <span class="md-ellipsis">
-      🧩 Why Nextcloud?
+      🧩 Why Nextcloud AIO?
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#deployment-with-podman" class="md-nav__link">
+  <a href="#deployment-via-docker" class="md-nav__link">
     <span class="md-ellipsis">
-      📦 Deployment with Podman
+      📦 Deployment via Docker
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#recommended-stack" class="md-nav__link">
+  <a href="#hardened-stack-built-in" class="md-nav__link">
     <span class="md-ellipsis">
-      🧰 Recommended Stack
+      🧰 Hardened Stack (Built-In)
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#access-controls" class="md-nav__link">
+  <a href="#access-controls-sso-via-keycloak" class="md-nav__link">
     <span class="md-ellipsis">
-      🔒 Access Controls
+      🔒 Access Controls (SSO via Keycloak)
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#folder-permissions-cui-tagging" class="md-nav__link">
+  <a href="#folder-permissions-cui-access-groups" class="md-nav__link">
     <span class="md-ellipsis">
-      🔐 Folder Permissions &amp; CUI Tagging
+      🔐 Folder Permissions &amp; CUI Access Groups
     </span>
   </a>
   
@@ -501,9 +501,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#backup-considerations" class="md-nav__link">
+  <a href="#health-monitoring-backup" class="md-nav__link">
     <span class="md-ellipsis">
-      📝 Backup Considerations
+      🔁 Health Monitoring &amp; Backup
     </span>
   </a>
   
@@ -845,6 +845,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../14_deployment_guide/phase04-files/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Phase 3a - Nextcloud-AIO Deployment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../14_deployment_guide/05_identity_cert_mgmt/" class="md-nav__link">
         
   
@@ -1002,30 +1025,39 @@
 
 <h1 id="section-6-secure-file-sharing-and-collaboration">📁 Section 6: Secure File Sharing and Collaboration<a class="headerlink" href="#section-6-secure-file-sharing-and-collaboration" title="Permanent link">&para;</a></h1>
 <h2 id="objective">🎯 Objective<a class="headerlink" href="#objective" title="Permanent link">&para;</a></h2>
-<p>This section details how to securely deploy <strong>Nextcloud</strong>, an open-source file sharing and collaboration platform that satisfies CMMC Level 2 requirements for <strong>Media Protection (MP)</strong>, <strong>Access Control (AC)</strong>, and <strong>System Communications Protection (SC)</strong>.</p>
-<p>It enables your organization to securely store, access, and collaborate on Controlled Unclassified Information (CUI) without relying on commercial SaaS platforms.</p>
+<p>This section details how to securely deploy <strong>Nextcloud All-in-One (AIO)</strong> — an integrated file sharing and collaboration platform that satisfies CMMC Level 2 requirements for <strong>Media Protection (MP)</strong>, <strong>Access Control (AC)</strong>, and <strong>System Communications Protection (SC)</strong>.</p>
+<p>Nextcloud AIO consolidates secure storage, team collaboration, antivirus scanning, and file retention — enabling your organization to manage CUI without reliance on commercial SaaS platforms.</p>
 <hr />
-<h2 id="why-nextcloud">🧩 Why Nextcloud?<a class="headerlink" href="#why-nextcloud" title="Permanent link">&para;</a></h2>
-<p><strong>Nextcloud</strong> offers:</p>
+<h2 id="why-nextcloud-aio">🧩 Why Nextcloud AIO?<a class="headerlink" href="#why-nextcloud-aio" title="Permanent link">&para;</a></h2>
+<p><strong>Nextcloud AIO</strong> offers:</p>
 <ul>
-<li>Web-based file access and sharing with granular permissions</li>
-<li>Full audit logs and file activity tracking</li>
-<li>Integration with SSO (via Keycloak)</li>
-<li>End-to-end encryption (E2EE) and client-side encryption</li>
-<li>Collaboration apps (Office, calendar, contacts)</li>
+<li>One hardened container with all critical components:</li>
+<li>Files, Calendar, Contacts, Mail, Talk, and OnlyOffice</li>
+<li>PostgreSQL, Redis, and ClamAV preconfigured</li>
+<li>Web-based file access with granular permissioning</li>
+<li>Built-in audit logging and file activity tracking</li>
+<li>SSO support via Keycloak (SAML)</li>
+<li>Server-side and optional client-side encryption</li>
+<li>Secure sharing and team folder access control</li>
 </ul>
 <hr />
-<h2 id="deployment-with-podman">📦 Deployment with Podman<a class="headerlink" href="#deployment-with-podman" title="Permanent link">&para;</a></h2>
-<p>Basic command (non-production setup):</p>
-<div class="codehilite"><pre><span></span><code>podman<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>nextcloud<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-p<span class="w"> </span><span class="m">8081</span>:80<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-v<span class="w"> </span>nextcloud_data:/var/www/html<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>docker.io/library/nextcloud:28-apache
+<h2 id="deployment-via-docker">📦 Deployment via Docker<a class="headerlink" href="#deployment-via-docker" title="Permanent link">&para;</a></h2>
+<p>Run this container behind a reverse proxy (e.g., NGINX Proxy Manager):</p>
+<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span><span class="se">\\</span>
+<span class="w">  </span>--name<span class="w"> </span>nextcloud-aio-mastercontainer<span class="w"> </span><span class="se">\\</span>
+<span class="w">  </span>--restart<span class="w"> </span>always<span class="w"> </span><span class="se">\\</span>
+<span class="w">  </span>-p<span class="w"> </span><span class="m">8080</span>:8080<span class="w"> </span><span class="se">\\</span>
+<span class="w">  </span>-v<span class="w"> </span>nextcloud_aio_mastercontainer:/mnt/docker-aio-config<span class="w"> </span><span class="se">\\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">NEXTCLOUD_DATADIR</span><span class="o">=</span><span class="s2">&quot;/mnt/ncdata&quot;</span><span class="w"> </span><span class="se">\\</span>
+<span class="w">  </span>nextcloud/all-in-one:latest
 </code></pre></div>
 
-<p>In production, Nextcloud should use a reverse proxy (NGINX, Traefik), persistent PostgreSQL backend, Redis cache, and TLS.</p>
+<ul>
+<li>Expose to internet <strong>only through reverse proxy with TLS termination</strong></li>
+<li>All services run inside AIO: no external database or cache required</li>
+</ul>
 <hr />
-<h2 id="recommended-stack">🧰 Recommended Stack<a class="headerlink" href="#recommended-stack" title="Permanent link">&para;</a></h2>
+<h2 id="hardened-stack-built-in">🧰 Hardened Stack (Built-In)<a class="headerlink" href="#hardened-stack-built-in" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -1035,50 +1067,58 @@
 </thead>
 <tbody>
 <tr>
-<td>Nextcloud</td>
+<td>Nextcloud Core</td>
 <td>File &amp; data collaboration</td>
 </tr>
 <tr>
+<td>OnlyOffice</td>
+<td>Integrated document editing</td>
+</tr>
+<tr>
+<td>ClamAV</td>
+<td>Antivirus scanning for file uploads</td>
+</tr>
+<tr>
 <td>PostgreSQL</td>
-<td>Reliable backend DB</td>
+<td>Backend database (within container)</td>
 </tr>
 <tr>
 <td>Redis</td>
-<td>Improves performance</td>
-</tr>
-<tr>
-<td>NGINX</td>
-<td>TLS termination, reverse proxy</td>
+<td>Performance cache</td>
 </tr>
 <tr>
 <td>Keycloak</td>
-<td>Federated SSO via OIDC</td>
+<td>External SSO federation via SAML</td>
 </tr>
 </tbody>
 </table>
-<p>All components should be deployed as rootless Podman containers and protected behind a firewall or private network overlay.</p>
+<p>All services are isolated within the container and monitored via health checks.</p>
 <hr />
-<h2 id="access-controls">🔒 Access Controls<a class="headerlink" href="#access-controls" title="Permanent link">&para;</a></h2>
-<p>Configure Nextcloud to use Keycloak for authentication:</p>
+<h2 id="access-controls-sso-via-keycloak">🔒 Access Controls (SSO via Keycloak)<a class="headerlink" href="#access-controls-sso-via-keycloak" title="Permanent link">&para;</a></h2>
+<p>Configure SSO for Nextcloud AIO:</p>
 <ol>
-<li>Install <a href="https://apps.nextcloud.com/apps/oidc_login">OIDC Login app</a></li>
+<li>In Nextcloud AIO:</li>
+<li>Install <strong>SSO &amp; SAML authentication</strong> app</li>
+<li>Set UID attribute: <code>user.userprincipalname</code></li>
+<li>Set display name, email, group mapping (via SAML)</li>
 <li>In Keycloak:</li>
-<li>Add a client with <code>openid-connect</code> protocol</li>
-<li>Set redirect URI: <code>https://nextcloud.yourdomain.com/index.php/apps/oidc_login/oidc</code></li>
-<li>In Nextcloud:</li>
-<li>Enter Keycloak endpoints and client credentials</li>
-<li>Enable auto-provisioning</li>
-<li>Test login and group-based file access</li>
+<li>Create a SAML client</li>
+<li>Import metadata from:
+     <code>https://nextcloud.yourdomain.com/apps/user_saml/saml/metadata</code></li>
+<li>Map email, displayname, and groups</li>
 </ol>
+<p>This enables secure login via Microsoft Entra ID, Keycloak users, or FreeIPA LDAP federation.</p>
 <hr />
-<h2 id="folder-permissions-cui-tagging">🔐 Folder Permissions &amp; CUI Tagging<a class="headerlink" href="#folder-permissions-cui-tagging" title="Permanent link">&para;</a></h2>
-<p>Use <strong>Nextcloud Groups</strong> to control CUI access:</p>
+<h2 id="folder-permissions-cui-access-groups">🔐 Folder Permissions &amp; CUI Access Groups<a class="headerlink" href="#folder-permissions-cui-access-groups" title="Permanent link">&para;</a></h2>
+<p>Use <strong>Team Folders</strong> to control CUI access:</p>
 <ul>
-<li>Create groups: <code>fcigroup</code>, <code>cuigroup</code>, <code>executiveonly</code></li>
-<li>Assign folder-level sharing permissions</li>
-<li>Restrict file/folder downloads and sharing</li>
+<li>Create groups: <code>Access_CUI</code>, <code>Access_FCI</code>, <code>Access_Proprietary</code></li>
+<li>Restrict download, upload, and sharing rights per group</li>
+<li>Assign group-based access via Keycloak SAML attribute mapping</li>
 </ul>
-<p>Enable logging and configure <strong>file retention</strong> for change auditing.</p>
+<p>Use File Access Control rules to:
+- Block sharing of CUI outside organization
+- Require group membership for sensitive content</p>
 <hr />
 <h2 id="cmmc-practices-addressed">📜 CMMC Practices Addressed<a class="headerlink" href="#cmmc-practices-addressed" title="Permanent link">&para;</a></h2>
 <table>
@@ -1112,16 +1152,20 @@
 </tbody>
 </table>
 <hr />
-<h2 id="backup-considerations">📝 Backup Considerations<a class="headerlink" href="#backup-considerations" title="Permanent link">&para;</a></h2>
-<p>Use tools like <strong>Restic</strong> or <strong>BorgBackup</strong> to:</p>
+<h2 id="health-monitoring-backup">🔁 Health Monitoring &amp; Backup<a class="headerlink" href="#health-monitoring-backup" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Schedule encrypted backups of Nextcloud volumes</li>
-<li>Store offsite or on offline storage</li>
-<li>Validate backups monthly for integrity</li>
+<li>Use <strong>Uptime Kuma</strong> to check AIO at <code>/status.php</code></li>
+<li>Enable internal <strong>Nextcloud backup app</strong> or schedule:</li>
+<li>Volume-level backups via Restic or BorgBackup</li>
+<li>External backup of <code>/mnt/ncdata</code> and <code>aio-mastercontainer</code> config</li>
 </ul>
+<p>Backup plans should include:
+- Encryption-at-rest
+- Monthly restore validation
+- Offline storage copies (e.g., encrypted USB)</p>
 <hr />
 <h2 id="next-step">✅ Next Step<a class="headerlink" href="#next-step" title="Permanent link">&para;</a></h2>
-<p>With secure file collaboration enabled, we now turn to deploying <strong>secure email services with Mailcow</strong> in Section 7.</p>
+<p>With secure file collaboration via Nextcloud AIO in place, proceed to Section 7 to configure <strong>Mailcow</strong> for secure email services.</p>
 <hr />
 
 

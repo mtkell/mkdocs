@@ -2,106 +2,110 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://docs.kellengineering.com/</loc>
-         <lastmod>2025-04-14</lastmod>
+         <lastmod>2025-04-15</lastmod>
     </url>
     <url>
          <loc>https://docs.kellengineering.com/99_appendix_a_acronyms/</loc>
-         <lastmod>2025-04-14</lastmod>
+         <lastmod>2025-04-15</lastmod>
     </url>
     <url>
          <loc>https://docs.kellengineering.com/99_appendix_b_references/</loc>
-         <lastmod>2025-04-14</lastmod>
+         <lastmod>2025-04-15</lastmod>
     </url>
     <url>
          <loc>https://docs.kellengineering.com/00_preface/</loc>
-         <lastmod>2025-04-14</lastmod>
+         <lastmod>2025-04-15</lastmod>
     </url>
     <url>
          <loc>https://docs.kellengineering.com/01_cmmc_intro/</loc>
-         <lastmod>2025-04-14</lastmod>
+         <lastmod>2025-04-15</lastmod>
     </url>
     <url>
          <loc>https://docs.kellengineering.com/02_reference_architecture/</loc>
-         <lastmod>2025-04-14</lastmod>
+         <lastmod>2025-04-15</lastmod>
     </url>
     <url>
          <loc>https://docs.kellengineering.com/03_provisioning/</loc>
-         <lastmod>2025-04-14</lastmod>
+         <lastmod>2025-04-15</lastmod>
     </url>
     <url>
          <loc>https://docs.kellengineering.com/04_os_hardening/</loc>
-         <lastmod>2025-04-14</lastmod>
+         <lastmod>2025-04-15</lastmod>
     </url>
     <url>
          <loc>https://docs.kellengineering.com/05_identity_access/</loc>
-         <lastmod>2025-04-14</lastmod>
+         <lastmod>2025-04-15</lastmod>
     </url>
     <url>
          <loc>https://docs.kellengineering.com/06_file_storage/</loc>
-         <lastmod>2025-04-14</lastmod>
+         <lastmod>2025-04-15</lastmod>
     </url>
     <url>
          <loc>https://docs.kellengineering.com/07_email/</loc>
-         <lastmod>2025-04-14</lastmod>
+         <lastmod>2025-04-15</lastmod>
     </url>
     <url>
          <loc>https://docs.kellengineering.com/08_logging_monitoring/</loc>
-         <lastmod>2025-04-14</lastmod>
+         <lastmod>2025-04-15</lastmod>
     </url>
     <url>
          <loc>https://docs.kellengineering.com/09_container_runtime/</loc>
-         <lastmod>2025-04-14</lastmod>
+         <lastmod>2025-04-15</lastmod>
     </url>
     <url>
          <loc>https://docs.kellengineering.com/10_backup_recovery/</loc>
-         <lastmod>2025-04-14</lastmod>
+         <lastmod>2025-04-15</lastmod>
     </url>
     <url>
          <loc>https://docs.kellengineering.com/11_policies_procedures/</loc>
-         <lastmod>2025-04-14</lastmod>
+         <lastmod>2025-04-15</lastmod>
     </url>
     <url>
          <loc>https://docs.kellengineering.com/12_assessment_readiness/</loc>
-         <lastmod>2025-04-14</lastmod>
+         <lastmod>2025-04-15</lastmod>
     </url>
     <url>
          <loc>https://docs.kellengineering.com/13_architecture/</loc>
-         <lastmod>2025-04-14</lastmod>
+         <lastmod>2025-04-15</lastmod>
     </url>
     <url>
          <loc>https://docs.kellengineering.com/14_deployment_guide/</loc>
-         <lastmod>2025-04-14</lastmod>
+         <lastmod>2025-04-15</lastmod>
     </url>
     <url>
          <loc>https://docs.kellengineering.com/14_deployment_guide/01_planning/</loc>
-         <lastmod>2025-04-14</lastmod>
+         <lastmod>2025-04-15</lastmod>
     </url>
     <url>
          <loc>https://docs.kellengineering.com/14_deployment_guide/02_terraform_provisioning/</loc>
-         <lastmod>2025-04-14</lastmod>
+         <lastmod>2025-04-15</lastmod>
     </url>
     <url>
          <loc>https://docs.kellengineering.com/14_deployment_guide/03_ansible_hardening/</loc>
-         <lastmod>2025-04-14</lastmod>
+         <lastmod>2025-04-15</lastmod>
     </url>
     <url>
          <loc>https://docs.kellengineering.com/14_deployment_guide/04_podman_services/</loc>
-         <lastmod>2025-04-14</lastmod>
+         <lastmod>2025-04-15</lastmod>
     </url>
     <url>
          <loc>https://docs.kellengineering.com/14_deployment_guide/05_identity_cert_mgmt/</loc>
-         <lastmod>2025-04-14</lastmod>
+         <lastmod>2025-04-15</lastmod>
     </url>
     <url>
          <loc>https://docs.kellengineering.com/14_deployment_guide/06_client_registration/</loc>
-         <lastmod>2025-04-14</lastmod>
+         <lastmod>2025-04-15</lastmod>
     </url>
     <url>
          <loc>https://docs.kellengineering.com/14_deployment_guide/07_logging_monitoring/</loc>
-         <lastmod>2025-04-14</lastmod>
+         <lastmod>2025-04-15</lastmod>
     </url>
     <url>
          <loc>https://docs.kellengineering.com/14_deployment_guide/08_validation_reporting/</loc>
-         <lastmod>2025-04-14</lastmod>
+         <lastmod>2025-04-15</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.kellengineering.com/14_deployment_guide/phase04-files/</loc>
+         <lastmod>2025-04-15</lastmod>
     </url>
 </urlset>

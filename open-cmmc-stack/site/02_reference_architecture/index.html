@@ -437,9 +437,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#architecture-diagram-recommended" class="md-nav__link">
+  <a href="#architecture-diagram" class="md-nav__link">
     <span class="md-ellipsis">
-      🖼️ Architecture Diagram (Recommended)
+      🖼️ Architecture Diagram
     </span>
   </a>
   
@@ -878,6 +878,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../14_deployment_guide/phase04-files/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Phase 3a - Nextcloud-AIO Deployment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../14_deployment_guide/05_identity_cert_mgmt/" class="md-nav__link">
         
   
@@ -1111,6 +1134,11 @@
 <td>Identity-bound networking (Zero Trust)</td>
 <td>AC, SC</td>
 </tr>
+<tr>
+<td><strong>Microsoft Entra ID</strong> (optional)</td>
+<td>External SAML IDP for hybrid ICAM</td>
+<td>AC, IA</td>
+</tr>
 </tbody>
 </table>
 <hr />
@@ -1125,8 +1153,8 @@
 </thead>
 <tbody>
 <tr>
-<td><strong>Nextcloud</strong></td>
-<td>File sharing, document collaboration</td>
+<td><strong>Nextcloud AIO</strong></td>
+<td>Secure file sharing, document collaboration, AV scanning, OnlyOffice, Talk</td>
 <td>MP, AC, SC</td>
 </tr>
 <tr>
@@ -1135,17 +1163,20 @@
 <td>SC, AC</td>
 </tr>
 <tr>
-<td><strong>PostgreSQL</strong></td>
-<td>Database backend</td>
+<td><strong>PostgreSQL</strong> (in AIO)</td>
+<td>Database backend for Nextcloud services</td>
 <td>SC, SI</td>
 </tr>
 <tr>
-<td><strong>Redis</strong></td>
-<td>Caching layer for Nextcloud</td>
+<td><strong>Redis</strong> (in AIO)</td>
+<td>Caching for Nextcloud performance</td>
 <td>SC</td>
 </tr>
 </tbody>
 </table>
+<blockquote>
+<p>🔒 <strong>Nextcloud AIO</strong> is deployed as an all-in-one container behind NGINX Proxy Manager, offering full server-side encryption, integrated ClamAV, and team folder access control. It is functionally equivalent to the SharePoint + OneDrive components in Microsoft GCC High.</p>
+</blockquote>
 <hr />
 <h3 id="5-monitoring-response-layer">5. <strong>Monitoring &amp; Response Layer</strong><a class="headerlink" href="#5-monitoring-response-layer" title="Permanent link">&para;</a></h3>
 <table>
@@ -1179,7 +1210,7 @@
 <ol>
 <li><strong>User authenticates via Keycloak</strong> using MFA.</li>
 <li><strong>Tailscale tunnel is established</strong> for trusted remote access.</li>
-<li><strong>User accesses services</strong> (Nextcloud, Mailcow) over TLS.</li>
+<li><strong>User accesses services</strong> (Nextcloud AIO, Mailcow) over TLS.</li>
 <li><strong>System logs events</strong> with <code>auditd</code>, <code>journalctl</code>, and <code>Wazuh</code>.</li>
 <li><strong>AIDE checks</strong> file system integrity every 24 hours.</li>
 <li><strong>Security policies</strong> are applied via Ansible on schedule or via trigger.</li>
@@ -1195,16 +1226,12 @@
 <li><strong>Change Control</strong>: Containerized infrastructure ensures reproducibility and rollback capability</li>
 </ul>
 <hr />
-<h2 id="architecture-diagram-recommended">🖼️ Architecture Diagram (Recommended)<a class="headerlink" href="#architecture-diagram-recommended" title="Permanent link">&para;</a></h2>
-<p><em>(Insert network/system-level diagram here)</em></p>
-<p>Suggested elements to include:</p>
-<ul>
-<li>Hardened Ubuntu base with Podman containers</li>
-<li>Enforced SSO via Keycloak</li>
-<li>VPN overlay via Tailscale</li>
-<li>Logging pipeline from <code>auditd</code> to Wazuh</li>
-<li>Web services reverse-proxied with NGINX or Caddy</li>
-</ul>
+<h2 id="architecture-diagram">🖼️ Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Permanent link">&para;</a></h2>
+<p><img alt="OpenCMMC Stack with Nextcloud AIO" src="../img/svg/open-cmmc-stack-nextcloud-aio-arch.svg" /></p>
+<p><strong>Key updates:</strong>
+- Nextcloud AIO consolidates file services into one secure container
+- All access routed through NGINX Proxy Manager (TLS-terminated)
+- Trust boundaries clearly separate identity, infrastructure, and application services</p>
 <hr />
 <h2 id="modular-deployment-strategy">🧰 Modular Deployment Strategy<a class="headerlink" href="#modular-deployment-strategy" title="Permanent link">&para;</a></h2>
 <p>All components are:</p>

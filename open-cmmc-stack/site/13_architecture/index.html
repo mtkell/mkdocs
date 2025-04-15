@@ -610,9 +610,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#opencmmc-network-topology" class="md-nav__link">
+  <a href="#opencmmc-network-topology-svg" class="md-nav__link">
     <span class="md-ellipsis">
-      🖧 OpenCMMC Network Topology
+      🖧 OpenCMMC Network Topology (SVG)
     </span>
   </a>
   
@@ -641,6 +641,15 @@
   <a href="#certificate-authority" class="md-nav__link">
     <span class="md-ellipsis">
       Certificate Authority
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file-services-nextcloud-aio" class="md-nav__link">
+    <span class="md-ellipsis">
+      File Services (Nextcloud AIO)
     </span>
   </a>
   
@@ -869,6 +878,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../14_deployment_guide/phase04-files/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Phase 3a - Nextcloud-AIO Deployment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../14_deployment_guide/05_identity_cert_mgmt/" class="md-nav__link">
         
   
@@ -1029,18 +1061,51 @@
 <p>📚 This section visually complements <a href="../02_reference_architecture/">Section 2: Reference Architecture</a>, where each component’s function and compliance relevance is explained in detail.</p>
 </blockquote>
 <p>This section provides a comprehensive view of the Zero Trust-aligned FOSS architecture for small-to-medium defense contractors targeting CMMC Level 2 readiness. It includes a layered topology, component roles, and system interactions.</p>
+<hr />
 <h2 id="system-topology-overview">🗺️ System Topology Overview<a class="headerlink" href="#system-topology-overview" title="Permanent link">&para;</a></h2>
 <p>The architecture below highlights how clients, core services, and perimeter components interact within a segmented and policy-enforced environment.</p>
+<hr />
 <h2 id="network-level-system-topology-mermaid">🖧 Network-Level System Topology (Mermaid)<a class="headerlink" href="#network-level-system-topology-mermaid" title="Permanent link">&para;</a></h2>
-<h2 id="opencmmc-network-topology">🖧 OpenCMMC Network Topology<a class="headerlink" href="#opencmmc-network-topology" title="Permanent link">&para;</a></h2>
+<div class="codehilite"><pre><span></span><code><span class="nf">graph</span><span class="w"> </span><span class="n">LR</span>
+<span class="w">  </span><span class="n">subgraph</span><span class="w"> </span><span class="n">Internet</span>
+<span class="w">    </span><span class="n">User</span><span class="p">[</span><span class="n">User</span><span class="w"> </span><span class="p">(</span><span class="n">Browser</span><span class="p">,</span><span class="w"> </span><span class="n">Client</span><span class="p">)]</span>
+<span class="w">  </span><span class="kd">end</span>
+
+<span class="w">  </span><span class="n">subgraph</span><span class="w"> </span><span class="s">&quot;DMZ (Zero Trust Proxy Layer)&quot;</span>
+<span class="w">    </span><span class="n">NGINX</span><span class="p">[</span><span class="n">NGINX</span><span class="w"> </span><span class="n">Proxy</span><span class="w"> </span><span class="n">Manager</span><span class="err">\</span><span class="n">n</span><span class="p">(</span><span class="n">TLS</span><span class="w"> </span><span class="n">Termination</span><span class="p">)]</span>
+<span class="w">  </span><span class="kd">end</span>
+
+<span class="w">  </span><span class="n">subgraph</span><span class="w"> </span><span class="s">&quot;Internal Secure Docker Network&quot;</span>
+<span class="w">    </span><span class="n">Keycloak</span><span class="p">[</span><span class="n">Keycloak</span><span class="err">\</span><span class="n">n</span><span class="p">(</span><span class="n">SSO</span><span class="p">,</span><span class="w"> </span><span class="n">MFA</span><span class="p">,</span><span class="w"> </span><span class="n">RBAC</span><span class="p">)]</span>
+<span class="w">    </span><span class="n">NC</span><span class="p">[</span><span class="n">Nextcloud</span><span class="w"> </span><span class="n">AIO</span><span class="err">\</span><span class="n">n</span><span class="p">(</span><span class="n">Files</span><span class="p">,</span><span class="w"> </span><span class="n">AV</span><span class="p">,</span><span class="w"> </span><span class="n">OnlyOffice</span><span class="p">,</span><span class="w"> </span><span class="n">Talk</span><span class="p">)]</span>
+<span class="w">    </span><span class="n">Mailcow</span><span class="p">[</span><span class="n">Mailcow</span><span class="err">\</span><span class="n">n</span><span class="p">(</span><span class="n">SMTP</span><span class="p">,</span><span class="w"> </span><span class="n">IMAP</span><span class="p">,</span><span class="w"> </span><span class="n">Webmail</span><span class="p">)]</span>
+<span class="w">    </span><span class="n">DB</span><span class="p">[</span><span class="n">Internal</span><span class="w"> </span><span class="n">Services</span><span class="err">\</span><span class="n">n</span><span class="p">(</span><span class="n">PostgreSQL</span><span class="p">,</span><span class="w"> </span><span class="n">Redis</span><span class="p">)]</span>
+<span class="w">  </span><span class="kd">end</span>
+
+<span class="w">  </span><span class="n">subgraph</span><span class="w"> </span><span class="n">Optional</span><span class="p">[</span><span class="s">&quot;Optional External Identity Provider&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="n">Entra</span><span class="p">[</span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Entra</span><span class="w"> </span><span class="n">ID</span><span class="err">\</span><span class="n">n</span><span class="p">(</span><span class="n">SAML</span><span class="w"> </span><span class="n">Federation</span><span class="p">)]</span>
+<span class="w">  </span><span class="kd">end</span>
+
+<span class="w">  </span><span class="n">User</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">NGINX</span>
+<span class="w">  </span><span class="n">NGINX</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">Keycloak</span>
+<span class="w">  </span><span class="n">NGINX</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">NC</span>
+<span class="w">  </span><span class="n">NGINX</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">Mailcow</span>
+
+<span class="w">  </span><span class="n">Keycloak</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">Entra</span>
+<span class="w">  </span><span class="n">NC</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">DB</span>
+<span class="w">  </span><span class="n">Mailcow</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">DB</span>
+</code></pre></div>
+
+<hr />
+<h2 id="opencmmc-network-topology-svg">🖧 OpenCMMC Network Topology (SVG)<a class="headerlink" href="#opencmmc-network-topology-svg" title="Permanent link">&para;</a></h2>
 <p><img src="../img/svg/network-topology.svg" alt="Zero Trust architecture diagram" style="width:100%; max-width:1000px;"></p>
 <hr />
 <h2 id="component-interactions">🧩 Component Interactions<a class="headerlink" href="#component-interactions" title="Permanent link">&para;</a></h2>
 <h3 id="identity-access-control">Identity &amp; Access Control<a class="headerlink" href="#identity-access-control" title="Permanent link">&para;</a></h3>
 <ul>
-<li>All users authenticate via <strong>Keycloak</strong> with <strong>YubiKey</strong> or <strong>WebAuthn</strong></li>
+<li>All users authenticate via <strong>Keycloak</strong> with <strong>YubiKey</strong>, <strong>WebAuthn</strong>, or <strong>Microsoft Entra SAML Federation</strong></li>
 <li>Authorization is scoped per application via Keycloak roles and group policies</li>
-<li>MFA is enforced for SOGo, Nextcloud, and Admin interfaces</li>
+<li>MFA is enforced for Mailcow, Nextcloud AIO, and Admin interfaces</li>
 </ul>
 <h3 id="certificate-authority">Certificate Authority<a class="headerlink" href="#certificate-authority" title="Permanent link">&para;</a></h3>
 <ul>
@@ -1048,6 +1113,13 @@
 <li>S/MIME certificates for secure email</li>
 <li>Device certificates for Tailscale ACLs and VPN gateway access</li>
 <li>SSH certificates for privileged access with expiration</li>
+</ul>
+<h3 id="file-services-nextcloud-aio">File Services (Nextcloud AIO)<a class="headerlink" href="#file-services-nextcloud-aio" title="Permanent link">&para;</a></h3>
+<ul>
+<li>AIO consolidates: file sharing, AV scanning, OnlyOffice, Talk, Redis, and PostgreSQL</li>
+<li>Deployed as a single secure container behind NGINX Proxy Manager</li>
+<li>Integrated with Keycloak via SAML for secure group-based access control</li>
+<li>Health-monitored with Uptime Kuma (<code>/status.php</code>)</li>
 </ul>
 <h3 id="network-enforcement">Network Enforcement<a class="headerlink" href="#network-enforcement" title="Permanent link">&para;</a></h3>
 <ul>
@@ -1071,7 +1143,7 @@
 </tr>
 <tr>
 <td><strong>Secure LAN</strong></td>
-<td>Internal services with TLS + RBAC</td>
+<td>Internal services with TLS + RBAC; includes Keycloak, Nextcloud AIO, Mailcow</td>
 </tr>
 <tr>
 <td><strong>Client Zone</strong></td>
@@ -1115,24 +1187,36 @@
 <td>UDP 41641</td>
 <td>Overlay access</td>
 </tr>
+<tr>
+<td>Clients</td>
+<td>Nextcloud AIO</td>
+<td>TCP 443 via Proxy</td>
+<td>Secure file services</td>
+</tr>
 </tbody>
 </table>
 <hr />
 <h2 id="monitoring-and-audit">🧪 Monitoring and Audit<a class="headerlink" href="#monitoring-and-audit" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Wazuh</strong> agents monitor system logs, auth attempts, and file integrity</li>
+<li>Health checks for AIO and Mailcow integrated with <strong>Uptime Kuma</strong></li>
 <li>Alerting integrated with email and secure dashboard</li>
+<li>Auditd logs enriched by Filebeat and forwarded to Wazuh indexer</li>
 </ul>
 <hr />
 <h2 id="summary">📝 Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
-<p>This reference architecture provides:
-- Strong access control via SSO, MFA, and per-device policies
-- End-to-end encryption through S/MIME and TLS-based services
-- Identity-bound networking through device-issued certificates
-- Full observability with integrated logging and alerting</p>
+<p>This reference architecture provides:</p>
+<ul>
+<li>Strong access control via SSO, MFA, and per-device policies</li>
+<li>End-to-end encryption through S/MIME and TLS-based services</li>
+<li>Identity-bound networking through device-issued certificates</li>
+<li>Full observability with integrated logging and alerting</li>
+<li>Simplified, auditable CUI collaboration using Nextcloud AIO</li>
+</ul>
 <blockquote>
 <p>This design aligns with core CMMC Level 2 controls including AC.1.001, AC.3.014, IA.3.083, and SC.12.3–12.5.</p>
 </blockquote>
+<hr />
 
 
 

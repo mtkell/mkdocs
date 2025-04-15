@@ -95,7 +95,7 @@ This architecture supports the following CMMC Level 2 priorities:
 
 ## 🖼️ Architecture Diagram
 
-![OpenCMMC Stack with Nextcloud AIO](../../img/svg/open-cmmc-stack-nextcloud-aio-arch.svg)
+![OpenCMMC Stack with Nextcloud AIO](../img/svg/open-cmmc-stack-nextcloud-aio-arch.svg)
 
 **Key updates:**
 - Nextcloud AIO consolidates file services into one secure container

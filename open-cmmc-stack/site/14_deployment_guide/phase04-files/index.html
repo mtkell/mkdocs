@@ -12,13 +12,13 @@
         <meta name="author" content="Kell Engineering">
       
       
-        <link rel="canonical" href="https://docs.kellengineering.com/14_deployment_guide/04_podman_services/">
+        <link rel="canonical" href="https://docs.kellengineering.com/14_deployment_guide/phase04-files/">
       
       
-        <link rel="prev" href="../03_ansible_hardening/">
+        <link rel="prev" href="../04_podman_services/">
       
       
-        <link rel="next" href="../phase04-files/">
+        <link rel="next" href="../05_identity_cert_mgmt/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -26,7 +26,7 @@
     
     
       
-        <title>Phase 3- Podman Service Deployment - OpenCMMC Stack</title>
+        <title>Phase 3a - Nextcloud-AIO Deployment - OpenCMMC Stack</title>
       
     
     
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#phase-3-podman-service-deployment" class="md-skip">
+        <a href="#phase-3a-file-collaboration-services-nextcloud-aio-deployment" class="md-skip">
           Skip to content
         </a>
       
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Phase 3- Podman Service Deployment
+              Phase 3a - Nextcloud-AIO Deployment
             
           </span>
         </div>
@@ -698,6 +698,29 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_podman_services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Phase 3- Podman Service Deployment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -715,7 +738,7 @@
   
   
   <span class="md-ellipsis">
-    Phase 3- Podman Service Deployment
+    Phase 3a - Nextcloud-AIO Deployment
     
   </span>
   
@@ -728,7 +751,7 @@
   
   
   <span class="md-ellipsis">
-    Phase 3- Podman Service Deployment
+    Phase 3a - Nextcloud-AIO Deployment
     
   </span>
   
@@ -751,54 +774,78 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#phase-3-podman-service-deployment_1" class="md-nav__link">
+  <a href="#aio-deployment-overview" class="md-nav__link">
     <span class="md-ellipsis">
-      📦 Phase 3 – Podman Service Deployment
+      📦 AIO Deployment Overview
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="📦 AIO Deployment Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-features-included" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Key Features Included:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#prerequisites" class="md-nav__link">
     <span class="md-ellipsis">
-      🧰 Prerequisites
+      🛠 Prerequisites
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#recommended-structure" class="md-nav__link">
+  <a href="#deployment-steps" class="md-nav__link">
     <span class="md-ellipsis">
-      🧱 Recommended Structure
+      🧱 Deployment Steps
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#systemd-unit-template-podman-service" class="md-nav__link">
+  <a href="#keycloak-saml-integration" class="md-nav__link">
     <span class="md-ellipsis">
-      ⚙️ Systemd Unit Template (Podman Service)
+      🔐 Keycloak SAML Integration
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#exception-nextcloud-aio" class="md-nav__link">
+  <a href="#team-folder-setup-for-cuifci" class="md-nav__link">
     <span class="md-ellipsis">
-      ⚠️ Exception: Nextcloud AIO
+      🔒 Team Folder Setup for CUI/FCI
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#security-practices" class="md-nav__link">
+  <a href="#health-monitoring" class="md-nav__link">
     <span class="md-ellipsis">
-      🔒 Security Practices
+      🔁 Health Monitoring
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#backup-recommendations" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔐 Backup Recommendations
     </span>
   </a>
   
@@ -817,29 +864,6 @@
   
 </nav>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../phase04-files/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Phase 3a - Nextcloud-AIO Deployment
-    
-  </span>
-  
-
-      </a>
     </li>
   
 
@@ -1007,71 +1031,42 @@
   
 
 
-<h1 id="phase-3-podman-service-deployment">Phase 3: Podman Service Deployment<a class="headerlink" href="#phase-3-podman-service-deployment" title="Permanent link">&para;</a></h1>
-<p>In this phase, we deploy core application services using <strong>Podman</strong> — a rootless, secure container runtime. Podman replaces Docker and integrates cleanly with systemd for persistent service management.</p>
-<blockquote>
-<p>📌 <strong>Note:</strong> As of this phase, Nextcloud is deployed via a standalone hardened container using the <strong>Nextcloud All-in-One (AIO)</strong> model. It is <strong>not</strong> managed via <code>podman-compose</code>, but follows secure Docker deployment practices described in <a href="../phase04-files/">Phase 4: File Collaboration Services</a>.</p>
-</blockquote>
+<h1 id="phase-3a-file-collaboration-services-nextcloud-aio-deployment">Phase 3A: File Collaboration Services – Nextcloud AIO Deployment<a class="headerlink" href="#phase-3a-file-collaboration-services-nextcloud-aio-deployment" title="Permanent link">&para;</a></h1>
+<p>In this phase, we deploy <strong>Nextcloud All-in-One (AIO)</strong> to enable secure file sharing, document collaboration, calendar access, and group-based data controls.</p>
+<p>Nextcloud AIO consolidates all supporting services (PostgreSQL, Redis, ClamAV, OnlyOffice, Talk) into a single hardened container, reducing complexity and improving security posture.</p>
 <hr />
-<h2 id="phase-3-podman-service-deployment_1">📦 Phase 3 – Podman Service Deployment<a class="headerlink" href="#phase-3-podman-service-deployment_1" title="Permanent link">&para;</a></h2>
-<p><img src="../../img/svg/phase03-podman.svg" alt="Workflow for deploying Keycloak, Mailcow, Wazuh, and Step-CA as rootless Podman containers" style="width:100%; max-width:800px; margin:1em 0;"></p>
-<hr />
-<h2 id="prerequisites">🧰 Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<h2 id="aio-deployment-overview">📦 AIO Deployment Overview<a class="headerlink" href="#aio-deployment-overview" title="Permanent link">&para;</a></h2>
+<p>Nextcloud AIO is deployed via Docker and should only be accessible behind a secure reverse proxy like <strong>NGINX Proxy Manager</strong> or <strong>Traefik</strong>.</p>
+<h3 id="key-features-included">✅ Key Features Included:<a class="headerlink" href="#key-features-included" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Host hardened via Ansible (see Phase 2)</li>
-<li><code>podman</code>, <code>podman-compose</code>, and <code>uidmap</code> installed</li>
-<li>Containers will run as <strong>non-root</strong> service users</li>
-<li>Reverse proxy (e.g., NGINX Proxy Manager) must be deployed to interface with external traffic</li>
+<li>Full-text search and OnlyOffice document editing</li>
+<li>File-level audit logging</li>
+<li>SAML SSO integration via Keycloak</li>
+<li>Team Folder access control</li>
+<li>Built-in virus scanning with ClamAV</li>
+<li>Scheduled backup tools</li>
+<li>Status endpoint for uptime monitoring</li>
 </ul>
 <hr />
-<h2 id="recommended-structure">🧱 Recommended Structure<a class="headerlink" href="#recommended-structure" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span><code><span class="nv">services</span><span class="o">/</span>
-├──<span class="w"> </span><span class="nv">keycloak</span><span class="o">/</span>
-│<span class="w">   </span>└──<span class="w"> </span><span class="nv">podman</span><span class="o">-</span><span class="nv">compose</span>.<span class="nv">yml</span>
-├──<span class="w"> </span><span class="nv">mailcow</span><span class="o">/</span>
-│<span class="w">   </span>└──<span class="w"> </span><span class="nv">podman</span><span class="o">-</span><span class="nv">compose</span>.<span class="nv">yml</span>
-├──<span class="w"> </span><span class="nv">wazuh</span><span class="o">/</span>
-│<span class="w">   </span>└──<span class="w"> </span><span class="nv">podman</span><span class="o">-</span><span class="nv">compose</span>.<span class="nv">yml</span>
-├──<span class="w"> </span><span class="nv">step</span><span class="o">-</span><span class="nv">ca</span><span class="o">/</span>
-│<span class="w">   </span>└──<span class="w"> </span><span class="nv">podman</span><span class="o">-</span><span class="nv">compose</span>.<span class="nv">yml</span>
-└──<span class="w"> </span><span class="nv">aio</span><span class="o">-</span><span class="nv">launcher</span><span class="o">/</span>
-<span class="w">    </span>└──<span class="w"> </span><span class="nv">docker</span><span class="o">-</span><span class="nv">run</span>.<span class="nv">sh</span><span class="w">  </span>#<span class="w"> </span><span class="nv">used</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nv">Nextcloud</span><span class="w"> </span><span class="nv">AIO</span>
-</code></pre></div>
-
-<p>Each subdirectory contains:</p>
+<h2 id="prerequisites">🛠 Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
 <ul>
-<li>A <code>podman-compose.yml</code> or <code>docker-run.sh</code> launcher script</li>
-<li>A <code>.env</code> file (secured)</li>
-<li>Systemd unit files for automatic start</li>
+<li>Reverse proxy is operational (NGINX Proxy Manager recommended)</li>
+<li>External domain with SSL termination set up</li>
+<li>Docker is installed on the host</li>
+<li>Backup volume storage mounted at <code>/mnt/ncdata</code></li>
 </ul>
 <hr />
-<h2 id="systemd-unit-template-podman-service">⚙️ Systemd Unit Template (Podman Service)<a class="headerlink" href="#systemd-unit-template-podman-service" title="Permanent link">&para;</a></h2>
-<p>Example for Keycloak:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">[Unit]</span>
-<span class="na">Description</span><span class="o">=</span><span class="s">Podman container for Keycloak</span>
-<span class="na">Wants</span><span class="o">=</span><span class="s">network.target</span>
-<span class="na">After</span><span class="o">=</span><span class="s">network.target</span>
-
-<span class="k">[Service]</span>
-<span class="na">User</span><span class="o">=</span><span class="s">svc_keycloak</span>
-<span class="na">ExecStart</span><span class="o">=</span><span class="s">/usr/bin/podman-compose -f /opt/services/keycloak/podman-compose.yml up</span>
-<span class="na">ExecStop</span><span class="o">=</span><span class="s">/usr/bin/podman-compose -f /opt/services/keycloak/podman-compose.yml down</span>
-<span class="na">Restart</span><span class="o">=</span><span class="s">always</span>
-<span class="na">EnvironmentFile</span><span class="o">=</span><span class="s">/opt/services/keycloak/.env</span>
-
-<span class="k">[Install]</span>
-<span class="na">WantedBy</span><span class="o">=</span><span class="s">multi-user.target</span>
+<h2 id="deployment-steps">🧱 Deployment Steps<a class="headerlink" href="#deployment-steps" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Create Docker volumes (if not using named mounts):</li>
+</ol>
+<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span>volume<span class="w"> </span>create<span class="w"> </span>nextcloud_aio_mastercontainer
+docker<span class="w"> </span>volume<span class="w"> </span>create<span class="w"> </span>ncdata
 </code></pre></div>
 
-<p>Install with:</p>
-<div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span>daemon-reexec
-sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>podman-keycloak.service
-</code></pre></div>
-
-<hr />
-<h2 id="exception-nextcloud-aio">⚠️ Exception: Nextcloud AIO<a class="headerlink" href="#exception-nextcloud-aio" title="Permanent link">&para;</a></h2>
-<p><strong>Nextcloud AIO</strong> is deployed using a hardened standalone Docker container to ensure full integration of Redis, PostgreSQL, ClamAV, and OnlyOffice in a single isolated unit.</p>
-<p>Use:</p>
+<ol>
+<li>Launch the AIO master container:</li>
+</ol>
 <div class="codehilite"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--name<span class="w"> </span>nextcloud-aio-mastercontainer<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--restart<span class="w"> </span>always<span class="w"> </span><span class="se">\</span>
@@ -1081,23 +1076,70 @@ sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">en
 <span class="w">  </span>nextcloud/all-in-one:latest
 </code></pre></div>
 
-<p>This container should be reverse proxied and monitored with health checks via Uptime Kuma.</p>
+<ol>
+<li>
+<p>Access the admin portal at:<br />
+<code>http://yourhost:8080</code> and follow the web-based installer</p>
+</li>
+<li>
+<p>Configure NGINX Proxy Manager:</p>
+</li>
+<li>Forward <code>nextcloud.yourdomain.com</code> → <code>localhost:8080</code></li>
+<li>Enable HTTPS with Let's Encrypt</li>
+<li>Enforce HTTP/2, HSTS, and force SSL</li>
+</ol>
 <hr />
-<h2 id="security-practices">🔒 Security Practices<a class="headerlink" href="#security-practices" title="Permanent link">&para;</a></h2>
+<h2 id="keycloak-saml-integration">🔐 Keycloak SAML Integration<a class="headerlink" href="#keycloak-saml-integration" title="Permanent link">&para;</a></h2>
+<p>Once AIO is running:</p>
+<ol>
+<li>Enable <strong>SSO &amp; SAML authentication</strong> app in Nextcloud</li>
+<li>Configure:</li>
+<li>UID mapping: <code>user.userprincipalname</code></li>
+<li>Display name: <code>user.displayname</code></li>
+<li>Email: <code>user.mail</code></li>
+<li>Groups: <code>groups</code></li>
+<li>In Keycloak:</li>
+<li>Register a SAML client with metadata from:
+     <code>https://nextcloud.yourdomain.com/apps/user_saml/saml/metadata</code></li>
+<li>Map required attributes</li>
+</ol>
+<p>This setup ensures login is identity-bound and supports group-based file access.</p>
+<hr />
+<h2 id="team-folder-setup-for-cuifci">🔒 Team Folder Setup for CUI/FCI<a class="headerlink" href="#team-folder-setup-for-cuifci" title="Permanent link">&para;</a></h2>
+<ol>
+<li>In Nextcloud Admin Panel:</li>
+<li>Enable <strong>Team folders</strong> (formerly Group folders)</li>
+<li>Create folders:</li>
+<li><code>/Access_CUI</code></li>
+<li><code>/Access_FCI</code></li>
+<li><code>/Access_Proprietary</code></li>
+<li>Assign groups from SAML mapping (e.g., Keycloak groups)</li>
+</ol>
+<p>You can enforce restrictions via the <strong>File Access Control app</strong>.</p>
+<hr />
+<h2 id="health-monitoring">🔁 Health Monitoring<a class="headerlink" href="#health-monitoring" title="Permanent link">&para;</a></h2>
+<p>Expose a status endpoint for Uptime Kuma or Prometheus-style checks:</p>
 <ul>
-<li>Use separate non-root service accounts for each containerized app</li>
-<li>Limit all traffic via internal-only Docker or Podman networks</li>
-<li>Use NGINX Proxy Manager to route HTTPS traffic securely</li>
-<li>Never expose Podman services directly to WAN or bypass ACLs</li>
+<li>URL: <code>https://nextcloud.yourdomain.com/status.php</code></li>
+<li>Expected result: HTTP 200</li>
 </ul>
+<p>Configure alerting if the instance is unreachable for &gt;5 minutes.</p>
+<hr />
+<h2 id="backup-recommendations">🔐 Backup Recommendations<a class="headerlink" href="#backup-recommendations" title="Permanent link">&para;</a></h2>
+<p>Recommended: <code>restic</code>, <code>borgbackup</code>, or built-in Nextcloud backup app.</p>
+<p>Backup:
+- <code>/mnt/ncdata</code>
+- <code>nextcloud_aio_mastercontainer</code> config volume</p>
+<p>Store offsite or on offline media. Validate monthly.</p>
 <hr />
 <h2 id="output-of-this-phase">✅ Output of This Phase<a class="headerlink" href="#output-of-this-phase" title="Permanent link">&para;</a></h2>
 <ul>
-<li>All core services (except Nextcloud) deployed as <strong>rootless Podman containers</strong></li>
-<li>Systemd units ensure services survive reboots and restart cleanly</li>
-<li>File collaboration services (Nextcloud AIO) prepared for deployment in Phase 4</li>
+<li>Fully operational Nextcloud AIO instance</li>
+<li>TLS-secured access with SAML authentication</li>
+<li>Logical group-based access to sensitive data</li>
+<li>ClamAV, audit logging, and backup services integrated</li>
 </ul>
-<p>→ Proceed to <a href="../phase04-files/">Phase 4: File Collaboration Services with Nextcloud AIO</a></p>
+<p>→ Proceed to <a href="../05_identity_cert_mgmt/">Phase 4: Identity &amp; Certificate Management</a></p>
 
 
 

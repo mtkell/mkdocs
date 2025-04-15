@@ -39,6 +39,7 @@ nav:
     - Phase 1- Terraform Provisioning: 14_deployment_guide/02_terraform_provisioning.md
     - Phase 2- OS Hardening with Ansible: 14_deployment_guide/03_ansible_hardening.md
     - Phase 3- Podman Service Deployment: 14_deployment_guide/04_podman_services.md
+    - Phase 3a - Nextcloud-AIO Deployment: 14_deployment_guide/phase04-files.md
     - Phase 4- Identity, Certs, and Access Control: 14_deployment_guide/05_identity_cert_mgmt.md
     - Phase 5- Client Device Registration: 14_deployment_guide/06_client_registration.md
     - Phase 6- Logging, SIEM, and Alerting: 14_deployment_guide/07_logging_monitoring.md
