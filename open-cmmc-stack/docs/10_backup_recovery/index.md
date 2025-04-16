@@ -19,64 +19,66 @@ CMMC Level 2 requires not only backups but **tested, restorable, secure** backup
 | **Restic** | Fast, encrypted backup with deduplication |
 | **BorgBackup** | Efficient backups with compression |
 | **Rclone** | Sync to cloud or remote endpoints      |
-| **Duplicity** | GPG-encrypted full/diff backups     |
 
-For simplicity and reliability, we’ll use **Restic**.
+For consistency with automated deployments, this stack uses **Restic** by default.
 
 ---
 
-## 🚀 Setting Up Restic
+## ⚙️ Automated Backup Deployment with Ansible
 
-Install Restic:
+The OpenCMMC Stack includes an Ansible role `roles/backup` that:
 
-```bash
-sudo apt install restic
-```
+- Installs Restic via `apt`
+- Deploys a backup script from template
+- Configures backup environment variables
+- Sets up a systemd service and timer to run backups daily
 
-Initialize repository (local or remote):
+### Files Deployed:
 
-```bash
-export RESTIC_REPOSITORY=/srv/backups
-export RESTIC_PASSWORD=mysecretpassword
-restic init
-```
+| File | Purpose |
+|------|---------|
+| `/usr/local/bin/restic-backup.sh` | The backup script |
+| `/etc/restic/backup.env` | Environment configuration for Restic |
+| `/etc/systemd/system/restic-backup.service` | One-shot backup job |
+| `/etc/systemd/system/restic-backup.timer` | Daily execution timer |
 
-Create a backup script (e.g., `backup.sh`):
+This ensures consistent, auditable, and policy-driven backups aligned with CMMC expectations.
 
-```bash
-#!/bin/bash
-export RESTIC_REPOSITORY=/srv/backups
-export RESTIC_PASSWORD=mysecretpassword
+---
 
-restic backup /var/lib/docker/volumes/nextcloud_data \
-              /var/lib/docker/volumes/postgres_data
+## 🧪 What the Backup Does
 
-restic forget --keep-daily 7 --keep-weekly 4 --prune
-```
+The deployed script performs:
 
-Schedule with `cron` or `systemd`.
+1. Daily backup of key service volumes (e.g., Nextcloud, PostgreSQL)
+2. Deduplicated and encrypted backup to local or remote repo
+3. Retention enforcement: `--keep-daily 7 --keep-weekly 4`
+4. Log generation for review by assessors
 
 ---
 
 ## 📥 Offsite & Encrypted Backup Strategy
 
-- Push to cloud (S3, Backblaze, Wasabi) via `restic -r s3:s3.amazonaws.com/mybucket`
-- Use **GPG encryption** for sensitive exports
-- Store keys separately from backup media
-- Rotate and test encryption passwords
+- Push backups offsite using `restic -r s3:s3.amazonaws.com/mybucket`
+- Use strong encryption and separate key storage
+- Store external backups in multiple regions (optional)
+- Rotate and test encryption keys periodically
 
 ---
 
-## 🔁 Restore Testing
+## 🧾 Restore and Audit Strategy
 
-Perform regular restore drills:
+Test restores monthly with:
 
-```bash
-restic restore latest --target /tmp/restore-test
-diff -r /tmp/restore-test/nextcloud_data /var/lib/docker/volumes/nextcloud_data
-```
+restic restore latest --target /tmp/restore-test diff -r /tmp/restore-test/nextcloud_data /var/lib/docker/volumes/nextcloud_data
 
-Keep logs for assessor review.
+
+Artifacts to maintain:
+
+- Ansible backup role log or `ansible-playbook` run output
+- Timer logs (`journalctl -u restic-backup.timer`)
+- Screenshots or logs from restore tests
+- An inventory of protected data and volumes
 
 ---
 
@@ -91,17 +93,6 @@ Keep logs for assessor review.
 
 ---
 
-## 🧾 Audit Artifacts to Generate
-
-- Backup policy and schedule
-- Backup and restore logs
-- Screenshots or evidence of test restores
-- Inventory of protected volumes and scope
-
----
-
 ## ✅ Next Step
 
-With resilient backups in place, the next section walks through writing and mapping **policies and procedures** to support your technical controls.
-
----
+With resilient backups in place and automation enforced via Ansible and systemd, the next section walks through writing and mapping **policies and procedures** to support your technical controls.

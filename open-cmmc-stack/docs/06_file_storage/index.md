@@ -101,17 +101,40 @@ Use File Access Control rules to:
 
 ---
 
-## 🔁 Health Monitoring & Backup
+## 🔁 Monitoring & Backup Strategy
 
-- Use **Uptime Kuma** to check AIO at `/status.php`
-- Enable internal **Nextcloud backup app** or schedule:
-  - Volume-level backups via Restic or BorgBackup
-  - External backup of `/mnt/ncdata` and `aio-mastercontainer` config
+### 🔍 Monitoring with Wazuh
 
-Backup plans should include:
-- Encryption-at-rest
-- Monthly restore validation
-- Offline storage copies (e.g., encrypted USB)
+Nextcloud AIO logs key file operations, user activity, and access patterns. These logs can be forwarded to **Wazuh** for centralized collection, alerting, and long-term audit readiness.
+
+Steps:
+- Enable syslog forwarding in the host OS
+- Configure log collection from:
+  - `/mnt/ncdata/nextcloud.log`
+  - Container journal logs (`journalctl -u podman`)
+- Parse and alert on:
+  - File uploads of CUI
+  - Failed login attempts
+  - External sharing violations
+
+### 🔐 Backup Considerations
+
+While Nextcloud AIO offers internal snapshot features, organizations should schedule full volume-level encrypted backups of:
+
+- `/mnt/ncdata` (user data and app config)
+- `aio-mastercontainer` volume (Nextcloud AIO config)
+
+Suggested tools:
+- **Restic** or **BorgBackup** for encrypted incremental backups
+- Automate off-host storage (e.g., SFTP, S3, USB)
+- Monthly restore testing for assurance
+
+Backup plans must align with:
+
+- MP.2.119 — CUI access limitation
+- SC.12.3 — Cryptographic protections at rest
+- IR.2.093 — Incident response and data recovery
+
 
 ---
 

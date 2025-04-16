@@ -1,0 +1,48 @@
+flowchart TD
+  subgraph UserDevices["Trusted User Devices"]
+    A1[Windows 10/11]
+    A2[macOS / Linux]
+    A3[Mobile (iOS/Android)]
+  end
+
+  subgraph AccessControl["Identity & Access Control"]
+    B1[Keycloak (SSO/MFA)]
+    B2[Tailscale Coordination Server]
+  end
+
+  subgraph ReverseProxy["DMZ / Public Access"]
+    C1[NGINX Proxy Manager]
+  end
+
+  subgraph CoreServices["Trusted Infrastructure"]
+    D1[Nextcloud AIO]
+    D2[Mailcow]
+    D3[PostgreSQL / Redis]
+  end
+
+  subgraph Monitoring["Monitoring & Forensics"]
+    E1[Wazuh Server]
+    E2[Auditd Logs]
+    E3[Restic Backups]
+  end
+
+  A1 --> B1
+  A2 --> B1
+  A3 --> B1
+
+  B1 --> B2
+  B1 --> C1
+  B2 --> C1
+
+  C1 --> D1
+  C1 --> D2
+
+  D1 --> D3
+  D2 --> D3
+
+  D1 --> E1
+  D2 --> E1
+  D3 --> E2
+  E1 --> E3
+
+  click A1 "https://docs.kellengineering.com" _blank

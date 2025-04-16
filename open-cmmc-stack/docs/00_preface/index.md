@@ -21,11 +21,11 @@ This guide is designed for:
 
 This documentation delivers:
 
-- A hardened Linux-based infrastructure using **rootless Podman** and **systemd**
-- Fully containerized services for **file sharing**, **email**, **SSO**, and **logging**
-- Automated provisioning with **Terraform** and **Ansible**
-- Written policy templates and **audit-ready artifacts**
-- CMMC control mappings and SSP guidance
+- A hardened Ubuntu-based infrastructure using **rootless Podman**, **systemd**, and Zero Trust principles
+- Fully containerized services for **file sharing**, **email**, **SSO**, **monitoring**, and **backup**
+- Automated provisioning using **Terraform**, **Ansible**, and templated CI/CD workflows
+- Pre-mapped policy templates, SSP structure, and **audit-ready documentation**
+- Compatibility with Windows, Linux, macOS, iOS, and Android clients
 
 ---
 
@@ -34,7 +34,7 @@ This documentation delivers:
 | Area              | Requirements |
 |-------------------|--------------|
 | OS                | Ubuntu 22.04 LTS (hardened) |
-| Host Type         | Cloud VM, VPS, or local server |
+| Host Type         | Cloud VM, VPS, bare metal |
 | Tools Installed   | Podman, Ansible, Terraform |
 | Compliance Target | CMMC Level 2, mapped to NIST SP 800-171 Rev. 2 |
 
@@ -42,13 +42,14 @@ This documentation delivers:
 
 ## 📦 Guide Format
 
-This guide is structured across **12 implementation chapters** and **2 appendices**, each representing a functional block of a secure system:
+This guide is structured across **21 technical and strategic sections** with **appendices** and **automation support**, each representing a key stage of deployment, governance, or assessment readiness.
 
-- Each section includes:
-  - Technical setup (infra, config, scripts)
-  - CMMC control mapping
-  - Operational best practices
-  - Audit preparation guidance
+Each section includes:
+
+- Infrastructure-as-code implementation
+- CMMC control mappings
+- Operational guidance
+- Audit artifacts and documentation templates
 
 ---
 
