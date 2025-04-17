@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#section-14-deployment-guide-opencmmc-foss-infrastructure" class="md-skip">
+        <a href="#section-14-deployment-guide" class="md-skip">
           Skip to content
         </a>
       
@@ -659,9 +659,117 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#deployment-phases" class="md-nav__link">
+  <a href="#objective" class="md-nav__link">
     <span class="md-ellipsis">
-      📘 Deployment Phases
+      🎯 Objective
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#overview-of-phases" class="md-nav__link">
+    <span class="md-ellipsis">
+      📌 Overview of Phases
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-use-this-section" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⚙️ How to Use This Section
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-0-planning-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      📐 Phase 0 – Planning &amp; Scope
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-1-provision-infrastructure-terraform" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧱 Phase 1 – Provision Infrastructure (Terraform)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-2-harden-host-ansible" class="md-nav__link">
+    <span class="md-ellipsis">
+      🛡️ Phase 2 – Harden Host (Ansible)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-3-podman-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔧 Phase 3 – Podman Services
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-3a-deploy-secure-file-sharing-nextcloud-aio" class="md-nav__link">
+    <span class="md-ellipsis">
+      📂 Phase 3A – Deploy Secure File Sharing (Nextcloud AIO)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-4-identity-certificate-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔐 Phase 4 – Identity &amp; Certificate Management
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-5-client-registration" class="md-nav__link">
+    <span class="md-ellipsis">
+      📱 Phase 5 – Client Registration
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-6-logging-siem-alerting" class="md-nav__link">
+    <span class="md-ellipsis">
+      📊 Phase 6 – Logging, SIEM &amp; Alerting
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-7-validation-export" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Phase 7 – Validation &amp; Export
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#return-to-readmemd-or-proceed-to-section-15-secops-sops" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⬅️ Return to README.md or proceed to Section 15: SecOps SOPs
     </span>
   </a>
   
@@ -1085,68 +1193,203 @@
   
 
 
-<h1 id="section-14-deployment-guide-opencmmc-foss-infrastructure">Section 14: Deployment Guide – OpenCMMC FOSS Infrastructure<a class="headerlink" href="#section-14-deployment-guide-opencmmc-foss-infrastructure" title="Permanent link">&para;</a></h1>
-<p>This deployment guide provides a step-by-step, modular walkthrough for provisioning and configuring a fully CMMC Level 2–aligned FOSS infrastructure stack for small to medium defense contractors.</p>
-<p><strong>Technologies Used:</strong></p>
-<ul>
-<li>🔧 Terraform for infrastructure provisioning</li>
-<li>🛡️ Ansible for operating system hardening and service configuration</li>
-<li>📦 Podman for secure, rootless container deployment</li>
-<li>🔐 Keycloak, Smallstep CA, Tailscale, Mailcow, Nextcloud, Wazuh</li>
-</ul>
-<p>The end result is a fully operational, Zero Trust–compliant environment accessible securely by:</p>
-<ul>
-<li>✅ Windows, macOS, Linux endpoints</li>
-<li>✅ Android and iOS mobile devices</li>
-<li>✅ Remote and on-prem users</li>
-</ul>
+<h1 id="section-14-deployment-guide">🚀 Section 14: Deployment Guide<a class="headerlink" href="#section-14-deployment-guide" title="Permanent link">&para;</a></h1>
+<h2 id="objective">🎯 Objective<a class="headerlink" href="#objective" title="Permanent link">&para;</a></h2>
+<p>This section outlines a step-by-step deployment path to implement the OpenCMMC Stack using fully automated, reproducible infrastructure-as-code workflows. Each phase corresponds to a tightly scoped operational unit aligned with CMMC Level 2 practices.</p>
 <hr />
-<h2 id="deployment-phases">📘 Deployment Phases<a class="headerlink" href="#deployment-phases" title="Permanent link">&para;</a></h2>
-<p>Each phase maps directly to key CMMC practices across Access Control (AC), Configuration Management (CM), System Integrity (SI), and Audit &amp; Accountability (AU).</p>
+<h2 id="overview-of-phases">📌 Overview of Phases<a class="headerlink" href="#overview-of-phases" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
 <th>Phase</th>
-<th>Focus</th>
+<th>Title</th>
+<th>Tools Used</th>
+<th>Evidence Folder</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><a href="01_planning/">Phase 0</a></td>
-<td>Planning and scoping CMMC-aligned infrastructure</td>
+<td>0</td>
+<td>Planning &amp; Scope Definition</td>
+<td>Markdown, Diagrams</td>
+<td><code>evidence/00_scoping/</code></td>
 </tr>
 <tr>
-<td><a href="02_terraform_provisioning/">Phase 1</a></td>
-<td>Provisioning secure hosts using Terraform</td>
+<td>1</td>
+<td>Terraform VM Provisioning</td>
+<td>Terraform</td>
+<td><code>evidence/01_identity_access/</code></td>
 </tr>
 <tr>
-<td><a href="03_ansible_hardening/">Phase 2</a></td>
-<td>Operating system hardening using Ansible</td>
+<td>2</td>
+<td>Host Hardening with Ansible</td>
+<td>Ansible, UFW, AIDE</td>
+<td><code>evidence/02_system_hardening/</code></td>
 </tr>
 <tr>
-<td><a href="04_podman_services/">Phase 3</a></td>
-<td>Secure application services deployed with Podman</td>
+<td>3</td>
+<td>Podman-Based Service Container Setup</td>
+<td>Podman, Systemd</td>
+<td><code>evidence/03_file_sharing/</code></td>
 </tr>
 <tr>
-<td><a href="05_identity_cert_mgmt/">Phase 4</a></td>
-<td>Identity, certificate issuance, and access control</td>
+<td>3A</td>
+<td>Secure File Sharing with Nextcloud</td>
+<td>Nextcloud AIO</td>
+<td><code>evidence/03_file_sharing/</code></td>
 </tr>
 <tr>
-<td><a href="06_client_registration/">Phase 5</a></td>
-<td>Secure client onboarding (Windows, macOS, iOS, Android)</td>
+<td>4</td>
+<td>Identity, MFA, and Cert Management</td>
+<td>Keycloak, ACME, SCEP</td>
+<td><code>evidence/01_identity_access/</code></td>
 </tr>
 <tr>
-<td><a href="07_logging_monitoring/">Phase 6</a></td>
-<td>Logging, alerting, and security monitoring</td>
+<td>5</td>
+<td>Client Device Registration &amp; Policy</td>
+<td>Platform-specific MDM</td>
+<td><code>evidence/01_identity_access/</code></td>
 </tr>
 <tr>
-<td><a href="08_validation_reporting/">Phase 7</a></td>
-<td>Compliance testing, reporting, and evidence capture</td>
+<td>6</td>
+<td>Logging, SIEM, and Alerting</td>
+<td>Wazuh, Auditd</td>
+<td><code>evidence/05_monitoring/</code></td>
+</tr>
+<tr>
+<td>7</td>
+<td>Validation, Screenshots &amp; Export</td>
+<td>Manual + CI</td>
+<td><code>evidence/06_backups/</code></td>
 </tr>
 </tbody>
 </table>
 <hr />
-<p>Let’s begin with Phase 0.</p>
+<h2 id="how-to-use-this-section">⚙️ How to Use This Section<a class="headerlink" href="#how-to-use-this-section" title="Permanent link">&para;</a></h2>
+<p>Each step in the deployment includes:</p>
+<ul>
+<li>✅ Playbook file and role used</li>
+<li>📁 Where to store your evidence</li>
+<li>🔗 Related diagrams</li>
+<li>📝 References to corresponding SSP sections</li>
+</ul>
+<hr />
+<h2 id="phase-0-planning-scope">📐 Phase 0 – Planning &amp; Scope<a class="headerlink" href="#phase-0-planning-scope" title="Permanent link">&para;</a></h2>
+<p>Ensure all project stakeholders agree on:</p>
+<ul>
+<li>What systems process CUI or FCI</li>
+<li>Deployment boundaries (cloud/on-prem)</li>
+<li>Target number of users/devices</li>
+<li>DNS zones, certificate providers, and external access needs</li>
+</ul>
+<p><em>Artifacts to collect:</em>
+- <code>network-topology.mmd</code> → <code>img/svg/</code>
+- <code>evidence_index.md</code>
+- Domain diagrams and port maps</p>
+<hr />
+<h2 id="phase-1-provision-infrastructure-terraform">🧱 Phase 1 – Provision Infrastructure (Terraform)<a class="headerlink" href="#phase-1-provision-infrastructure-terraform" title="Permanent link">&para;</a></h2>
+<div class="codehilite"><pre><span></span><code>terraform<span class="w"> </span>init
+terraform<span class="w"> </span>apply
+</code></pre></div>
+
+<p>Evidence to collect:
+- Terraform plan/apply logs
+- Output IPs
+- SSH key fingerprints</p>
+<p><em>Artifacts:</em>
+- <code>main.tf</code>
+- <code>bootstrap.sh</code>
+- <code>terraform.tfvars.example</code></p>
+<hr />
+<h2 id="phase-2-harden-host-ansible">🛡️ Phase 2 – Harden Host (Ansible)<a class="headerlink" href="#phase-2-harden-host-ansible" title="Permanent link">&para;</a></h2>
+<div class="codehilite"><pre><span></span><code>ansible-playbook<span class="w"> </span>-i<span class="w"> </span>inventory<span class="w"> </span>localhost<span class="w"> </span>playbooks/phase02_ansible_hardening.yml
+</code></pre></div>
+
+<p>Includes:
+- SSH lock-down
+- Password policy
+- Login banner
+- UFW and Auditd</p>
+<p><em>Artifacts:</em>
+- <code>audit.log</code>
+- <code>sshd_config</code>
+- <code>aide.db.gz</code></p>
+<hr />
+<h2 id="phase-3-podman-services">🔧 Phase 3 – Podman Services<a class="headerlink" href="#phase-3-podman-services" title="Permanent link">&para;</a></h2>
+<div class="codehilite"><pre><span></span><code>ansible-playbook<span class="w"> </span>-i<span class="w"> </span>inventory<span class="w"> </span>localhost<span class="w"> </span>playbooks/phase03_podman_services.yml
+</code></pre></div>
+
+<p>Installs Podman and sets up:</p>
+<ul>
+<li>Rootless container runtime</li>
+<li>Systemd service wrappers</li>
+<li>Logging socket passthrough</li>
+</ul>
+<p><em>Artifacts:</em>
+- Podman install logs
+- Systemd service manifests
+- Runtime socket test output</p>
+<hr />
+<h2 id="phase-3a-deploy-secure-file-sharing-nextcloud-aio">📂 Phase 3A – Deploy Secure File Sharing (Nextcloud AIO)<a class="headerlink" href="#phase-3a-deploy-secure-file-sharing-nextcloud-aio" title="Permanent link">&para;</a></h2>
+<p>This step deploys the secure file collaboration environment using the <code>file_storage</code> Ansible role. It pulls the hardened Nextcloud All-in-One container and mounts persistent storage volumes to host CUI/FCI data.</p>
+<div class="codehilite"><pre><span></span><code>ansible-playbook<span class="w"> </span>-i<span class="w"> </span>inventory<span class="w"> </span>localhost<span class="w"> </span>playbooks/phase03a_file_storage.yml
+</code></pre></div>
+
+<p>Artifacts from this step should be archived under <code>evidence/03_file_sharing/</code> including container logs, volume listings, and security posture verification.</p>
+<hr />
+<h2 id="phase-4-identity-certificate-management">🔐 Phase 4 – Identity &amp; Certificate Management<a class="headerlink" href="#phase-4-identity-certificate-management" title="Permanent link">&para;</a></h2>
+<div class="codehilite"><pre><span></span><code>ansible-playbook<span class="w"> </span>playbooks/phase04_identity_cert.yml
+</code></pre></div>
+
+<p>Includes:
+- Keycloak realm and MFA
+- External IdP setup (optional)
+- ACME DNS/HTTP validation
+- TLS termination config</p>
+<p>Artifacts:
+- Realm export JSON
+- Group mappings
+- Certbot or Step-CA logs</p>
+<hr />
+<h2 id="phase-5-client-registration">📱 Phase 5 – Client Registration<a class="headerlink" href="#phase-5-client-registration" title="Permanent link">&para;</a></h2>
+<p>Includes:
+- Android/iOS/Windows/Mac device onboarding
+- Identity binding via Tailscale or LDAP
+- MDM enrollment or profile loading</p>
+<p>Artifacts:
+- MDM profile screenshots
+- Device join logs
+- VPN identity fingerprint</p>
+<hr />
+<h2 id="phase-6-logging-siem-alerting">📊 Phase 6 – Logging, SIEM &amp; Alerting<a class="headerlink" href="#phase-6-logging-siem-alerting" title="Permanent link">&para;</a></h2>
+<div class="codehilite"><pre><span></span><code>ansible-playbook<span class="w"> </span>playbooks/phase06_logging_monitoring.yml
+</code></pre></div>
+
+<ul>
+<li>Wazuh deployment</li>
+<li>Central log forwarding (journald, auditd)</li>
+<li>Anomaly detection rules</li>
+</ul>
+<p>Artifacts:
+- Wazuh install logs
+- Sample alerts
+- Evidence forwarding screenshot</p>
+<hr />
+<h2 id="phase-7-validation-export">✅ Phase 7 – Validation &amp; Export<a class="headerlink" href="#phase-7-validation-export" title="Permanent link">&para;</a></h2>
+<p>Compile final evidence set:</p>
+<ul>
+<li>Screenshot walkthrough</li>
+<li>Playbook run logs</li>
+<li>Log integrity export</li>
+<li>SSP references and traceability</li>
+</ul>
+<p>Export Markdown to PDF:</p>
+<div class="codehilite"><pre><span></span><code>mkdocs<span class="w"> </span>build
+</code></pre></div>
+
+<hr />
+<h2 id="return-to-readmemd-or-proceed-to-section-15-secops-sops">⬅️ Return to <a href="../">README.md</a> or proceed to <a href="../15_secops_sops/">Section 15: SecOps SOPs</a><a class="headerlink" href="#return-to-readmemd-or-proceed-to-section-15-secops-sops" title="Permanent link">&para;</a></h2>
+<hr />
 
 
 

@@ -1,0 +1,36 @@
+flowchart TD
+  subgraph NextcloudAIO["Nextcloud All-in-One Stack"]
+    NC["Nextcloud Web UI"]
+    OO["OnlyOffice Integration"]
+    CL["ClamAV Scanner"]
+    DB["(PostgreSQL)"]
+    RS["Redis Cache"]
+    LOG["Audit Logs"]
+  end
+
+  subgraph Auth["Identity & Access"]
+    KC["Keycloak (SSO via SAML)"]
+  end
+
+  subgraph Backup["Backups"]
+    BK1["Restic/Borg Volume Backup"]
+    BK2["Encrypted External Offsite Copy"]
+  end
+
+  subgraph Monitoring["Audit & Monitoring"]
+    WZ["Wazuh Agent"]
+  end
+
+  U1["User Device 1"]
+  U2["User Device 2"]
+
+  U1 --> NC
+  U2 --> NC
+  NC --> OO
+  NC --> CL
+  NC --> DB
+  NC --> RS
+  NC --> KC
+  NC --> LOG --> WZ
+  DB --> BK1 --> BK2
+  RS --> BK1

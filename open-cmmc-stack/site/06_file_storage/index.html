@@ -456,36 +456,27 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#deployment-via-docker" class="md-nav__link">
+  <a href="#deployment-with-podman" class="md-nav__link">
     <span class="md-ellipsis">
-      📦 Deployment via Docker
+      🔧 Deployment with Podman
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#hardened-stack-built-in" class="md-nav__link">
+  <a href="#access-controls-with-keycloak" class="md-nav__link">
     <span class="md-ellipsis">
-      🧰 Hardened Stack (Built-In)
+      🔒 Access Controls with Keycloak
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#access-controls-sso-via-keycloak" class="md-nav__link">
+  <a href="#architecture-diagram" class="md-nav__link">
     <span class="md-ellipsis">
-      🔒 Access Controls (SSO via Keycloak)
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#folder-permissions-cui-access-groups" class="md-nav__link">
-    <span class="md-ellipsis">
-      🔐 Folder Permissions &amp; CUI Access Groups
+      🧰 Architecture Diagram
     </span>
   </a>
   
@@ -494,42 +485,9 @@
         <li class="md-nav__item">
   <a href="#cmmc-practices-addressed" class="md-nav__link">
     <span class="md-ellipsis">
-      📜 CMMC Practices Addressed
+      🛡️ CMMC Practices Addressed
     </span>
   </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#monitoring-backup-strategy" class="md-nav__link">
-    <span class="md-ellipsis">
-      🔁 Monitoring &amp; Backup Strategy
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="🔁 Monitoring &amp; Backup Strategy">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#monitoring-with-wazuh" class="md-nav__link">
-    <span class="md-ellipsis">
-      🔍 Monitoring with Wazuh
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#backup-considerations" class="md-nav__link">
-    <span class="md-ellipsis">
-      🔐 Backup Considerations
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -1197,86 +1155,44 @@
 <li>Secure sharing and team folder access control</li>
 </ul>
 <hr />
-<h2 id="deployment-via-docker">📦 Deployment via Docker<a class="headerlink" href="#deployment-via-docker" title="Permanent link">&para;</a></h2>
-<p>Run this container behind a reverse proxy (e.g., NGINX Proxy Manager):</p>
-<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span><span class="se">\\</span>
-<span class="w">  </span>--name<span class="w"> </span>nextcloud-aio-mastercontainer<span class="w"> </span><span class="se">\\</span>
-<span class="w">  </span>--restart<span class="w"> </span>always<span class="w"> </span><span class="se">\\</span>
-<span class="w">  </span>-p<span class="w"> </span><span class="m">8080</span>:8080<span class="w"> </span><span class="se">\\</span>
-<span class="w">  </span>-v<span class="w"> </span>nextcloud_aio_mastercontainer:/mnt/docker-aio-config<span class="w"> </span><span class="se">\\</span>
-<span class="w">  </span>-e<span class="w"> </span><span class="nv">NEXTCLOUD_DATADIR</span><span class="o">=</span><span class="s2">&quot;/mnt/ncdata&quot;</span><span class="w"> </span><span class="se">\\</span>
-<span class="w">  </span>nextcloud/all-in-one:latest
+<h2 id="deployment-with-podman">🔧 Deployment with Podman<a class="headerlink" href="#deployment-with-podman" title="Permanent link">&para;</a></h2>
+<p>Nextcloud AIO runs as the only service in our stack using Docker. Everything else uses Podman. We isolate this with clear firewall and volume boundaries.</p>
+<div class="codehilite"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Pull Nextcloud AIO container image</span>
+<span class="w">  </span><span class="nt">containers.podman.podman_image</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;nextcloud/all-in-one:latest&quot;</span>
+
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deploy Nextcloud AIO container</span>
+<span class="w">  </span><span class="nt">containers.podman.podman_container</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;nextcloud-aio-mastercontainer&quot;</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;nextcloud/all-in-one:latest&quot;</span>
+<span class="w">    </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">started</span>
+<span class="w">    </span><span class="nt">restart_policy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">always</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;8080:8080&quot;</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/srv/nextcloud_data:/mnt/ncdata:z&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;nextcloud_aio_mastercontainer:/mnt/docker-aio-config:z&quot;</span>
+<span class="w">    </span><span class="nt">env</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">NEXTCLOUD_DATADIR</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/mnt/ncdata&quot;</span>
 </code></pre></div>
 
-<ul>
-<li>Expose to internet <strong>only through reverse proxy with TLS termination</strong></li>
-<li>All services run inside AIO: no external database or cache required</li>
-</ul>
 <hr />
-<h2 id="hardened-stack-built-in">🧰 Hardened Stack (Built-In)<a class="headerlink" href="#hardened-stack-built-in" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>Component</th>
-<th>Purpose</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Nextcloud Core</td>
-<td>File &amp; data collaboration</td>
-</tr>
-<tr>
-<td>OnlyOffice</td>
-<td>Integrated document editing</td>
-</tr>
-<tr>
-<td>ClamAV</td>
-<td>Antivirus scanning for file uploads</td>
-</tr>
-<tr>
-<td>PostgreSQL</td>
-<td>Backend database (within container)</td>
-</tr>
-<tr>
-<td>Redis</td>
-<td>Performance cache</td>
-</tr>
-<tr>
-<td>Keycloak</td>
-<td>External SSO federation via SAML</td>
-</tr>
-</tbody>
-</table>
-<p>All services are isolated within the container and monitored via health checks.</p>
-<hr />
-<h2 id="access-controls-sso-via-keycloak">🔒 Access Controls (SSO via Keycloak)<a class="headerlink" href="#access-controls-sso-via-keycloak" title="Permanent link">&para;</a></h2>
+<h2 id="access-controls-with-keycloak">🔒 Access Controls with Keycloak<a class="headerlink" href="#access-controls-with-keycloak" title="Permanent link">&para;</a></h2>
 <p>Configure SSO for Nextcloud AIO:</p>
-<ol>
-<li>In Nextcloud AIO:</li>
-<li>Install <strong>SSO &amp; SAML authentication</strong> app</li>
-<li>Set UID attribute: <code>user.userprincipalname</code></li>
-<li>Set display name, email, group mapping (via SAML)</li>
-<li>In Keycloak:</li>
-<li>Create a SAML client</li>
-<li>Import metadata from:
-     <code>https://nextcloud.yourdomain.com/apps/user_saml/saml/metadata</code></li>
-<li>Map email, displayname, and groups</li>
-</ol>
-<p>This enables secure login via Microsoft Entra ID, Keycloak users, or FreeIPA LDAP federation.</p>
-<hr />
-<h2 id="folder-permissions-cui-access-groups">🔐 Folder Permissions &amp; CUI Access Groups<a class="headerlink" href="#folder-permissions-cui-access-groups" title="Permanent link">&para;</a></h2>
-<p>Use <strong>Team Folders</strong> to control CUI access:</p>
 <ul>
-<li>Create groups: <code>Access_CUI</code>, <code>Access_FCI</code>, <code>Access_Proprietary</code></li>
-<li>Restrict download, upload, and sharing rights per group</li>
-<li>Assign group-based access via Keycloak SAML attribute mapping</li>
+<li>Install <strong>SSO &amp; SAML Authentication</strong> app in Nextcloud</li>
+<li>Set UID attribute to <code>user.userprincipalname</code></li>
+<li>Configure Keycloak to map attributes (SAML)</li>
 </ul>
-<p>Use File Access Control rules to:
-- Block sharing of CUI outside organization
-- Require group membership for sensitive content</p>
+<p>Group access to Team Folders:
+- <code>Access_CUI</code>
+- <code>Access_FCI</code>
+- <code>Access_Proprietary</code></p>
 <hr />
-<h2 id="cmmc-practices-addressed">📜 CMMC Practices Addressed<a class="headerlink" href="#cmmc-practices-addressed" title="Permanent link">&para;</a></h2>
+<h2 id="architecture-diagram">🧰 Architecture Diagram<a class="headerlink" href="#architecture-diagram" title="Permanent link">&para;</a></h2>
+<p><img alt="Secure File Storage Architecture" src="../img/svg/section06-files-architecture.svg" /></p>
+<hr />
+<h2 id="cmmc-practices-addressed">🛡️ CMMC Practices Addressed<a class="headerlink" href="#cmmc-practices-addressed" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -1308,38 +1224,8 @@
 </tbody>
 </table>
 <hr />
-<h2 id="monitoring-backup-strategy">🔁 Monitoring &amp; Backup Strategy<a class="headerlink" href="#monitoring-backup-strategy" title="Permanent link">&para;</a></h2>
-<h3 id="monitoring-with-wazuh">🔍 Monitoring with Wazuh<a class="headerlink" href="#monitoring-with-wazuh" title="Permanent link">&para;</a></h3>
-<p>Nextcloud AIO logs key file operations, user activity, and access patterns. These logs can be forwarded to <strong>Wazuh</strong> for centralized collection, alerting, and long-term audit readiness.</p>
-<p>Steps:
-- Enable syslog forwarding in the host OS
-- Configure log collection from:
-  - <code>/mnt/ncdata/nextcloud.log</code>
-  - Container journal logs (<code>journalctl -u podman</code>)
-- Parse and alert on:
-  - File uploads of CUI
-  - Failed login attempts
-  - External sharing violations</p>
-<h3 id="backup-considerations">🔐 Backup Considerations<a class="headerlink" href="#backup-considerations" title="Permanent link">&para;</a></h3>
-<p>While Nextcloud AIO offers internal snapshot features, organizations should schedule full volume-level encrypted backups of:</p>
-<ul>
-<li><code>/mnt/ncdata</code> (user data and app config)</li>
-<li><code>aio-mastercontainer</code> volume (Nextcloud AIO config)</li>
-</ul>
-<p>Suggested tools:
-- <strong>Restic</strong> or <strong>BorgBackup</strong> for encrypted incremental backups
-- Automate off-host storage (e.g., SFTP, S3, USB)
-- Monthly restore testing for assurance</p>
-<p>Backup plans must align with:</p>
-<ul>
-<li>MP.2.119 — CUI access limitation</li>
-<li>SC.12.3 — Cryptographic protections at rest</li>
-<li>IR.2.093 — Incident response and data recovery</li>
-</ul>
-<hr />
 <h2 id="next-step">✅ Next Step<a class="headerlink" href="#next-step" title="Permanent link">&para;</a></h2>
-<p>With secure file collaboration via Nextcloud AIO in place, proceed to Section 7 to configure <strong>Mailcow</strong> for secure email services.</p>
-<hr />
+<p>Proceed to Section 7 to configure <strong>Mailcow</strong> for secure email services.</p>
 
 
 

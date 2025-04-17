@@ -23,73 +23,54 @@ Nextcloud AIO consolidates secure storage, team collaboration, antivirus scannin
 
 ---
 
-## 📦 Deployment via Docker
+## 🔧 Deployment with Podman
 
-Run this container behind a reverse proxy (e.g., NGINX Proxy Manager):
+Nextcloud AIO runs as the only service in our stack using Docker. Everything else uses Podman. We isolate this with clear firewall and volume boundaries.
 
-```bash
-docker run -d \\
-  --name nextcloud-aio-mastercontainer \\
-  --restart always \\
-  -p 8080:8080 \\
-  -v nextcloud_aio_mastercontainer:/mnt/docker-aio-config \\
-  -e NEXTCLOUD_DATADIR="/mnt/ncdata" \\
-  nextcloud/all-in-one:latest
+```yaml
+- name: Pull Nextcloud AIO container image
+  containers.podman.podman_image:
+    name: "nextcloud/all-in-one:latest"
+
+- name: Deploy Nextcloud AIO container
+  containers.podman.podman_container:
+    name: "nextcloud-aio-mastercontainer"
+    image: "nextcloud/all-in-one:latest"
+    state: started
+    restart_policy: always
+    ports:
+      - "8080:8080"
+    volumes:
+      - "/srv/nextcloud_data:/mnt/ncdata:z"
+      - "nextcloud_aio_mastercontainer:/mnt/docker-aio-config:z"
+    env:
+      NEXTCLOUD_DATADIR: "/mnt/ncdata"
 ```
 
-- Expose to internet **only through reverse proxy with TLS termination**
-- All services run inside AIO: no external database or cache required
-
 ---
 
-## 🧰 Hardened Stack (Built-In)
-
-| Component        | Purpose                                |
-|------------------|----------------------------------------|
-| Nextcloud Core   | File & data collaboration              |
-| OnlyOffice       | Integrated document editing            |
-| ClamAV           | Antivirus scanning for file uploads    |
-| PostgreSQL       | Backend database (within container)    |
-| Redis            | Performance cache                      |
-| Keycloak         | External SSO federation via SAML       |
-
-All services are isolated within the container and monitored via health checks.
-
----
-
-## 🔒 Access Controls (SSO via Keycloak)
+## 🔒 Access Controls with Keycloak
 
 Configure SSO for Nextcloud AIO:
 
-1. In Nextcloud AIO:
-   - Install **SSO & SAML authentication** app
-   - Set UID attribute: `user.userprincipalname`
-   - Set display name, email, group mapping (via SAML)
-2. In Keycloak:
-   - Create a SAML client
-   - Import metadata from:
-     `https://nextcloud.yourdomain.com/apps/user_saml/saml/metadata`
-   - Map email, displayname, and groups
+- Install **SSO & SAML Authentication** app in Nextcloud
+- Set UID attribute to `user.userprincipalname`
+- Configure Keycloak to map attributes (SAML)
 
-This enables secure login via Microsoft Entra ID, Keycloak users, or FreeIPA LDAP federation.
+Group access to Team Folders:
+- `Access_CUI`
+- `Access_FCI`
+- `Access_Proprietary`
 
 ---
 
-## 🔐 Folder Permissions & CUI Access Groups
+## 🧰 Architecture Diagram
 
-Use **Team Folders** to control CUI access:
-
-- Create groups: `Access_CUI`, `Access_FCI`, `Access_Proprietary`
-- Restrict download, upload, and sharing rights per group
-- Assign group-based access via Keycloak SAML attribute mapping
-
-Use File Access Control rules to:
-- Block sharing of CUI outside organization
-- Require group membership for sensitive content
+![Secure File Storage Architecture](../img/svg/section06-files-architecture.svg)
 
 ---
 
-## 📜 CMMC Practices Addressed
+## 🛡️ CMMC Practices Addressed
 
 | CMMC Practice | Description |
 |---------------|-------------|
@@ -101,45 +82,6 @@ Use File Access Control rules to:
 
 ---
 
-## 🔁 Monitoring & Backup Strategy
-
-### 🔍 Monitoring with Wazuh
-
-Nextcloud AIO logs key file operations, user activity, and access patterns. These logs can be forwarded to **Wazuh** for centralized collection, alerting, and long-term audit readiness.
-
-Steps:
-- Enable syslog forwarding in the host OS
-- Configure log collection from:
-  - `/mnt/ncdata/nextcloud.log`
-  - Container journal logs (`journalctl -u podman`)
-- Parse and alert on:
-  - File uploads of CUI
-  - Failed login attempts
-  - External sharing violations
-
-### 🔐 Backup Considerations
-
-While Nextcloud AIO offers internal snapshot features, organizations should schedule full volume-level encrypted backups of:
-
-- `/mnt/ncdata` (user data and app config)
-- `aio-mastercontainer` volume (Nextcloud AIO config)
-
-Suggested tools:
-- **Restic** or **BorgBackup** for encrypted incremental backups
-- Automate off-host storage (e.g., SFTP, S3, USB)
-- Monthly restore testing for assurance
-
-Backup plans must align with:
-
-- MP.2.119 — CUI access limitation
-- SC.12.3 — Cryptographic protections at rest
-- IR.2.093 — Incident response and data recovery
-
-
----
-
 ## ✅ Next Step
 
-With secure file collaboration via Nextcloud AIO in place, proceed to Section 7 to configure **Mailcow** for secure email services.
-
----
+Proceed to Section 7 to configure **Mailcow** for secure email services.

@@ -1,27 +1,54 @@
-# Phase 3: Podman Service Deployment
+# 🧩 Phase 3: Podman Services Deployment
 
-In this phase, we deploy core application services using **Podman** — a rootless, secure container runtime. Podman replaces Docker and integrates cleanly with systemd for persistent service management.
+## 🎯 Objective
 
-> 📌 **Note:** As of this phase, Nextcloud is deployed via a standalone hardened container using the **Nextcloud All-in-One (AIO)** model. It is **not** managed via `podman-compose`, but follows secure Docker deployment practices described in [Phase 4: File Collaboration Services](./phase04-files.md).
-
----
-
-## 📦 Phase 3 – Podman Service Deployment
-
-<img src="../../img/svg/phase03-podman.svg" alt="Workflow for deploying Keycloak, Mailcow, Wazuh, and Step-CA as rootless Podman containers" style="width:100%; max-width:800px; margin:1em 0;">
+This phase installs and configures the core **Podman-based services** used throughout the OpenCMMC Stack. It leverages an Ansible role to run secure, rootless containers for various components, except for Nextcloud AIO, which remains a hardened Docker container due to its upstream architecture.
 
 ---
 
-## 🧰 Prerequisites
+## 📦 Role: `podman_services`
 
-- Host hardened via Ansible (see Phase 2)
-- `podman`, `podman-compose`, and `uidmap` installed
-- Containers will run as **non-root** service users
-- Reverse proxy (e.g., NGINX Proxy Manager) must be deployed to interface with external traffic
+The `podman_services` Ansible role handles:
+
+- Pulling images via Podman
+- Deploying containers as systemd-managed services
+- Restart policies and volume bindings
+- Managing containers declaratively from a variable file
+
+All Podman-managed containers run rootless under defined service accounts and can be expanded modularly.
 
 ---
 
-## 🧱 Recommended Structure
+## 🧾 Example Usage
+
+```yaml
+- name: Deploy Podman services
+  hosts: localhost
+  become: yes
+  roles:
+    - role: podman_services
+```
+
+Edit the `defaults/main.yml` to declare your container list:
+
+```yaml
+podman_services:
+  - name: keycloak
+    image: quay.io/keycloak/keycloak:24.0.2
+    ports:
+      - "8080:8080"
+    volumes:
+      - "/opt/keycloak:/data:z"
+    env:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: changeme
+```
+
+---
+
+## 🧱 Optional Service Layout (Manual Pods)
+
+Some organizations may still use a pod structure like below:
 
 ```
 services/
@@ -37,17 +64,17 @@ services/
     └── docker-run.sh  # used for Nextcloud AIO
 ```
 
-Each subdirectory contains:
+Each service directory includes:
 
-- A `podman-compose.yml` or `docker-run.sh` launcher script
-- A `.env` file (secured)
-- Systemd unit files for automatic start
+- `podman-compose.yml` or single-container runner script
+- `.env` file (secured)
+- Optional systemd unit templates
+
+However, the `podman_services` role supersedes the need for manual pod structures.
 
 ---
 
-## ⚙️ Systemd Unit Template (Podman Service)
-
-Example for Keycloak:
+## ⚙️ Example Systemd Unit (Optional)
 
 ```ini
 [Unit]
@@ -57,29 +84,36 @@ After=network.target
 
 [Service]
 User=svc_keycloak
-ExecStart=/usr/bin/podman-compose -f /opt/services/keycloak/podman-compose.yml up
-ExecStop=/usr/bin/podman-compose -f /opt/services/keycloak/podman-compose.yml down
+ExecStart=/usr/bin/podman run --rm quay.io/keycloak/keycloak:24.0.2
 Restart=always
-EnvironmentFile=/opt/services/keycloak/.env
 
 [Install]
 WantedBy=multi-user.target
 ```
 
-Install with:
-
-```bash
-sudo systemctl daemon-reexec
-sudo systemctl enable --now podman-keycloak.service
-```
+In most cases, this is replaced with Ansible-deployed `podman_container` modules and pre-written units.
 
 ---
 
-## ⚠️ Exception: Nextcloud AIO
+## 🔒 Security Considerations
 
-**Nextcloud AIO** is deployed using a hardened standalone Docker container to ensure full integration of Redis, PostgreSQL, ClamAV, and OnlyOffice in a single isolated unit.
+- All Podman containers run **as non-root** service accounts
+- Use `:z` SELinux volume labels for confined access
+- Isolate each service to private networks where possible
+- Do **not expose ports** directly to WAN without reverse proxy
+- Enforce container logs forwarding to **Wazuh**
 
-Use:
+---
+
+## ⚠️ Exception: Nextcloud AIO (Docker)
+
+Nextcloud AIO is a single Docker container that includes:
+
+- Redis
+- PostgreSQL
+- ClamAV
+- OnlyOffice
+- Nextcloud core
 
 ```bash
 docker run -d \
@@ -91,23 +125,32 @@ docker run -d \
   nextcloud/all-in-one:latest
 ```
 
-This container should be reverse proxied and monitored with health checks via Uptime Kuma.
+This container is managed via the `file_storage` role in **Phase 3a** and must be:
+
+- Placed behind NGINX Proxy Manager
+- Included in your Tailscale ACLs
+- Backed up via volume mount `/mnt/ncdata`
 
 ---
 
-## 🔒 Security Practices
+## 📜 CMMC Practices Mapped
 
-- Use separate non-root service accounts for each containerized app
-- Limit all traffic via internal-only Docker or Podman networks
-- Use NGINX Proxy Manager to route HTTPS traffic securely
-- Never expose Podman services directly to WAN or bypass ACLs
+| CMMC Practice | Description |
+|---------------|-------------|
+| CM.2.064 | Track and approve software components |
+| AC.3.021 | Use role-based service separation |
+| SC.3.177 | Encrypt data flows within containers |
+| AU.2.042 | Enable logging from Podman containers |
+| MA.3.115 | Support automated service restarts |
 
 ---
 
 ## ✅ Output of This Phase
 
-- All core services (except Nextcloud) deployed as **rootless Podman containers**
-- Systemd units ensure services survive reboots and restart cleanly
-- File collaboration services (Nextcloud AIO) prepared for deployment in Phase 4
+- Podman-deployed containers configured via Ansible
+- Secure container runtime fully integrated
+- Nextcloud AIO Docker container ready for launch in **Phase 3a**
 
-→ Proceed to [Phase 4: File Collaboration Services with Nextcloud AIO](./phase04-files.md)
+→ Continue to [Phase 3a: File Collaboration Services with Nextcloud AIO](./phase04-files.md)
+
+---

@@ -1,37 +1,190 @@
-# Section 14: Deployment Guide – OpenCMMC FOSS Infrastructure
+# 🚀 Section 14: Deployment Guide
 
-This deployment guide provides a step-by-step, modular walkthrough for provisioning and configuring a fully CMMC Level 2–aligned FOSS infrastructure stack for small to medium defense contractors.
+## 🎯 Objective
 
-**Technologies Used:**
-
-- 🔧 Terraform for infrastructure provisioning
-- 🛡️ Ansible for operating system hardening and service configuration
-- 📦 Podman for secure, rootless container deployment
-- 🔐 Keycloak, Smallstep CA, Tailscale, Mailcow, Nextcloud, Wazuh
-
-The end result is a fully operational, Zero Trust–compliant environment accessible securely by:
-
-- ✅ Windows, macOS, Linux endpoints
-- ✅ Android and iOS mobile devices
-- ✅ Remote and on-prem users
+This section outlines a step-by-step deployment path to implement the OpenCMMC Stack using fully automated, reproducible infrastructure-as-code workflows. Each phase corresponds to a tightly scoped operational unit aligned with CMMC Level 2 practices.
 
 ---
 
-## 📘 Deployment Phases
+## 📌 Overview of Phases
 
-Each phase maps directly to key CMMC practices across Access Control (AC), Configuration Management (CM), System Integrity (SI), and Audit & Accountability (AU).
-
-| Phase | Focus |
-|-------|-------|
-| [Phase 0](01_planning.md) | Planning and scoping CMMC-aligned infrastructure |
-| [Phase 1](02_terraform_provisioning.md) | Provisioning secure hosts using Terraform |
-| [Phase 2](03_ansible_hardening.md) | Operating system hardening using Ansible |
-| [Phase 3](04_podman_services.md) | Secure application services deployed with Podman |
-| [Phase 4](05_identity_cert_mgmt.md) | Identity, certificate issuance, and access control |
-| [Phase 5](06_client_registration.md) | Secure client onboarding (Windows, macOS, iOS, Android) |
-| [Phase 6](07_logging_monitoring.md) | Logging, alerting, and security monitoring |
-| [Phase 7](08_validation_reporting.md) | Compliance testing, reporting, and evidence capture |
+| Phase | Title                               | Tools Used              | Evidence Folder              |
+|-------|-------------------------------------|--------------------------|------------------------------|
+| 0     | Planning & Scope Definition         | Markdown, Diagrams       | `evidence/00_scoping/`       |
+| 1     | Terraform VM Provisioning           | Terraform                | `evidence/01_identity_access/` |
+| 2     | Host Hardening with Ansible         | Ansible, UFW, AIDE       | `evidence/02_system_hardening/` |
+| 3     | Podman-Based Service Container Setup| Podman, Systemd          | `evidence/03_file_sharing/`  |
+| 3A    | Secure File Sharing with Nextcloud  | Nextcloud AIO            | `evidence/03_file_sharing/`  |
+| 4     | Identity, MFA, and Cert Management  | Keycloak, ACME, SCEP     | `evidence/01_identity_access/` |
+| 5     | Client Device Registration & Policy | Platform-specific MDM    | `evidence/01_identity_access/` |
+| 6     | Logging, SIEM, and Alerting         | Wazuh, Auditd            | `evidence/05_monitoring/`    |
+| 7     | Validation, Screenshots & Export    | Manual + CI              | `evidence/06_backups/`       |
 
 ---
 
-Let’s begin with Phase 0.
+## ⚙️ How to Use This Section
+
+Each step in the deployment includes:
+
+- ✅ Playbook file and role used
+- 📁 Where to store your evidence
+- 🔗 Related diagrams
+- 📝 References to corresponding SSP sections
+
+---
+
+## 📐 Phase 0 – Planning & Scope
+
+Ensure all project stakeholders agree on:
+
+- What systems process CUI or FCI
+- Deployment boundaries (cloud/on-prem)
+- Target number of users/devices
+- DNS zones, certificate providers, and external access needs
+
+_Artifacts to collect:_
+- `network-topology.mmd` → `img/svg/`
+- `evidence_index.md`
+- Domain diagrams and port maps
+
+---
+
+## 🧱 Phase 1 – Provision Infrastructure (Terraform)
+
+```bash
+terraform init
+terraform apply
+```
+
+Evidence to collect:
+- Terraform plan/apply logs
+- Output IPs
+- SSH key fingerprints
+
+_Artifacts:_
+- `main.tf`
+- `bootstrap.sh`
+- `terraform.tfvars.example`
+
+---
+
+## 🛡️ Phase 2 – Harden Host (Ansible)
+
+```bash
+ansible-playbook -i inventory localhost playbooks/phase02_ansible_hardening.yml
+```
+
+Includes:
+- SSH lock-down
+- Password policy
+- Login banner
+- UFW and Auditd
+
+_Artifacts:_
+- `audit.log`
+- `sshd_config`
+- `aide.db.gz`
+
+---
+
+## 🔧 Phase 3 – Podman Services
+
+```bash
+ansible-playbook -i inventory localhost playbooks/phase03_podman_services.yml
+```
+
+Installs Podman and sets up:
+
+- Rootless container runtime
+- Systemd service wrappers
+- Logging socket passthrough
+
+_Artifacts:_
+- Podman install logs
+- Systemd service manifests
+- Runtime socket test output
+
+---
+
+## 📂 Phase 3A – Deploy Secure File Sharing (Nextcloud AIO)
+
+This step deploys the secure file collaboration environment using the `file_storage` Ansible role. It pulls the hardened Nextcloud All-in-One container and mounts persistent storage volumes to host CUI/FCI data.
+
+```bash
+ansible-playbook -i inventory localhost playbooks/phase03a_file_storage.yml
+```
+
+Artifacts from this step should be archived under `evidence/03_file_sharing/` including container logs, volume listings, and security posture verification.
+
+---
+
+## 🔐 Phase 4 – Identity & Certificate Management
+
+```bash
+ansible-playbook playbooks/phase04_identity_cert.yml
+```
+
+Includes:
+- Keycloak realm and MFA
+- External IdP setup (optional)
+- ACME DNS/HTTP validation
+- TLS termination config
+
+Artifacts:
+- Realm export JSON
+- Group mappings
+- Certbot or Step-CA logs
+
+---
+
+## 📱 Phase 5 – Client Registration
+
+Includes:
+- Android/iOS/Windows/Mac device onboarding
+- Identity binding via Tailscale or LDAP
+- MDM enrollment or profile loading
+
+Artifacts:
+- MDM profile screenshots
+- Device join logs
+- VPN identity fingerprint
+
+---
+
+## 📊 Phase 6 – Logging, SIEM & Alerting
+
+```bash
+ansible-playbook playbooks/phase06_logging_monitoring.yml
+```
+
+- Wazuh deployment
+- Central log forwarding (journald, auditd)
+- Anomaly detection rules
+
+Artifacts:
+- Wazuh install logs
+- Sample alerts
+- Evidence forwarding screenshot
+
+---
+
+## ✅ Phase 7 – Validation & Export
+
+Compile final evidence set:
+
+- Screenshot walkthrough
+- Playbook run logs
+- Log integrity export
+- SSP references and traceability
+
+Export Markdown to PDF:
+
+```bash
+mkdocs build
+```
+
+---
+
+## ⬅️ Return to [README.md](../README.md) or proceed to [Section 15: SecOps SOPs](../15_secops_sops/index.md)
+
+---
