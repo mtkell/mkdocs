@@ -12,28 +12,28 @@
         <meta name="author" content="Kell Engineering">
       
       
-        <link rel="canonical" href="https://docs.kellengineering.com/14_deployment_guide/02_terraform_provisioning/">
+        <link rel="canonical" href="https://docs.kellengineering.com/15_secops_sops/">
       
       
-        <link rel="prev" href="../01_planning/">
+        <link rel="prev" href="../14_deployment_guide/08_validation_reporting/">
       
       
-        <link rel="next" href="../03_ansible_hardening/">
+        <link rel="next" href="../16_user_device_onboarding/">
       
       
-      <link rel="icon" href="../../assets/images/favicon.png">
+      <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.11">
     
     
       
-        <title>Phase 1- Terraform Provisioning - OpenCMMC Stack</title>
+        <title>Security Operations Procedures (SecOps) - OpenCMMC Stack</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.4af4bdda.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.4af4bdda.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -52,7 +52,7 @@
       
     
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#phase-1-terraform-infrastructure-provisioning" class="md-skip">
+        <a href="#section-15-security-operations-procedures-secops-sops" class="md-skip">
           Skip to content
         </a>
       
@@ -92,7 +92,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="OpenCMMC Stack" class="md-header__button md-logo" aria-label="OpenCMMC Stack" data-md-component="logo">
+    <a href=".." title="OpenCMMC Stack" class="md-header__button md-logo" aria-label="OpenCMMC Stack" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Phase 1- Terraform Provisioning
+              Security Operations Procedures (SecOps)
             
           </span>
         </div>
@@ -204,7 +204,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="OpenCMMC Stack" class="md-nav__button md-logo" aria-label="OpenCMMC Stack" data-md-component="logo">
+    <a href=".." title="OpenCMMC Stack" class="md-nav__button md-logo" aria-label="OpenCMMC Stack" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -234,7 +234,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href=".." class="md-nav__link">
         
   
   
@@ -256,7 +256,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../00_preface/" class="md-nav__link">
+      <a href="../00_preface/" class="md-nav__link">
         
   
   
@@ -278,7 +278,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../01_cmmc_intro/" class="md-nav__link">
+      <a href="../01_cmmc_intro/" class="md-nav__link">
         
   
   
@@ -300,7 +300,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../02_reference_architecture/" class="md-nav__link">
+      <a href="../02_reference_architecture/" class="md-nav__link">
         
   
   
@@ -322,7 +322,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../03_provisioning/" class="md-nav__link">
+      <a href="../03_provisioning/" class="md-nav__link">
         
   
   
@@ -344,7 +344,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../04_os_hardening/" class="md-nav__link">
+      <a href="../04_os_hardening/" class="md-nav__link">
         
   
   
@@ -366,7 +366,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../05_identity_access/" class="md-nav__link">
+      <a href="../05_identity_access/" class="md-nav__link">
         
   
   
@@ -388,7 +388,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../06_file_storage/" class="md-nav__link">
+      <a href="../06_file_storage/" class="md-nav__link">
         
   
   
@@ -410,7 +410,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../07_email/" class="md-nav__link">
+      <a href="../07_email/" class="md-nav__link">
         
   
   
@@ -432,7 +432,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../08_logging_monitoring/" class="md-nav__link">
+      <a href="../08_logging_monitoring/" class="md-nav__link">
         
   
   
@@ -454,7 +454,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../09_container_runtime/" class="md-nav__link">
+      <a href="../09_container_runtime/" class="md-nav__link">
         
   
   
@@ -476,7 +476,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../10_backup_recovery/" class="md-nav__link">
+      <a href="../10_backup_recovery/" class="md-nav__link">
         
   
   
@@ -498,7 +498,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../11_policies_procedures/" class="md-nav__link">
+      <a href="../11_policies_procedures/" class="md-nav__link">
         
   
   
@@ -520,7 +520,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../12_assessment_readiness/" class="md-nav__link">
+      <a href="../12_assessment_readiness/" class="md-nav__link">
         
   
   
@@ -542,7 +542,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../13_architecture/" class="md-nav__link">
+      <a href="../13_architecture/" class="md-nav__link">
         
   
   
@@ -561,8 +561,6 @@
       
   
   
-    
-  
   
   
     
@@ -575,11 +573,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_16" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_16" >
         
           
           <label class="md-nav__link" for="__nav_16" id="__nav_16_label" tabindex="">
@@ -595,7 +593,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_16_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_16_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_16">
             <span class="md-nav__icon md-icon"></span>
             Deployment Guide
@@ -609,7 +607,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../14_deployment_guide/" class="md-nav__link">
         
   
   
@@ -632,7 +630,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../01_planning/" class="md-nav__link">
+      <a href="../14_deployment_guide/01_planning/" class="md-nav__link">
         
   
   
@@ -652,32 +650,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    Phase 1- Terraform Provisioning
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../14_deployment_guide/02_terraform_provisioning/" class="md-nav__link">
         
   
   
@@ -688,98 +664,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#phase-1-infrastructure-provisioning-terraform" class="md-nav__link">
-    <span class="md-ellipsis">
-      🛠 Phase 1 – Infrastructure Provisioning (Terraform)
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#tools-required" class="md-nav__link">
-    <span class="md-ellipsis">
-      🧰 Tools Required
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#terraform-structure" class="md-nav__link">
-    <span class="md-ellipsis">
-      🧱 Terraform Structure
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#sample-maintf-digitalocean" class="md-nav__link">
-    <span class="md-ellipsis">
-      🌐 Sample main.tf (DigitalOcean)
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#define-variables-variablestf" class="md-nav__link">
-    <span class="md-ellipsis">
-      📦 Define Variables (variables.tf)
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#add-secrets-terraformtfvars" class="md-nav__link">
-    <span class="md-ellipsis">
-      🔐 Add Secrets (terraform.tfvars)
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#on-prem-alternative-proxmox" class="md-nav__link">
-    <span class="md-ellipsis">
-      🖥️ On-Prem Alternative (Proxmox)
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#output-of-this-phase" class="md-nav__link">
-    <span class="md-ellipsis">
-      ✅ Output of This Phase
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -792,7 +676,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../03_ansible_hardening/" class="md-nav__link">
+      <a href="../14_deployment_guide/03_ansible_hardening/" class="md-nav__link">
         
   
   
@@ -815,7 +699,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../04_podman_services/" class="md-nav__link">
+      <a href="../14_deployment_guide/04_podman_services/" class="md-nav__link">
         
   
   
@@ -838,7 +722,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../phase04-files/" class="md-nav__link">
+      <a href="../14_deployment_guide/phase04-files/" class="md-nav__link">
         
   
   
@@ -861,7 +745,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../05_identity_cert_mgmt/" class="md-nav__link">
+      <a href="../14_deployment_guide/05_identity_cert_mgmt/" class="md-nav__link">
         
   
   
@@ -884,7 +768,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../06_client_registration/" class="md-nav__link">
+      <a href="../14_deployment_guide/06_client_registration/" class="md-nav__link">
         
   
   
@@ -907,7 +791,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../07_logging_monitoring/" class="md-nav__link">
+      <a href="../14_deployment_guide/07_logging_monitoring/" class="md-nav__link">
         
   
   
@@ -930,7 +814,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../08_validation_reporting/" class="md-nav__link">
+      <a href="../14_deployment_guide/08_validation_reporting/" class="md-nav__link">
         
   
   
@@ -957,10 +841,32 @@
       
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../15_secops_sops/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Security Operations Procedures (SecOps)
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -971,6 +877,98 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objective" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Objective
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#daily-operations-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      📆 Daily Operations Checklist
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#weekly-operations-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      📅 Weekly Operations Checklist
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#monthly-operations-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      🗓️ Monthly Operations Checklist
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tools-and-scripts-used" class="md-nav__link">
+    <span class="md-ellipsis">
+      🛠️ Tools and Scripts Used
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#audit-artifacts-to-maintain" class="md-nav__link">
+    <span class="md-ellipsis">
+      🗂️ Audit Artifacts to Maintain
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cmmc-practices-addressed" class="md-nav__link">
+    <span class="md-ellipsis">
+      📌 CMMC Practices Addressed
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-step" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Next Step
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -982,7 +980,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../16_user_device_onboarding/" class="md-nav__link">
+      <a href="../16_user_device_onboarding/" class="md-nav__link">
         
   
   
@@ -1004,7 +1002,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../17_patch_vuln_management/" class="md-nav__link">
+      <a href="../17_patch_vuln_management/" class="md-nav__link">
         
   
   
@@ -1026,7 +1024,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../18_incident_response/" class="md-nav__link">
+      <a href="../18_incident_response/" class="md-nav__link">
         
   
   
@@ -1048,7 +1046,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../19_data_flow_mapping/" class="md-nav__link">
+      <a href="../19_data_flow_mapping/" class="md-nav__link">
         
   
   
@@ -1070,7 +1068,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../20_scaling_cost/" class="md-nav__link">
+      <a href="../20_scaling_cost/" class="md-nav__link">
         
   
   
@@ -1092,7 +1090,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../99_appendix_a_acronyms/" class="md-nav__link">
+      <a href="../99_appendix_a_acronyms/" class="md-nav__link">
         
   
   
@@ -1114,7 +1112,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../99_appendix_b_resources/" class="md-nav__link">
+      <a href="../99_appendix_b_resources/" class="md-nav__link">
         
   
   
@@ -1139,7 +1137,7 @@
           
           
             <div class="md-content" data-md-component="content">
-              <article class="md-content__inner md-typeset"><a class="md-content__button md-icon" download href="../../pdf/combined.pdf" title="PDF Export"><svg style="height: 1.2rem; width: 1.2rem;" viewBox="0 0 384 512" xmlns="http://www.w3.org/2000/svg"><path d="M224 136V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zm76.45 211.36l-96.42 95.7c-6.65 6.61-17.39 6.61-24.04 0l-96.42-95.7C73.42 337.29 80.54 320 94.82 320H160v-80c0-8.84 7.16-16 16-16h32c8.84 0 16 7.16 16 16v80h65.18c14.28 0 21.4 17.29 11.27 27.36zM377 105L279.1 7c-4.5-4.5-10.6-7-17-7H256v128h128v-6.1c0-6.3-2.5-12.4-7-16.9z"></path></svg></a>
+              <article class="md-content__inner md-typeset"><a class="md-content__button md-icon" download href="../pdf/combined.pdf" title="PDF Export"><svg style="height: 1.2rem; width: 1.2rem;" viewBox="0 0 384 512" xmlns="http://www.w3.org/2000/svg"><path d="M224 136V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zm76.45 211.36l-96.42 95.7c-6.65 6.61-17.39 6.61-24.04 0l-96.42-95.7C73.42 337.29 80.54 320 94.82 320H160v-80c0-8.84 7.16-16 16-16h32c8.84 0 16 7.16 16 16v80h65.18c14.28 0 21.4 17.29 11.27 27.36zM377 105L279.1 7c-4.5-4.5-10.6-7-17-7H256v128h128v-6.1c0-6.3-2.5-12.4-7-16.9z"></path></svg></a>
                 
                   
 
@@ -1148,71 +1146,202 @@
   
 
 
-<h1 id="phase-1-terraform-infrastructure-provisioning">Phase 1: Terraform Infrastructure Provisioning<a class="headerlink" href="#phase-1-terraform-infrastructure-provisioning" title="Permanent link">&para;</a></h1>
-<p>This phase provisions the baseline infrastructure using <strong>Terraform</strong>, establishing a consistent and repeatable environment for CMMC-aligned services. It supports both cloud-based and on-premise deployments (e.g., DigitalOcean, Proxmox, VMware).</p>
-<h2 id="phase-1-infrastructure-provisioning-terraform">🛠 Phase 1 – Infrastructure Provisioning (Terraform)<a class="headerlink" href="#phase-1-infrastructure-provisioning-terraform" title="Permanent link">&para;</a></h2>
-<p><img src="../../img/svg/phase01-terraform.svg" alt="Diagram of Terraform provisioning process for Ubuntu virtual machine and SSH access" style="width:100%; max-width:800px; margin:1em 0;"></p>
+<h1 id="section-15-security-operations-procedures-secops-sops">🛡️ Section 15: Security Operations Procedures (SecOps SOPs)<a class="headerlink" href="#section-15-security-operations-procedures-secops-sops" title="Permanent link">&para;</a></h1>
+<h2 id="objective">🎯 Objective<a class="headerlink" href="#objective" title="Permanent link">&para;</a></h2>
+<p>This section defines the <strong>routine security tasks</strong> required to maintain, monitor, and verify the operational security of the OpenCMMC Stack. These procedures support ongoing compliance with <strong>System and Information Integrity (SI)</strong>, <strong>Configuration Management (CM)</strong>, <strong>Access Control (AC)</strong>, and <strong>Audit and Accountability (AU)</strong> domains in CMMC Level 2.</p>
 <hr />
-<h2 id="tools-required">🧰 Tools Required<a class="headerlink" href="#tools-required" title="Permanent link">&para;</a></h2>
+<h2 id="daily-operations-checklist">📆 Daily Operations Checklist<a class="headerlink" href="#daily-operations-checklist" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Responsible Role</th>
+<th>Tools</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Review Wazuh dashboard alerts</td>
+<td>Security Officer</td>
+<td>Wazuh Web UI</td>
+<td>Screenshot or exported alert logs</td>
+</tr>
+<tr>
+<td>Check Podman service health</td>
+<td>System Admin</td>
+<td><code>podman ps</code>, <code>systemctl status</code></td>
+<td>CLI output</td>
+</tr>
+<tr>
+<td>Verify overnight backup success</td>
+<td>System Admin</td>
+<td><code>journalctl -u restic-backup.timer</code></td>
+<td>Timer log</td>
+</tr>
+<tr>
+<td>Tailscale device review</td>
+<td>Network Admin</td>
+<td>Tailscale Admin Panel</td>
+<td>Screenshot or audit log</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="weekly-operations-checklist">📅 Weekly Operations Checklist<a class="headerlink" href="#weekly-operations-checklist" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Responsible Role</th>
+<th>Tools</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Apply pending OS updates (non-emergency)</td>
+<td>System Admin</td>
+<td><code>apt</code>, <code>ansible-pull</code></td>
+<td>Ansible log or <code>apt list --upgradable</code></td>
+</tr>
+<tr>
+<td>Review Keycloak login history and MFA failures</td>
+<td>Security Officer</td>
+<td>Keycloak Admin Console</td>
+<td>Audit log export</td>
+</tr>
+<tr>
+<td>Rotate logs to archive</td>
+<td>System Admin</td>
+<td><code>logrotate</code>, <code>tar</code></td>
+<td>Archived <code>.gz</code> file list</td>
+</tr>
+<tr>
+<td>Compare current container image versions</td>
+<td>DevSecOps</td>
+<td><code>podman image ls</code>, <code>skopeo inspect</code></td>
+<td>Version report or SBOM diff</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="monthly-operations-checklist">🗓️ Monthly Operations Checklist<a class="headerlink" href="#monthly-operations-checklist" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Responsible Role</th>
+<th>Tools</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Run backup restore test</td>
+<td>Security Officer</td>
+<td><code>restic</code>, <code>diff</code></td>
+<td>Screenshot or diff report</td>
+</tr>
+<tr>
+<td>Review all Wazuh rule overrides</td>
+<td>Security Officer</td>
+<td>Wazuh Rules Config</td>
+<td>Rule diff or exported rules</td>
+</tr>
+<tr>
+<td>Conduct user access review</td>
+<td>HR + IT</td>
+<td>Keycloak Groups</td>
+<td>Access report</td>
+</tr>
+<tr>
+<td>Test disaster recovery procedure</td>
+<td>System Admin</td>
+<td>Runbook or manual</td>
+<td>Checklist completion or script output</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="tools-and-scripts-used">🛠️ Tools and Scripts Used<a class="headerlink" href="#tools-and-scripts-used" title="Permanent link">&para;</a></h2>
 <ul>
-<li><a href="https://developer.hashicorp.com/terraform/install">Terraform CLI</a></li>
-<li>Access credentials for your cloud or hypervisor provider</li>
-<li>SSH key pair (<code>id_rsa</code>, <code>id_rsa.pub</code>) for Ansible provisioning</li>
-<li>Predefined VPC, firewall rules, or isolated network</li>
+<li><code>restic-backup.sh</code> — backup and retention</li>
+<li><code>podman</code> — container monitoring and updates</li>
+<li><code>ansible</code> — patch automation, drift detection</li>
+<li><code>journalctl</code> — log source for backup and security events</li>
+<li><code>Wazuh</code> — security alerts and compliance reporting</li>
+<li><code>Keycloak</code> — access logging and user behavior</li>
 </ul>
 <hr />
-<h2 id="terraform-structure">🧱 Terraform Structure<a class="headerlink" href="#terraform-structure" title="Permanent link">&para;</a></h2>
-<p>Recommended folder layout:</p>
-<div class="codehilite"><pre><span></span><code><span class="n">terraform</span><span class="o">/</span>
-<span class="err">├──</span><span class="w"> </span><span class="n">main</span><span class="o">.</span><span class="n">tf</span>
-<span class="err">├──</span><span class="w"> </span><span class="n">variables</span><span class="o">.</span><span class="n">tf</span>
-<span class="err">├──</span><span class="w"> </span><span class="n">terraform</span><span class="o">.</span><span class="n">tfvars</span>
-<span class="err">└──</span><span class="w"> </span><span class="n">outputs</span><span class="o">.</span><span class="n">tf</span>
-</code></pre></div>
-
+<h2 id="audit-artifacts-to-maintain">🗂️ Audit Artifacts to Maintain<a class="headerlink" href="#audit-artifacts-to-maintain" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Artifact</th>
+<th>Source</th>
+<th>Frequency</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Wazuh alerts (critical/high)</td>
+<td>Wazuh dashboard</td>
+<td>Daily</td>
+</tr>
+<tr>
+<td>Backup logs</td>
+<td>systemd journal</td>
+<td>Daily</td>
+</tr>
+<tr>
+<td>Restore test success/fail log</td>
+<td>CLI/Restic output</td>
+<td>Monthly</td>
+</tr>
+<tr>
+<td>Patch application log</td>
+<td>Ansible/Apt</td>
+<td>Weekly</td>
+</tr>
+<tr>
+<td>Keycloak login audit</td>
+<td>Exported .csv</td>
+<td>Weekly</td>
+</tr>
+</tbody>
+</table>
 <hr />
-<h2 id="sample-maintf-digitalocean">🌐 Sample <code>main.tf</code> (DigitalOcean)<a class="headerlink" href="#sample-maintf-digitalocean" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span><code><span class="kr">provider</span><span class="w"> </span><span class="nv">&quot;digitalocean&quot;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="na">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">var.do_token</span>
-<span class="p">}</span>
-
-<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;digitalocean_droplet&quot;</span><span class="w"> </span><span class="nv">&quot;cmmc_host&quot;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="na">name</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;cmmc-foss-server&quot;</span>
-<span class="w">  </span><span class="na">region</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">var.region</span>
-<span class="w">  </span><span class="na">size</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="nv">var.size</span>
-<span class="w">  </span><span class="na">image</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ubuntu-22-04-x64&quot;</span>
-
-<span class="w">  </span><span class="na">ssh_keys</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="nv">var.ssh_key_fingerprint</span><span class="p">]</span>
-
-<span class="w">  </span><span class="na">tags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;cmmc&quot;, &quot;infrastructure&quot;</span><span class="p">]</span>
-<span class="p">}</span>
-</code></pre></div>
-
+<h2 id="cmmc-practices-addressed">📌 CMMC Practices Addressed<a class="headerlink" href="#cmmc-practices-addressed" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Practice</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SI.2.216</td>
+<td>Monitor system security alerts and logs</td>
+</tr>
+<tr>
+<td>SI.1.210</td>
+<td>Identify unauthorized use or modification</td>
+</tr>
+<tr>
+<td>CM.2.067</td>
+<td>Monitor system configuration</td>
+</tr>
+<tr>
+<td>AC.1.001</td>
+<td>Maintain access restrictions</td>
+</tr>
+</tbody>
+</table>
 <hr />
-<h2 id="define-variables-variablestf">📦 Define Variables (<code>variables.tf</code>)<a class="headerlink" href="#define-variables-variablestf" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span><code><span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;do_token&quot;</span><span class="w"> </span><span class="p">{}</span>
-<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;region&quot;</span><span class="w">   </span><span class="p">{</span><span class="w"> </span><span class="na">default</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;nyc3&quot;</span><span class="w"> </span><span class="p">}</span>
-<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;size&quot;</span><span class="w">     </span><span class="p">{</span><span class="w"> </span><span class="na">default</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;s-2vcpu-4gb&quot;</span><span class="w"> </span><span class="p">}</span>
-<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;ssh_key_fingerprint&quot;</span><span class="w"> </span><span class="p">{}</span>
-</code></pre></div>
-
-<hr />
-<h2 id="add-secrets-terraformtfvars">🔐 Add Secrets (<code>terraform.tfvars</code>)<a class="headerlink" href="#add-secrets-terraformtfvars" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span><code>do_token             = &quot;your_do_token_here&quot;
-ssh_key_fingerprint  = &quot;your_fingerprint&quot;
-</code></pre></div>
-
-<hr />
-<h2 id="on-prem-alternative-proxmox">🖥️ On-Prem Alternative (Proxmox)<a class="headerlink" href="#on-prem-alternative-proxmox" title="Permanent link">&para;</a></h2>
-<p>Use <code>proxmox</code> provider or provision VMs via Ansible + cloud-init. Details can be added in an advanced appendix.</p>
-<hr />
-<h2 id="output-of-this-phase">✅ Output of This Phase<a class="headerlink" href="#output-of-this-phase" title="Permanent link">&para;</a></h2>
-<ul>
-<li>One or more hardened Ubuntu 22.04 VMs</li>
-<li>SSH key access for provisioning</li>
-<li>IP addresses or DNS names for Ansible roles</li>
-</ul>
-<p>→ Proceed to <a href="../03_ansible_hardening/">Phase 2: OS Hardening with Ansible</a></p>
+<h2 id="next-step">✅ Next Step<a class="headerlink" href="#next-step" title="Permanent link">&para;</a></h2>
+<p>In the next section, you’ll document how new users and devices are securely provisioned and scoped using identity-based Zero Trust policies.</p>
 
 
 
@@ -1267,10 +1396,10 @@ ssh_key_fingerprint  = &quot;your_fingerprint&quot;
     
     
       
-      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.sections", "navigation.top", "content.code.annotate", "toc.integrate"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.sections", "navigation.top", "content.code.annotate", "toc.integrate"], "search": "../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      <script src="../assets/javascripts/bundle.c8b220af.min.js"></script>
       
     
   </body>

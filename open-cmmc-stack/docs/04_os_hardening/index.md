@@ -4,6 +4,8 @@
 
 This section walks through hardening the Ubuntu 22.04 LTS host to meet the foundational system-level security expectations of CMMC Level 2. All configurations are managed using **Ansible**, enabling repeatability, version control, and audit readiness.
 
+> **ℹ️ NOTE:** This hardening role is **executed automatically** during the provisioning phase (see Section 3) via the `bootstrap.sh` script included in the Terraform configuration. The secure baseline is applied during the first boot of the server. This section documents the tasks for audit clarity and allows for manual reapplication if needed.
+
 ---
 
 ## 🧱 Host Hardening Checklist

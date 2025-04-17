@@ -1,0 +1,26 @@
+flowchart TD
+    subgraph UserDevices["Trusted User Devices"]
+        A1["Windows / Linux / macOS"]
+        A2["Mobile (iOS / Android)"]
+    end
+
+    subgraph AccessControl["Identity & Access Layer"]
+        B1["Keycloak (SSO + MFA)"]
+        B2["Tailscale Coordination Node"]
+    end
+
+    subgraph InternalServices["Protected Internal Services"]
+        C1["Nextcloud AIO"]
+        C2["Mailcow"]
+        C3["Gitea (Optional)"]
+    end
+
+    A1 --> B1
+    A2 --> B1
+    B1 --> B2
+    B1 --> C1
+    B1 --> C2
+    B1 --> C3
+    B2 --> C1
+    B2 --> C2
+    B2 --> C3

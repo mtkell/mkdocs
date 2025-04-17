@@ -4,7 +4,7 @@ site_author: Kell Engineering
 site_url: https://docs.kellengineering.com
 
 repo_name: kellengineering/open-cmmc-stack
-repo_url: https://github.com/mtkell/open-cmmc-stack
+repo_url: https://github.com/mtkell/mkdocs/tree/main/open-cmmc-stack
 
 theme:
   name: material
@@ -19,39 +19,39 @@ theme:
 
 nav:
   - Home: README.md
-  - Preface: docs/00_preface/index.md
-  - Introduction to CMMC v2: docs/01_cmmc_intro/index.md
-  - Reference Architecture: docs/02_reference_architecture/index.md
-  - Provisioning Infrastructure: docs/03_provisioning/index.md
-  - Securing the Host OS: docs/04_os_hardening/index.md
-  - Identity & Access Management: docs/05_identity_access/index.md
-  - Secure File Sharing: docs/06_file_storage/index.md
-  - Secure Email: docs/07_email/index.md
-  - Logging & Monitoring: docs/08_logging_monitoring/index.md
-  - Container Runtime: docs/09_container_runtime/index.md
-  - Backup & Recovery: docs/10_backup_recovery/index.md
-  - Policies & Procedures: docs/11_policies_procedures/index.md
-  - Assessment & Readiness: docs/12_assessment_readiness/index.md
-  - Infrastructure Architecture & System Interconnection: docs/13_architecture/index.md
+  - Preface: 00_preface/index.md
+  - Introduction to CMMC v2: 01_cmmc_intro/index.md
+  - Reference Architecture: 02_reference_architecture/index.md
+  - Provisioning Infrastructure: 03_provisioning/index.md
+  - Securing the Host OS: 04_os_hardening/index.md
+  - Identity & Access Management: 05_identity_access/index.md
+  - Secure File Sharing: 06_file_storage/index.md
+  - Secure Email: 07_email/index.md
+  - Logging & Monitoring: 08_logging_monitoring/index.md
+  - Container Runtime: 09_container_runtime/index.md
+  - Backup & Recovery: 10_backup_recovery/index.md
+  - Policies & Procedures: 11_policies_procedures/index.md
+  - Assessment & Readiness: 12_assessment_readiness/index.md
+  - Infrastructure Architecture & System Interconnection: 13_architecture/index.md
   - Deployment Guide:
-    - Overview: docs/14_deployment_guide/index.md
-    - Phase 0- Planning & Scope: docs/14_deployment_guide/01_planning.md
-    - Phase 1- Terraform Provisioning: docs/14_deployment_guide/02_terraform_provisioning.md
-    - Phase 2- OS Hardening with Ansible: docs/14_deployment_guide/03_ansible_hardening.md
-    - Phase 3- Podman Service Deployment: docs/14_deployment_guide/04_podman_services.md
-    - Phase 3a - Nextcloud-AIO Deployment: docs/14_deployment_guide/phase04-files.md
-    - Phase 4- Identity, Certs, and Access Control: docs/14_deployment_guide/05_identity_cert_mgmt.md
-    - Phase 5- Client Device Registration: docs/14_deployment_guide/06_client_registration.md
-    - Phase 6- Logging, SIEM, and Alerting: docs/14_deployment_guide/07_logging_monitoring.md
-    - Phase 7- Validation and Reporting: docs/14_deployment_guide/08_validation_reporting.md
-  - Security Operations (SecOps): docs/15_secops_sops/index.md
-  - Automation & CI/CD: docs/16_automation_cicd/index.md
-  - Compliance Artifacts: docs/17_compliance_artifacts/index.md
-  - SSP Templates: docs/18_ssp_templates/index.md
-  - Data Flow & Trust Boundaries: docs/19_data_flow_mapping/index.md
-  - Performance & Cost Planning: docs/20_scaling_cost/index.md
-  - Appendix A: docs/99_appendix_a_acronyms.md
-  - Appendix B: docs/99_appendix_b_resources.md
+    - Overview: 14_deployment_guide/index.md
+    - Phase 0- Planning & Scope: 14_deployment_guide/01_planning.md
+    - Phase 1- Terraform Provisioning: 14_deployment_guide/02_terraform_provisioning.md
+    - Phase 2- OS Hardening with Ansible: 14_deployment_guide/03_ansible_hardening.md
+    - Phase 3- Podman Service Deployment: 14_deployment_guide/04_podman_services.md
+    - Phase 3a - Nextcloud-AIO Deployment: 14_deployment_guide/phase04-files.md
+    - Phase 4- Identity, Certs, and Access Control: 14_deployment_guide/05_identity_cert_mgmt.md
+    - Phase 5- Client Device Registration: 14_deployment_guide/06_client_registration.md
+    - Phase 6- Logging, SIEM, and Alerting: 14_deployment_guide/07_logging_monitoring.md
+    - Phase 7- Validation and Reporting: 14_deployment_guide/08_validation_reporting.md
+  - Security Operations Procedures (SecOps): 15_secops_sops/index.md
+  - User Device Onboarding:  16_user_device_onboarding/index.md
+  - Patch & Vulnerability Management: 17_patch_vuln_management/index.md
+  - Incident Response: 18_incident_response/index.md
+  - Data Flow & Trust Boundaries: 19_data_flow_mapping/index.md
+  - Performance, Scaling & Cost Estimation: 20_scaling_cost/index.md
+  - Appendix A: 99_appendix_a_acronyms.md
+  - Appendix B: 99_appendix_b_resources.md
 
 markdown_extensions:
   - toc:

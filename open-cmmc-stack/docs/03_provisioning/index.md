@@ -6,17 +6,19 @@ This section explains how to **provision a secure virtual server** for the OpenC
 
 This environment will host your containerized, CMMC-aligned services and enforce key technical controls such as least privilege, rootless access, encryption, and system auditing from day one.
 
+> **ℹ️ NOTE:** In the OpenCMMC Stack automation workflow, the host operating system is **hardened immediately during provisioning** using the `bootstrap.sh` script. As soon as the virtual machine is created, it uses `cloud-init` to install Ansible and apply the `secure_ubuntu.yml` role from Section 4. This ensures CMMC-aligned controls are enforced at first boot.
+
 ---
 
 ## ☁️ Target Environments
 
 This guide is compatible with:
 
-- **Cloud providers**: DigitalOcean, AWS EC2, Hetzner Cloud, Linode
-- **On-premise**: VirtualBox, VMware, or Proxmox (with manual adaptation)
-- **Bare metal**: Supported via PXE or image-based deployment
+- Cloud providers: DigitalOcean, AWS EC2, Hetzner Cloud, Linode
+- On-premise: VirtualBox, VMware, or Proxmox (with manual adaptation)
+- Bare metal: Supported via PXE or image-based deployment
 
-We’ll demonstrate using **DigitalOcean** for simplicity and speed.
+We demonstrate using DigitalOcean for simplicity and speed.
 
 ---
 
@@ -28,81 +30,89 @@ Before proceeding, install the following on your local workstation:
 - [Ansible](https://docs.ansible.com/)
 - [Python 3 & pip](https://www.python.org/downloads/)
 - SSH keypair for your user (`ssh-keygen`)
+- DigitalOcean account and API token
+
+---
+
+## 📁 Directory Layout
+
+Your cloned repo should look like this:
+
+```
+open-cmmc-stack/
+├── terraform/
+│   ├── main.tf
+│   ├── variables.tf
+│   ├── terraform.tfvars.example
+│   └── bootstrap.sh
+├── ansible/
+│   ├── secure_ubuntu.yml
+│   └── roles/
+│       └── secure_ubuntu/
+│           └── tasks/main.yml
+```
 
 ---
 
 ## 🚀 Step-by-Step Provisioning with Terraform
 
-### 1. Configure Terraform Provider
-
-Create a `main.tf` file:
-
-```hcl
-provider "digitalocean" {
-  token = var.do_token
-}
-
-resource "digitalocean_droplet" "secure_host" {
-  name   = "cmmc-hardened"
-  region = "nyc3"
-  size   = "s-2vcpu-4gb"
-  image  = "ubuntu-22-04-x64"
-  ssh_keys = [var.ssh_fingerprint]
-
-  user_data = file("bootstrap.sh")
-}
-
-output "droplet_ip" {
-  value = digitalocean_droplet.secure_host.ipv4_address
-}
-```
-
-Create a `variables.tf`:
-
-```hcl
-variable "do_token" {}
-variable "ssh_fingerprint" {}
-```
-
----
-
-### 2. Create `bootstrap.sh` Cloud Init Script
+### 1. Copy and Customize Variable Values
 
 ```bash
-#!/bin/bash
-apt update && apt install -y git python3-pip
-pip3 install ansible
-git clone https://github.com/your-org/open-cmmc-stack.git
-cd open-cmmc-stack/ansible
-ansible-playbook -i localhost, secure_ubuntu.yml
+cp terraform/terraform.tfvars.example terraform/terraform.tfvars
 ```
 
-This script installs Ansible and immediately runs your secure hardening role.
+Edit `terraform.tfvars` to include your actual DigitalOcean token and SSH key fingerprint.
 
----
-
-### 3. Initialize and Apply Terraform
+### 2. Initialize Terraform
 
 ```bash
+cd terraform
 terraform init
+```
+
+### 3. Apply and Provision the Droplet
+
+```bash
 terraform apply
 ```
 
-Your secure host will be provisioned and bootstrapped.
+Terraform will create the VM, inject your SSH key, and use `bootstrap.sh` to start the Ansible hardening playbook.
+
+To retrieve the IP address of your new host:
+
+```bash
+terraform output -raw droplet_ip
+```
+
+You can then connect using:
+
+```bash
+ssh -i ~/.ssh/id_rsa cmmcadmin@$(terraform output -raw droplet_ip)
+```
 
 ---
 
-## 🔐 SSH-Only Access (No Password Login)
+## 🧑‍💻 Non-Root SSH Login
 
-Ensure your Terraform setup **does not enable password authentication**. You may also verify your Ansible hardening role disables root SSH login and enforces key-based access only.
+The Ansible hardening role will:
 
-```yaml
-- name: Disable root login
-  lineinfile:
-    path: /etc/ssh/sshd_config
-    regexp: '^PermitRootLogin'
-    line: 'PermitRootLogin no'
-```
+- Create a non-root user `cmmcadmin`
+- Add your public SSH key to `~/.ssh/authorized_keys`
+- Disable password login
+- Disable SSH access for `root`
+- Enable and configure UFW to allow only SSH
+
+This ensures a minimum-privilege access posture from the start.
+
+---
+
+## 📜 Terraform File Descriptions
+
+- `main.tf` – Defines the DigitalOcean droplet resource and provider
+- `variables.tf` – Declares expected inputs like `do_token` and `ssh_fingerprint`
+- `terraform.tfvars.example` – Provides an example configuration you should copy and edit
+- `bootstrap.sh` – Runs on the VM after creation to install dependencies and run the hardening playbook automatically
 
 ---
 
@@ -110,7 +120,7 @@ Ensure your Terraform setup **does not enable password authentication**. You may
 
 After provisioning, validate:
 
-- SSH access using your private key
+- SSH access using `cmmcadmin` and your private key
 - Root login is disabled
 - Firewall is active (`ufw status`)
 - Ansible has applied initial hardening
@@ -127,7 +137,7 @@ For air-gapped or restricted environments, you may:
 
 ```bash
 sudo apt update && sudo apt install -y git ansible
-git clone https://github.com/your-org/open-cmmc-stack.git
+git clone https://github.com/mtkell/open-cmmc-stack.git
 cd open-cmmc-stack/ansible
 ansible-playbook -i localhost, secure_ubuntu.yml
 ```
@@ -145,10 +155,24 @@ ansible-playbook -i localhost, secure_ubuntu.yml
 
 ---
 
+## 🖼️ Infrastructure Provisioning Diagram
+
+To visualize this process, refer to the following diagram:
+
+```markdown
+![Provisioning Infrastructure Overview](../img/svg/03_provisioning-detailed-diagram.svg)
+```
+
+The source Mermaid file is available at:
+
+```text
+docs/img/diagrams/03_provisioning-detailed-diagram.mmd
+```
+
+---
+
 ## ✅ Next Step
 
-Once your infrastructure is provisioned and secured, you’re ready to begin deploying core security and identity services using rootless containers.
-
-We’ll cover that in the next section: **Securing the Host OS**.
+Once your infrastructure is provisioned and secured, proceed to [Section 4: Securing the Host OS](../04_os_hardening/index.md) to continue the deployment of core CMMC capabilities.
 
 ---

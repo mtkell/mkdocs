@@ -8,38 +8,38 @@ This project provides a complete, secure, and modular self-hosted architecture t
 
 | Section | Title |
 |---------|-------|
-| 00 | [Preface](docs/00_preface/index.md) |
-| 01 | [Introduction to CMMC v2](docs/01_cmmc_intro/index.md) |
-| 02 | [Reference Architecture](docs/02_reference_architecture/index.md) |
-| 03 | [Provisioning Infrastructure](docs/03_provisioning/index.md) |
-| 04 | [Securing the Host OS](docs/04_os_hardening/index.md) |
-| 05 | [Identity & Access Management](docs/05_identity_access/index.md) |
-| 06 | [Secure File Sharing (Nextcloud)](docs/06_file_storage/index.md) |
-| 07 | [Secure Email (Mailcow)](docs/07_email/index.md) |
-| 08 | [Monitoring & Logging](docs/08_logging_monitoring/index.md) |
-| 09 | [Application Hosting (Podman)](docs/09_container_runtime/index.md) |
-| 10 | [Backup & Recovery](docs/10_backup_recovery/index.md) |
-| 11 | [Policies & Procedures](docs/11_policies_procedures/index.md) |
-| 12 | [Assessment & Readiness](docs/12_assessment_readiness/index.md) |
-| 13 | [Architecture Summary & Trust Boundaries](docs/13_architecture/index.md) |
-| 14 | [Deployment Guide](docs/14_deployment_guide/index.md) |
-|    | [Phase 0: Planning](docs/14_deployment_guide/01_planning.md) |
-|    | [Phase 1: Terraform Provisioning](docs/14_deployment_guide/02_terraform_provisioning.md) |
-|    | [Phase 2: Ansible Hardening](docs/14_deployment_guide/03_ansible_hardening.md) |
-|    | [Phase 3: Podman Services](docs/14_deployment_guide/04_podman_services.md) |
-|    | [Phase 3A: Nextcloud All-In-One](docs/14_deployment_guide/phase04-files.md) |
-|    | [Phase 4: Identity & Certificate Management](docs/14_deployment_guide/05_identity_cert_mgmt.md) |
-|    | [Phase 5: Client Registration](docs/14_deployment_guide/06_client_registration.md) |
-|    | [Phase 6: Logging & Monitoring](docs/14_deployment_guide/07_logging_monitoring.md) |
-|    | [Phase 7: Validation & Reporting](docs/14_deployment_guide/08_validation_reporting.md) |
-| 15 | [Security Operations Procedures (SecOps)](docs/15_secops_sops/index.md) |
-| 16 | [Automation & CI/CD](docs/16_automation_cicd/index.md) |
-| 17 | [Compliance Artifacts & Documentation](docs/17_compliance_artifacts/index.md) |
-| 18 | [SSP Templates](docs/18_ssp_templates/index.md) |
-| 19 | [Data Flow & Trust Boundaries](docs/19_data_flow_mapping/index.md) |
-| 20 | [Performance, Scaling & Cost Estimation](docs/20_scaling_cost/index.md) |
-| —  | [Appendix A: Acronyms](docs/99_appendix_a_acronyms.md) |
-| —  | [Appendix B: Resources](docs/99_appendix_b_resources.md) |
+| 00 | [Preface](00_preface/index.md) |
+| 01 | [Introduction to CMMC v2](01_cmmc_intro/index.md) |
+| 02 | [Reference Architecture](02_reference_architecture/index.md) |
+| 03 | [Provisioning Infrastructure](03_provisioning/index.md) |
+| 04 | [Securing the Host OS](04_os_hardening/index.md) |
+| 05 | [Identity & Access Management](05_identity_access/index.md) |
+| 06 | [Secure File Sharing (Nextcloud)](06_file_storage/index.md) |
+| 07 | [Secure Email (Mailcow)](07_email/index.md) |
+| 08 | [Monitoring & Logging](08_logging_monitoring/index.md) |
+| 09 | [Application Hosting (Podman)](09_container_runtime/index.md) |
+| 10 | [Backup & Recovery](10_backup_recovery/index.md) |
+| 11 | [Policies & Procedures](11_policies_procedures/index.md) |
+| 12 | [Assessment & Readiness](12_assessment_readiness/index.md) |
+| 13 | [Architecture Summary & Trust Boundaries](13_architecture/index.md) |
+| 14 | [Deployment Guide](14_deployment_guide/index.md) |
+|    | [Phase 0: Planning](14_deployment_guide/01_planning.md) |
+|    | [Phase 1: Terraform Provisioning](14_deployment_guide/02_terraform_provisioning.md) |
+|    | [Phase 2: Ansible Hardening](14_deployment_guide/03_ansible_hardening.md) |
+|    | [Phase 3: Podman Services](14_deployment_guide/04_podman_services.md) |
+|    | [Phase 3A: Nextcloud All-In-One](14_deployment_guide/phase04-files.md) |
+|    | [Phase 4: Identity & Certificate Management](14_deployment_guide/05_identity_cert_mgmt.md) |
+|    | [Phase 5: Client Registration](14_deployment_guide/06_client_registration.md) |
+|    | [Phase 6: Logging & Monitoring](14_deployment_guide/07_logging_monitoring.md) |
+|    | [Phase 7: Validation & Reporting](14_deployment_guide/08_validation_reporting.md) |
+| 15 | [Security Operations Procedures (SecOps)](15_secops_sops/index.md) |
+| 16 | [User Device Onboarding](16_user_device_onboarding/index.md) |
+| 17 | [Patch & Vulnerability Management](17_patch_vuln_management/index.md) |
+| 18 | [Incident Response](18_incident_response/index.md) |
+| 19 | [Data Flow & Trust Boundaries](19_data_flow_mapping/index.md) |
+| 20 | [Performance, Scaling & Cost Estimation](20_scaling_cost/index.md) |
+| —  | [Appendix A: Acronyms](99_appendix_a_acronyms.md) |
+| —  | [Appendix B: Resources](99_appendix_b_resources.md) |
 
 ## 🔧 Technologies Used
 

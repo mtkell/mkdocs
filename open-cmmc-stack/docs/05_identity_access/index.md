@@ -21,22 +21,30 @@ This aligns with CMMC Level 2 controls for **Access Control (AC)** and **Identif
 - LDAP, AD, and Entra ID federation
 - Fine-grained session policies
 
-It integrates with applications like Nextcloud AIO, Mailcow, Gitea, and more.
+It integrates with applications like Nextcloud AIO, Mailcow, and Gitea.
 
 ---
 
-## 🧪 Keycloak Deployment (Secure Container)
+## 🔧 Keycloak Deployment via Ansible and Podman
 
-```bash
-docker run -d --name keycloak \
-  -p 8080:8080 \
-  -e KEYCLOAK_ADMIN=admin \
-  -e KEYCLOAK_ADMIN_PASSWORD=supersecurepw \
-  quay.io/keycloak/keycloak:24.0.2 \
-  start --optimized
+Keycloak should run as a systemd-managed, rootless Podman container. Example role:
+
+```yaml
+- name: Run Keycloak container
+  containers.podman.podman_container:
+    name: keycloak
+    image: quay.io/keycloak/keycloak:24.0.2
+    state: started
+    detach: true
+    env:
+      KEYCLOAK_ADMIN: "admin"
+      KEYCLOAK_ADMIN_PASSWORD: "supersecurepw"
+    ports:
+      - "8080:8080"
+    command: "start --optimized"
 ```
 
-> ✅ In production, place behind a reverse proxy and run as a systemd-managed container with secure TLS.
+Ensure reverse proxy TLS termination via NGINX Proxy Manager or Caddy.
 
 ---
 
@@ -46,7 +54,7 @@ docker run -d --name keycloak \
 2. Create a realm (e.g., `OpenCMMC`)
 3. Create groups: `Access_CUI`, `Access_FCI`, `Access_Proprietary`
 4. Enable MFA under **Authentication > Flows**
-5. Register clients (Nextcloud AIO, Mailcow, Gitea, etc.)
+5. Register clients (Nextcloud AIO, Mailcow, Gitea)
 6. Use:
    - **OIDC** for Mailcow and Gitea
    - **SAML** for Nextcloud AIO
@@ -65,6 +73,7 @@ docker run -d --name keycloak \
      - `email` → `user.mail`
      - `displayname` → `user.displayname`
      - `groups` → `user.groups`
+
 2. In Nextcloud AIO:
    - Enable **SSO & SAML authentication app**
    - Set UID attribute and display name/email fields
@@ -130,6 +139,12 @@ Example ACL:
   ]
 }
 ```
+
+---
+
+## 🖼️ Diagram: Identity & Access Flow
+
+![Keycloak and Tailscale IAM Architecture](../img/svg/section05-identity-architecture.svg)
 
 ---
 

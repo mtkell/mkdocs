@@ -52,7 +52,7 @@ This section defines how **Controlled Unclassified Information (CUI)** and **Fed
 
 ## 🖼️ Architecture Diagram
 
-![Zero Trust Data Flow and Trust Boundaries – OpenCMMC Stack](../../img/svg/network-dataflow-boundaries.svg "Zero Trust Data Flow and Trust Boundaries – OpenCMMC Stack")
+![Zero Trust Data Flow and Trust Boundaries – OpenCMMC Stack](../img/svg/network-dataflow-boundaries.svg "Zero Trust Data Flow and Trust Boundaries – OpenCMMC Stack")
 
 > This diagram visualizes how Controlled Unclassified Information (CUI) and Federal Contract Information (FCI) flow securely through trust zones in the OpenCMMC Stack. Each containerized service is scoped, monitored, and hardened to enforce CMMC Level 2 compliance.
 

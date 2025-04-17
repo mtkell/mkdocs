@@ -12,11 +12,13 @@
         <meta name="author" content="Kell Engineering">
       
       
-        <link rel="canonical" href="https://docs.kellengineering.com/99_appendix_b_references/">
+        <link rel="canonical" href="https://docs.kellengineering.com/17_patch_vuln_management/">
       
       
-        <link rel="prev" href="../99_appendix_a_acronyms/">
+        <link rel="prev" href="../16_user_device_onboarding/">
       
+      
+        <link rel="next" href="../18_incident_response/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -24,7 +26,7 @@
     
     
       
-        <title>Appendix B - OpenCMMC Stack</title>
+        <title>Patch & Vulnerability Management - OpenCMMC Stack</title>
       
     
     
@@ -74,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#appendix-b-reference-resources" class="md-skip">
+        <a href="#section-17-patch-vulnerability-management" class="md-skip">
           Skip to content
         </a>
       
@@ -110,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Appendix B
+              Patch & Vulnerability Management
             
           </span>
         </div>
@@ -164,7 +166,7 @@
     
     
       <div class="md-header__source">
-        <a href="https://github.com/mtkell/open-cmmc-stack" title="Go to repository" class="md-source" data-md-component="source">
+        <a href="https://github.com/mtkell/mkdocs/tree/main/open-cmmc-stack" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
@@ -212,7 +214,7 @@
   </label>
   
     <div class="md-nav__source">
-      <a href="https://github.com/mtkell/open-cmmc-stack" title="Go to repository" class="md-source" data-md-component="source">
+      <a href="https://github.com/mtkell/mkdocs/tree/main/open-cmmc-stack" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
@@ -842,12 +844,34 @@
   
   
     <li class="md-nav__item">
-      <a href="../99_appendix_a_acronyms/" class="md-nav__link">
+      <a href="../15_secops_sops/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Appendix A
+    Security Operations Procedures (SecOps)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../16_user_device_onboarding/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    User Device Onboarding
     
   </span>
   
@@ -878,7 +902,7 @@
   
   
   <span class="md-ellipsis">
-    Appendix B
+    Patch & Vulnerability Management
     
   </span>
   
@@ -891,7 +915,7 @@
   
   
   <span class="md-ellipsis">
-    Appendix B
+    Patch & Vulnerability Management
     
   </span>
   
@@ -914,27 +938,96 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#cmmc-and-nist" class="md-nav__link">
+  <a href="#objective" class="md-nav__link">
     <span class="md-ellipsis">
-      📝 CMMC and NIST
+      🎯 Objective
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#tools-used-in-this-guide" class="md-nav__link">
+  <a href="#continuous-patching-strategy" class="md-nav__link">
     <span class="md-ellipsis">
-      🛠️ Tools Used in This Guide
+      🔄 Continuous Patching Strategy
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔄 Continuous Patching Strategy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-host-level-patching" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Host-Level Patching
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-container-image-refresh" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Container Image Refresh
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vulnerability-scanning-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔍 Vulnerability Scanning Tools
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#policy-template-resources" class="md-nav__link">
+  <a href="#patch-lifecycle-automation-ansible" class="md-nav__link">
     <span class="md-ellipsis">
-      📑 Policy &amp; Template Resources
+      🔄 Patch Lifecycle Automation (Ansible)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verification-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧪 Verification Checklist
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recommended-patch-schedule" class="md-nav__link">
+    <span class="md-ellipsis">
+      📅 Recommended Patch Schedule
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cmmc-practices-addressed" class="md-nav__link">
+    <span class="md-ellipsis">
+      📜 CMMC Practices Addressed
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-step" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Next Step
     </span>
   </a>
   
@@ -944,6 +1037,116 @@
   
 </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../18_incident_response/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Incident Response
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../19_data_flow_mapping/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data Flow & Trust Boundaries
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../20_scaling_cost/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Performance, Scaling & Cost Estimation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../99_appendix_a_acronyms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix A
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../99_appendix_b_resources/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix B
+    
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -967,32 +1170,206 @@
   
 
 
-<h1 id="appendix-b-reference-resources">📚 Appendix B: Reference Resources<a class="headerlink" href="#appendix-b-reference-resources" title="Permanent link">&para;</a></h1>
-<h2 id="cmmc-and-nist">📝 CMMC and NIST<a class="headerlink" href="#cmmc-and-nist" title="Permanent link">&para;</a></h2>
+<h1 id="section-17-patch-vulnerability-management">🛠️ Section 17: Patch &amp; Vulnerability Management<a class="headerlink" href="#section-17-patch-vulnerability-management" title="Permanent link">&para;</a></h1>
+<h2 id="objective">🎯 Objective<a class="headerlink" href="#objective" title="Permanent link">&para;</a></h2>
+<p>This section outlines the procedures, tooling, and schedules for maintaining <strong>patched and secure software</strong>, container images, and infrastructure configurations in the OpenCMMC Stack. It supports compliance with CMMC Level 2 practices in the <strong>System &amp; Information Integrity (SI)</strong>, <strong>Configuration Management (CM)</strong>, and <strong>Risk Assessment (RA)</strong> domains.</p>
+<hr />
+<h2 id="continuous-patching-strategy">🔄 Continuous Patching Strategy<a class="headerlink" href="#continuous-patching-strategy" title="Permanent link">&para;</a></h2>
+<h3 id="1-host-level-patching">1. Host-Level Patching<a class="headerlink" href="#1-host-level-patching" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Method</th>
+<th>Schedule</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu OS</td>
+<td><code>apt update &amp;&amp; apt upgrade</code> via Ansible</td>
+<td>Weekly (auto), Monthly (manual)</td>
+</tr>
+<tr>
+<td>Kernel/critical CVEs</td>
+<td><code>unattended-upgrades</code> + CVE tracking</td>
+<td>Daily</td>
+</tr>
+<tr>
+<td>System hardening validation</td>
+<td>Ansible diff or compliance check</td>
+<td>Monthly</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-container-image-refresh">2. Container Image Refresh<a class="headerlink" href="#2-container-image-refresh" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Source</th>
+<th>Validation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Podman images</td>
+<td><code>podman pull &lt;image&gt;</code></td>
+<td>Digest verification</td>
+</tr>
+<tr>
+<td>Image integrity</td>
+<td><code>skopeo inspect</code> + SBOM check</td>
+<td><code>grype</code>, <code>trivy</code></td>
+</tr>
+<tr>
+<td>Drift detection</td>
+<td><code>ansible-playbook</code> dry-run</td>
+<td>Weekly</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="vulnerability-scanning-tools">🔍 Vulnerability Scanning Tools<a class="headerlink" href="#vulnerability-scanning-tools" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Target</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>grype</code></td>
+<td>Local containers, images</td>
+<td>SBOM and CVE scans</td>
+</tr>
+<tr>
+<td><code>trivy</code></td>
+<td>Container registry, file systems</td>
+<td>Vulnerability + secret scan</td>
+</tr>
+<tr>
+<td><code>clamav</code></td>
+<td>File uploads in Nextcloud</td>
+<td>Malware detection</td>
+</tr>
+<tr>
+<td><code>ansible-lint</code></td>
+<td>IaC playbook scan</td>
+<td>Misconfig checks</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="patch-lifecycle-automation-ansible">🔄 Patch Lifecycle Automation (Ansible)<a class="headerlink" href="#patch-lifecycle-automation-ansible" title="Permanent link">&para;</a></h2>
 <ul>
-<li><a href="https://www.acq.osd.mil/cmmc/">CMMC Model v2.0 Documentation</a></li>
-<li><a href="https://csrc.nist.gov/publications/detail/sp/800-171/rev-2/final">NIST SP 800-171 Rev. 2</a></li>
-<li><a href="https://csrc.nist.gov/publications/detail/sp/800-172/final">NIST SP 800-172 (Advanced Controls)</a></li>
+<li>Role: <code>roles/patching</code></li>
+<li>Features:</li>
+<li>OS package updates</li>
+<li>Container image digests refresh</li>
+<li>Service restarts for updated dependencies</li>
+<li>Backup validation prior to changes</li>
+<li>Summary report email</li>
 </ul>
-<h2 id="tools-used-in-this-guide">🛠️ Tools Used in This Guide<a class="headerlink" href="#tools-used-in-this-guide" title="Permanent link">&para;</a></h2>
-<ul>
-<li><a href="https://podman.io/">Podman</a></li>
-<li><a href="https://www.keycloak.org/">Keycloak</a></li>
-<li><a href="https://nextcloud.com/">Nextcloud</a></li>
-<li><a href="https://mailcow.email/">Mailcow</a></li>
-<li><a href="https://tailscale.com/">Tailscale</a></li>
-<li><a href="https://wazuh.com/">Wazuh</a></li>
-<li><a href="https://linux.die.net/man/8/auditd">Auditd</a></li>
-<li><a href="https://restic.net/">Restic</a></li>
-<li><a href="https://developer.hashicorp.com/terraform/">Terraform</a></li>
-<li><a href="https://www.ansible.com/">Ansible</a></li>
-</ul>
-<h2 id="policy-template-resources">📑 Policy &amp; Template Resources<a class="headerlink" href="#policy-template-resources" title="Permanent link">&para;</a></h2>
-<ul>
-<li><a href="https://www.projectspectrum.io/#/document-library">ProjectSpectrum Document Library</a></li>
-<li><a href="https://github.com/cisagov/template-policy-docs">Open Source Policy Templates (GitHub)</a></li>
-<li><a href="https://cyberab.org/resources/">CMMC-AB Resources</a></li>
-</ul>
+<hr />
+<h2 id="verification-checklist">🧪 Verification Checklist<a class="headerlink" href="#verification-checklist" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Check</th>
+<th>Method</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CVE reports resolved</td>
+<td><code>grype</code>, <code>trivy</code></td>
+<td>JSON scan reports</td>
+</tr>
+<tr>
+<td>Kernel patches current</td>
+<td><code>uname -r</code>, <code>apt</code></td>
+<td>CLI output</td>
+</tr>
+<tr>
+<td>Image digests match SBOM</td>
+<td><code>skopeo inspect</code></td>
+<td>Diff report</td>
+</tr>
+<tr>
+<td>No critical unpatched packages</td>
+<td><code>apt list --upgradable</code></td>
+<td>CLI export</td>
+</tr>
+<tr>
+<td>Patch playbook log exists</td>
+<td><code>ansible-playbook</code> log</td>
+<td>Log file</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="recommended-patch-schedule">📅 Recommended Patch Schedule<a class="headerlink" href="#recommended-patch-schedule" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Frequency</th>
+<th>Tasks</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Daily</td>
+<td>Security CVE polling, unattended upgrades</td>
+</tr>
+<tr>
+<td>Weekly</td>
+<td>OS &amp; container image patch via Ansible</td>
+</tr>
+<tr>
+<td>Monthly</td>
+<td>Restore test, SBOM scan, role diff</td>
+</tr>
+<tr>
+<td>Quarterly</td>
+<td>Full stack rebuild in staging</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="cmmc-practices-addressed">📜 CMMC Practices Addressed<a class="headerlink" href="#cmmc-practices-addressed" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Practice</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SI.1.210</td>
+<td>Identify and manage system flaws</td>
+</tr>
+<tr>
+<td>SI.2.214</td>
+<td>Update and patch system vulnerabilities</td>
+</tr>
+<tr>
+<td>CM.2.067</td>
+<td>Monitor system configuration for change</td>
+</tr>
+<tr>
+<td>RA.2.144</td>
+<td>Scan for vulnerabilities</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="next-step">✅ Next Step<a class="headerlink" href="#next-step" title="Permanent link">&para;</a></h2>
+<p>In Section 18, we’ll define the incident response and forensics capabilities to prepare for breach scenarios and ensure auditability.</p>
 
 
 

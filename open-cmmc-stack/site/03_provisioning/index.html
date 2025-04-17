@@ -166,7 +166,7 @@
     
     
       <div class="md-header__source">
-        <a href="https://github.com/mtkell/open-cmmc-stack" title="Go to repository" class="md-source" data-md-component="source">
+        <a href="https://github.com/mtkell/mkdocs/tree/main/open-cmmc-stack" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
@@ -214,7 +214,7 @@
   </label>
   
     <div class="md-nav__source">
-      <a href="https://github.com/mtkell/open-cmmc-stack" title="Go to repository" class="md-source" data-md-component="source">
+      <a href="https://github.com/mtkell/mkdocs/tree/main/open-cmmc-stack" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
@@ -399,6 +399,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#directory-layout" class="md-nav__link">
+    <span class="md-ellipsis">
+      📁 Directory Layout
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#step-by-step-provisioning-with-terraform" class="md-nav__link">
     <span class="md-ellipsis">
       🚀 Step-by-Step Provisioning with Terraform
@@ -409,27 +418,27 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-configure-terraform-provider" class="md-nav__link">
+  <a href="#1-copy-and-customize-variable-values" class="md-nav__link">
     <span class="md-ellipsis">
-      1. Configure Terraform Provider
+      1. Copy and Customize Variable Values
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-create-bootstrapsh-cloud-init-script" class="md-nav__link">
+  <a href="#2-initialize-terraform" class="md-nav__link">
     <span class="md-ellipsis">
-      2. Create bootstrap.sh Cloud Init Script
+      2. Initialize Terraform
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-initialize-and-apply-terraform" class="md-nav__link">
+  <a href="#3-apply-and-provision-the-droplet" class="md-nav__link">
     <span class="md-ellipsis">
-      3. Initialize and Apply Terraform
+      3. Apply and Provision the Droplet
     </span>
   </a>
   
@@ -441,9 +450,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#ssh-only-access-no-password-login" class="md-nav__link">
+  <a href="#non-root-ssh-login" class="md-nav__link">
     <span class="md-ellipsis">
-      🔐 SSH-Only Access (No Password Login)
+      🧑‍💻 Non-Root SSH Login
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#terraform-file-descriptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      📜 Terraform File Descriptions
     </span>
   </a>
   
@@ -471,6 +489,15 @@
   <a href="#relevant-cmmc-practices-addressed" class="md-nav__link">
     <span class="md-ellipsis">
       📜 Relevant CMMC Practices Addressed
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#infrastructure-provisioning-diagram" class="md-nav__link">
+    <span class="md-ellipsis">
+      🖼️ Infrastructure Provisioning Diagram
     </span>
   </a>
   
@@ -1000,6 +1027,138 @@
   
   
     <li class="md-nav__item">
+      <a href="../15_secops_sops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Security Operations Procedures (SecOps)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../16_user_device_onboarding/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    User Device Onboarding
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../17_patch_vuln_management/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Patch & Vulnerability Management
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../18_incident_response/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Incident Response
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../19_data_flow_mapping/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data Flow & Trust Boundaries
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../20_scaling_cost/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Performance, Scaling & Cost Estimation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../99_appendix_a_acronyms/" class="md-nav__link">
         
   
@@ -1022,7 +1181,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../99_appendix_b_references/" class="md-nav__link">
+      <a href="../99_appendix_b_resources/" class="md-nav__link">
         
   
   
@@ -1060,15 +1219,18 @@
 <h2 id="objective">🧭 Objective<a class="headerlink" href="#objective" title="Permanent link">&para;</a></h2>
 <p>This section explains how to <strong>provision a secure virtual server</strong> for the OpenCMMC Stack using <strong>Infrastructure as Code (IaC)</strong>. We use <strong>Terraform</strong> for automated provisioning and <strong>Ansible</strong> for post-deployment configuration.</p>
 <p>This environment will host your containerized, CMMC-aligned services and enforce key technical controls such as least privilege, rootless access, encryption, and system auditing from day one.</p>
+<blockquote>
+<p><strong>ℹ️ NOTE:</strong> In the OpenCMMC Stack automation workflow, the host operating system is <strong>hardened immediately during provisioning</strong> using the <code>bootstrap.sh</code> script. As soon as the virtual machine is created, it uses <code>cloud-init</code> to install Ansible and apply the <code>secure_ubuntu.yml</code> role from Section 4. This ensures CMMC-aligned controls are enforced at first boot.</p>
+</blockquote>
 <hr />
 <h2 id="target-environments">☁️ Target Environments<a class="headerlink" href="#target-environments" title="Permanent link">&para;</a></h2>
 <p>This guide is compatible with:</p>
 <ul>
-<li><strong>Cloud providers</strong>: DigitalOcean, AWS EC2, Hetzner Cloud, Linode</li>
-<li><strong>On-premise</strong>: VirtualBox, VMware, or Proxmox (with manual adaptation)</li>
-<li><strong>Bare metal</strong>: Supported via PXE or image-based deployment</li>
+<li>Cloud providers: DigitalOcean, AWS EC2, Hetzner Cloud, Linode</li>
+<li>On-premise: VirtualBox, VMware, or Proxmox (with manual adaptation)</li>
+<li>Bare metal: Supported via PXE or image-based deployment</li>
 </ul>
-<p>We’ll demonstrate using <strong>DigitalOcean</strong> for simplicity and speed.</p>
+<p>We demonstrate using DigitalOcean for simplicity and speed.</p>
 <hr />
 <h2 id="required-tools">🧰 Required Tools<a class="headerlink" href="#required-tools" title="Permanent link">&para;</a></h2>
 <p>Before proceeding, install the following on your local workstation:</p>
@@ -1077,68 +1239,73 @@
 <li><a href="https://docs.ansible.com/">Ansible</a></li>
 <li><a href="https://www.python.org/downloads/">Python 3 &amp; pip</a></li>
 <li>SSH keypair for your user (<code>ssh-keygen</code>)</li>
+<li>DigitalOcean account and API token</li>
 </ul>
 <hr />
+<h2 id="directory-layout">📁 Directory Layout<a class="headerlink" href="#directory-layout" title="Permanent link">&para;</a></h2>
+<p>Your cloned repo should look like this:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">open</span><span class="o">-</span><span class="n">cmmc</span><span class="o">-</span><span class="n">stack</span><span class="o">/</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">terraform</span><span class="o">/</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="n">main</span><span class="o">.</span><span class="n">tf</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="n">variables</span><span class="o">.</span><span class="n">tf</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="n">terraform</span><span class="o">.</span><span class="n">tfvars</span><span class="o">.</span><span class="n">example</span>
+<span class="err">│</span><span class="w">   </span><span class="err">└──</span><span class="w"> </span><span class="n">bootstrap</span><span class="o">.</span><span class="n">sh</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">ansible</span><span class="o">/</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="n">secure_ubuntu</span><span class="o">.</span><span class="n">yml</span>
+<span class="err">│</span><span class="w">   </span><span class="err">└──</span><span class="w"> </span><span class="n">roles</span><span class="o">/</span>
+<span class="err">│</span><span class="w">       </span><span class="err">└──</span><span class="w"> </span><span class="n">secure_ubuntu</span><span class="o">/</span>
+<span class="err">│</span><span class="w">           </span><span class="err">└──</span><span class="w"> </span><span class="n">tasks</span><span class="o">/</span><span class="n">main</span><span class="o">.</span><span class="n">yml</span>
+</code></pre></div>
+
+<hr />
 <h2 id="step-by-step-provisioning-with-terraform">🚀 Step-by-Step Provisioning with Terraform<a class="headerlink" href="#step-by-step-provisioning-with-terraform" title="Permanent link">&para;</a></h2>
-<h3 id="1-configure-terraform-provider">1. Configure Terraform Provider<a class="headerlink" href="#1-configure-terraform-provider" title="Permanent link">&para;</a></h3>
-<p>Create a <code>main.tf</code> file:</p>
-<div class="codehilite"><pre><span></span><code><span class="kr">provider</span><span class="w"> </span><span class="nv">&quot;digitalocean&quot;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="na">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">var.do_token</span>
-<span class="p">}</span>
-
-<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;digitalocean_droplet&quot;</span><span class="w"> </span><span class="nv">&quot;secure_host&quot;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="na">name</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;cmmc-hardened&quot;</span>
-<span class="w">  </span><span class="na">region</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;nyc3&quot;</span>
-<span class="w">  </span><span class="na">size</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;s-2vcpu-4gb&quot;</span>
-<span class="w">  </span><span class="na">image</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ubuntu-22-04-x64&quot;</span>
-<span class="w">  </span><span class="na">ssh_keys</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="nv">var.ssh_fingerprint</span><span class="p">]</span>
-
-<span class="w">  </span><span class="na">user_data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">file</span><span class="p">(</span><span class="s2">&quot;bootstrap.sh&quot;</span><span class="p">)</span>
-<span class="p">}</span>
-
-<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;droplet_ip&quot;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">digitalocean_droplet.secure_host.ipv4_address</span>
-<span class="p">}</span>
+<h3 id="1-copy-and-customize-variable-values">1. Copy and Customize Variable Values<a class="headerlink" href="#1-copy-and-customize-variable-values" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code>cp<span class="w"> </span>terraform/terraform.tfvars.example<span class="w"> </span>terraform/terraform.tfvars
 </code></pre></div>
 
-<p>Create a <code>variables.tf</code>:</p>
-<div class="codehilite"><pre><span></span><code><span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;do_token&quot;</span><span class="w"> </span><span class="p">{}</span>
-<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;ssh_fingerprint&quot;</span><span class="w"> </span><span class="p">{}</span>
+<p>Edit <code>terraform.tfvars</code> to include your actual DigitalOcean token and SSH key fingerprint.</p>
+<h3 id="2-initialize-terraform">2. Initialize Terraform<a class="headerlink" href="#2-initialize-terraform" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>terraform
+terraform<span class="w"> </span>init
+</code></pre></div>
+
+<h3 id="3-apply-and-provision-the-droplet">3. Apply and Provision the Droplet<a class="headerlink" href="#3-apply-and-provision-the-droplet" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code>terraform<span class="w"> </span>apply
+</code></pre></div>
+
+<p>Terraform will create the VM, inject your SSH key, and use <code>bootstrap.sh</code> to start the Ansible hardening playbook.</p>
+<p>To retrieve the IP address of your new host:</p>
+<div class="codehilite"><pre><span></span><code>terraform<span class="w"> </span>output<span class="w"> </span>-raw<span class="w"> </span>droplet_ip
+</code></pre></div>
+
+<p>You can then connect using:</p>
+<div class="codehilite"><pre><span></span><code>ssh<span class="w"> </span>-i<span class="w"> </span>~/.ssh/id_rsa<span class="w"> </span>cmmcadmin@<span class="k">$(</span>terraform<span class="w"> </span>output<span class="w"> </span>-raw<span class="w"> </span>droplet_ip<span class="k">)</span>
 </code></pre></div>
 
 <hr />
-<h3 id="2-create-bootstrapsh-cloud-init-script">2. Create <code>bootstrap.sh</code> Cloud Init Script<a class="headerlink" href="#2-create-bootstrapsh-cloud-init-script" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="ch">#!/bin/bash</span>
-apt<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>git<span class="w"> </span>python3-pip
-pip3<span class="w"> </span>install<span class="w"> </span>ansible
-git<span class="w"> </span>clone<span class="w"> </span>https://github.com/your-org/open-cmmc-stack.git
-<span class="nb">cd</span><span class="w"> </span>open-cmmc-stack/ansible
-ansible-playbook<span class="w"> </span>-i<span class="w"> </span>localhost,<span class="w"> </span>secure_ubuntu.yml
-</code></pre></div>
-
-<p>This script installs Ansible and immediately runs your secure hardening role.</p>
+<h2 id="non-root-ssh-login">🧑‍💻 Non-Root SSH Login<a class="headerlink" href="#non-root-ssh-login" title="Permanent link">&para;</a></h2>
+<p>The Ansible hardening role will:</p>
+<ul>
+<li>Create a non-root user <code>cmmcadmin</code></li>
+<li>Add your public SSH key to <code>~/.ssh/authorized_keys</code></li>
+<li>Disable password login</li>
+<li>Disable SSH access for <code>root</code></li>
+<li>Enable and configure UFW to allow only SSH</li>
+</ul>
+<p>This ensures a minimum-privilege access posture from the start.</p>
 <hr />
-<h3 id="3-initialize-and-apply-terraform">3. Initialize and Apply Terraform<a class="headerlink" href="#3-initialize-and-apply-terraform" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code>terraform<span class="w"> </span>init
-terraform<span class="w"> </span>apply
-</code></pre></div>
-
-<p>Your secure host will be provisioned and bootstrapped.</p>
-<hr />
-<h2 id="ssh-only-access-no-password-login">🔐 SSH-Only Access (No Password Login)<a class="headerlink" href="#ssh-only-access-no-password-login" title="Permanent link">&para;</a></h2>
-<p>Ensure your Terraform setup <strong>does not enable password authentication</strong>. You may also verify your Ansible hardening role disables root SSH login and enforces key-based access only.</p>
-<div class="codehilite"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Disable root login</span>
-<span class="w">  </span><span class="nt">lineinfile</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/ssh/sshd_config</span>
-<span class="w">    </span><span class="nt">regexp</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;^PermitRootLogin&#39;</span>
-<span class="w">    </span><span class="nt">line</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;PermitRootLogin</span><span class="nv"> </span><span class="s">no&#39;</span>
-</code></pre></div>
-
+<h2 id="terraform-file-descriptions">📜 Terraform File Descriptions<a class="headerlink" href="#terraform-file-descriptions" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>main.tf</code> – Defines the DigitalOcean droplet resource and provider</li>
+<li><code>variables.tf</code> – Declares expected inputs like <code>do_token</code> and <code>ssh_fingerprint</code></li>
+<li><code>terraform.tfvars.example</code> – Provides an example configuration you should copy and edit</li>
+<li><code>bootstrap.sh</code> – Runs on the VM after creation to install dependencies and run the hardening playbook automatically</li>
+</ul>
 <hr />
 <h2 id="post-provision-checklist">📋 Post-Provision Checklist<a class="headerlink" href="#post-provision-checklist" title="Permanent link">&para;</a></h2>
 <p>After provisioning, validate:</p>
 <ul>
-<li>SSH access using your private key</li>
+<li>SSH access using <code>cmmcadmin</code> and your private key</li>
 <li>Root login is disabled</li>
 <li>Firewall is active (<code>ufw status</code>)</li>
 <li>Ansible has applied initial hardening</li>
@@ -1152,7 +1319,7 @@ terraform<span class="w"> </span>apply
 <li>Log in and run:</li>
 </ol>
 <div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>git<span class="w"> </span>ansible
-git<span class="w"> </span>clone<span class="w"> </span>https://github.com/your-org/open-cmmc-stack.git
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/mtkell/open-cmmc-stack.git
 <span class="nb">cd</span><span class="w"> </span>open-cmmc-stack/ansible
 ansible-playbook<span class="w"> </span>-i<span class="w"> </span>localhost,<span class="w"> </span>secure_ubuntu.yml
 </code></pre></div>
@@ -1186,9 +1353,18 @@ ansible-playbook<span class="w"> </span>-i<span class="w"> </span>localhost,<spa
 </tbody>
 </table>
 <hr />
+<h2 id="infrastructure-provisioning-diagram">🖼️ Infrastructure Provisioning Diagram<a class="headerlink" href="#infrastructure-provisioning-diagram" title="Permanent link">&para;</a></h2>
+<p>To visualize this process, refer to the following diagram:</p>
+<div class="codehilite"><pre><span></span><code>![<span class="nt">Provisioning Infrastructure Overview</span>](<span class="na">../img/svg/03_provisioning-detailed-diagram.svg</span>)
+</code></pre></div>
+
+<p>The source Mermaid file is available at:</p>
+<div class="codehilite"><pre><span></span><code>docs/img/diagrams/03_provisioning-detailed-diagram.mmd
+</code></pre></div>
+
+<hr />
 <h2 id="next-step">✅ Next Step<a class="headerlink" href="#next-step" title="Permanent link">&para;</a></h2>
-<p>Once your infrastructure is provisioned and secured, you’re ready to begin deploying core security and identity services using rootless containers.</p>
-<p>We’ll cover that in the next section: <strong>Securing the Host OS</strong>.</p>
+<p>Once your infrastructure is provisioned and secured, proceed to <a href="../04_os_hardening/">Section 4: Securing the Host OS</a> to continue the deployment of core CMMC capabilities.</p>
 <hr />
 
 

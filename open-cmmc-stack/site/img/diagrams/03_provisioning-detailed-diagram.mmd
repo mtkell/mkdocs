@@ -1,0 +1,9 @@
+flowchart TD
+  user[Local Workstation] --> terraform[Terraform CLI]
+  terraform -->|Provision VM| do[DigitalOcean Droplet]
+  do -->|Runs| cloudinit[bootstrap.sh]
+  cloudinit -->|Clones| repo[GitHub: open-cmmc-stack]
+  repo -->|Executes| ansible[Ansible: secure_ubuntu.yml]
+  ansible -->|Creates| user["cmmcadmin (SSH only)"]
+  ansible --> ufw[Enables UFW + SSH rules]
+  ansible --> disablessh[Disables Root SSH + Passwords]

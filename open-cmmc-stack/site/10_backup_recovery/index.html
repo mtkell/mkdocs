@@ -166,7 +166,7 @@
     
     
       <div class="md-header__source">
-        <a href="https://github.com/mtkell/open-cmmc-stack" title="Go to repository" class="md-source" data-md-component="source">
+        <a href="https://github.com/mtkell/mkdocs/tree/main/open-cmmc-stack" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
@@ -214,7 +214,7 @@
   </label>
   
     <div class="md-nav__source">
-      <a href="https://github.com/mtkell/open-cmmc-stack" title="Go to repository" class="md-source" data-md-component="source">
+      <a href="https://github.com/mtkell/mkdocs/tree/main/open-cmmc-stack" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
@@ -553,9 +553,33 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#setting-up-restic" class="md-nav__link">
+  <a href="#automated-backup-deployment-with-ansible" class="md-nav__link">
     <span class="md-ellipsis">
-      🚀 Setting Up Restic
+      ⚙️ Automated Backup Deployment with Ansible
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="⚙️ Automated Backup Deployment with Ansible">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#files-deployed" class="md-nav__link">
+    <span class="md-ellipsis">
+      Files Deployed:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-the-backup-does" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧪 What the Backup Does
     </span>
   </a>
   
@@ -571,9 +595,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#restore-testing" class="md-nav__link">
+  <a href="#restore-and-audit-strategy" class="md-nav__link">
     <span class="md-ellipsis">
-      🔁 Restore Testing
+      🧾 Restore and Audit Strategy
     </span>
   </a>
   
@@ -583,15 +607,6 @@
   <a href="#cmmc-practices-addressed" class="md-nav__link">
     <span class="md-ellipsis">
       🛡️ CMMC Practices Addressed
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#audit-artifacts-to-generate" class="md-nav__link">
-    <span class="md-ellipsis">
-      🧾 Audit Artifacts to Generate
     </span>
   </a>
   
@@ -967,6 +982,138 @@
   
   
     <li class="md-nav__item">
+      <a href="../15_secops_sops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Security Operations Procedures (SecOps)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../16_user_device_onboarding/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    User Device Onboarding
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../17_patch_vuln_management/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Patch & Vulnerability Management
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../18_incident_response/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Incident Response
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../19_data_flow_mapping/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data Flow & Trust Boundaries
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../20_scaling_cost/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Performance, Scaling & Cost Estimation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../99_appendix_a_acronyms/" class="md-nav__link">
         
   
@@ -989,7 +1136,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../99_appendix_b_references/" class="md-nav__link">
+      <a href="../99_appendix_b_resources/" class="md-nav__link">
         
   
   
@@ -1051,53 +1198,74 @@
 <td><strong>Rclone</strong></td>
 <td>Sync to cloud or remote endpoints</td>
 </tr>
+</tbody>
+</table>
+<p>For consistency with automated deployments, this stack uses <strong>Restic</strong> by default.</p>
+<hr />
+<h2 id="automated-backup-deployment-with-ansible">⚙️ Automated Backup Deployment with Ansible<a class="headerlink" href="#automated-backup-deployment-with-ansible" title="Permanent link">&para;</a></h2>
+<p>The OpenCMMC Stack includes an Ansible role <code>roles/backup</code> that:</p>
+<ul>
+<li>Installs Restic via <code>apt</code></li>
+<li>Deploys a backup script from template</li>
+<li>Configures backup environment variables</li>
+<li>Sets up a systemd service and timer to run backups daily</li>
+</ul>
+<h3 id="files-deployed">Files Deployed:<a class="headerlink" href="#files-deployed" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
 <tr>
-<td><strong>Duplicity</strong></td>
-<td>GPG-encrypted full/diff backups</td>
+<th>File</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/usr/local/bin/restic-backup.sh</code></td>
+<td>The backup script</td>
+</tr>
+<tr>
+<td><code>/etc/restic/backup.env</code></td>
+<td>Environment configuration for Restic</td>
+</tr>
+<tr>
+<td><code>/etc/systemd/system/restic-backup.service</code></td>
+<td>One-shot backup job</td>
+</tr>
+<tr>
+<td><code>/etc/systemd/system/restic-backup.timer</code></td>
+<td>Daily execution timer</td>
 </tr>
 </tbody>
 </table>
-<p>For simplicity and reliability, we’ll use <strong>Restic</strong>.</p>
+<p>This ensures consistent, auditable, and policy-driven backups aligned with CMMC expectations.</p>
 <hr />
-<h2 id="setting-up-restic">🚀 Setting Up Restic<a class="headerlink" href="#setting-up-restic" title="Permanent link">&para;</a></h2>
-<p>Install Restic:</p>
-<div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>restic
-</code></pre></div>
-
-<p>Initialize repository (local or remote):</p>
-<div class="codehilite"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">RESTIC_REPOSITORY</span><span class="o">=</span>/srv/backups
-<span class="nb">export</span><span class="w"> </span><span class="nv">RESTIC_PASSWORD</span><span class="o">=</span>mysecretpassword
-restic<span class="w"> </span>init
-</code></pre></div>
-
-<p>Create a backup script (e.g., <code>backup.sh</code>):</p>
-<div class="codehilite"><pre><span></span><code><span class="ch">#!/bin/bash</span>
-<span class="nb">export</span><span class="w"> </span><span class="nv">RESTIC_REPOSITORY</span><span class="o">=</span>/srv/backups
-<span class="nb">export</span><span class="w"> </span><span class="nv">RESTIC_PASSWORD</span><span class="o">=</span>mysecretpassword
-
-restic<span class="w"> </span>backup<span class="w"> </span>/var/lib/docker/volumes/nextcloud_data<span class="w"> </span><span class="se">\</span>
-<span class="w">              </span>/var/lib/docker/volumes/postgres_data
-
-restic<span class="w"> </span>forget<span class="w"> </span>--keep-daily<span class="w"> </span><span class="m">7</span><span class="w"> </span>--keep-weekly<span class="w"> </span><span class="m">4</span><span class="w"> </span>--prune
-</code></pre></div>
-
-<p>Schedule with <code>cron</code> or <code>systemd</code>.</p>
+<h2 id="what-the-backup-does">🧪 What the Backup Does<a class="headerlink" href="#what-the-backup-does" title="Permanent link">&para;</a></h2>
+<p>The deployed script performs:</p>
+<ol>
+<li>Daily backup of key service volumes (e.g., Nextcloud, PostgreSQL)</li>
+<li>Deduplicated and encrypted backup to local or remote repo</li>
+<li>Retention enforcement: <code>--keep-daily 7 --keep-weekly 4</code></li>
+<li>Log generation for review by assessors</li>
+</ol>
 <hr />
 <h2 id="offsite-encrypted-backup-strategy">📥 Offsite &amp; Encrypted Backup Strategy<a class="headerlink" href="#offsite-encrypted-backup-strategy" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Push to cloud (S3, Backblaze, Wasabi) via <code>restic -r s3:s3.amazonaws.com/mybucket</code></li>
-<li>Use <strong>GPG encryption</strong> for sensitive exports</li>
-<li>Store keys separately from backup media</li>
-<li>Rotate and test encryption passwords</li>
+<li>Push backups offsite using <code>restic -r s3:s3.amazonaws.com/mybucket</code></li>
+<li>Use strong encryption and separate key storage</li>
+<li>Store external backups in multiple regions (optional)</li>
+<li>Rotate and test encryption keys periodically</li>
 </ul>
 <hr />
-<h2 id="restore-testing">🔁 Restore Testing<a class="headerlink" href="#restore-testing" title="Permanent link">&para;</a></h2>
-<p>Perform regular restore drills:</p>
-<div class="codehilite"><pre><span></span><code>restic<span class="w"> </span>restore<span class="w"> </span>latest<span class="w"> </span>--target<span class="w"> </span>/tmp/restore-test
-diff<span class="w"> </span>-r<span class="w"> </span>/tmp/restore-test/nextcloud_data<span class="w"> </span>/var/lib/docker/volumes/nextcloud_data
-</code></pre></div>
-
-<p>Keep logs for assessor review.</p>
+<h2 id="restore-and-audit-strategy">🧾 Restore and Audit Strategy<a class="headerlink" href="#restore-and-audit-strategy" title="Permanent link">&para;</a></h2>
+<p>Test restores monthly with:</p>
+<p>restic restore latest --target /tmp/restore-test diff -r /tmp/restore-test/nextcloud_data /var/lib/docker/volumes/nextcloud_data</p>
+<p>Artifacts to maintain:</p>
+<ul>
+<li>Ansible backup role log or <code>ansible-playbook</code> run output</li>
+<li>Timer logs (<code>journalctl -u restic-backup.timer</code>)</li>
+<li>Screenshots or logs from restore tests</li>
+<li>An inventory of protected data and volumes</li>
+</ul>
 <hr />
 <h2 id="cmmc-practices-addressed">🛡️ CMMC Practices Addressed<a class="headerlink" href="#cmmc-practices-addressed" title="Permanent link">&para;</a></h2>
 <table>
@@ -1127,17 +1295,8 @@ diff<span class="w"> </span>-r<span class="w"> </span>/tmp/restore-test/nextclou
 </tbody>
 </table>
 <hr />
-<h2 id="audit-artifacts-to-generate">🧾 Audit Artifacts to Generate<a class="headerlink" href="#audit-artifacts-to-generate" title="Permanent link">&para;</a></h2>
-<ul>
-<li>Backup policy and schedule</li>
-<li>Backup and restore logs</li>
-<li>Screenshots or evidence of test restores</li>
-<li>Inventory of protected volumes and scope</li>
-</ul>
-<hr />
 <h2 id="next-step">✅ Next Step<a class="headerlink" href="#next-step" title="Permanent link">&para;</a></h2>
-<p>With resilient backups in place, the next section walks through writing and mapping <strong>policies and procedures</strong> to support your technical controls.</p>
-<hr />
+<p>With resilient backups in place and automation enforced via Ansible and systemd, the next section walks through writing and mapping <strong>policies and procedures</strong> to support your technical controls.</p>
 
 
 
